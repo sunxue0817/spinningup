@@ -1,31 +1,32 @@
 ==========================
-Part 1: Key Concepts in RL
+第一部分：强化学习中的核心概念
 ==========================
 
 
-.. contents:: Table of Contents
+.. contents:: 目录
     :depth: 2
 
-Welcome to our introduction to reinforcement learning! Here, we aim to acquaint you with
+欢迎来到强化学习的介绍！我们希望你能了解一下内容：
 
-* the language and notation used to discuss the subject,
-* a high-level explanation of what RL algorithms do (although we mostly avoid the question of *how* they do it),
-* and a little bit of the core math that underlies the algorithms.
+* 常见的符号表示
+* 高层次的讲解：关于强化学习算法究竟能做什么（尽量避免如何做这个话题）
+* 算法背后的核心数学知识
 
-In a nutshell, RL is the study of agents and how they learn by trial and error. It formalizes the idea that rewarding or punishing an agent for its behavior makes it more likely to repeat or forego that behavior in the future. 
+总的来说，强化学习是关于智能体以及它们如何通过反复试错来学习的研究。它定义了通过奖励或者惩罚智能体的行为，从而使它未来更容易重复或者放弃某一行为的思想。
 
 
-What Can RL Do?
+强化学习能做什么
 ===============
 
-RL methods have recently enjoyed a wide variety of successes. For example, it's been used to teach computers to control robots in simulation...
+基于强化学习的方法已经在很多地方取得了成功。例如，它被用来教电脑在仿真环境下控制机器人：
+
 
 .. raw:: html
 
     <video autoplay="" src="https://storage.googleapis.com/joschu-public/knocked-over-stand-up.mp4" loop="" controls="" style="display: block; margin-left: auto; margin-right: auto; margin-bottom:1.5em; width: 100%; max-width: 720px; max-height: 80vh;">
     </video>
 
-...and in the real world...
+以及在现实世界中：
 
 .. raw:: html
 
@@ -35,15 +36,15 @@ RL methods have recently enjoyed a wide variety of successes. For example, it's 
     <br />
 
 
-It's also famously been used to create breakthrough AIs for sophisticated strategy games, most notably `Go`_ and `Dota`_, taught computers to `play Atari games`_ from raw pixels, and trained simulated robots `to follow human instructions`_.
+他也因为在复杂策略游戏中做出突破而名声大噪，最著名的要数 `围棋`_ 、 `Dota`_ 、教电脑 `玩Atari游戏`_ 以及训练模拟机器人 `听从人类的指令`_ 。
 
-.. _`Go`: https://deepmind.com/research/alphago/
+.. _`围棋`: https://deepmind.com/research/alphago/
 .. _`Dota`: https://blog.openai.com/openai-five/
-.. _`play Atari games`: https://deepmind.com/research/dqn/
-.. _`to follow human instructions`: https://blog.openai.com/deep-reinforcement-learning-from-human-preferences/
+.. _`玩Atari游戏`: https://deepmind.com/research/dqn/
+.. _`听从人类的指令`: https://blog.openai.com/deep-reinforcement-learning-from-human-preferences/
 
 
-Key Concepts and Terminology
+核心概念和术语
 ============================
 
 .. figure:: ../images/rl_diagram_transparent_bg.png
@@ -415,18 +416,18 @@ The advantage function :math:`A^{\pi}(s,a)` corresponding to a policy :math:`\pi
 
 
 
-(Optional) Formalism
+（可选）数学模型
 ====================
 
-So far, we've discussed the agent's environment in an informal way, but if you try to go digging through the literature, you're likely to run into the standard mathematical formalism for this setting: **Markov Decision Processes** (MDPs). An MDP is a 5-tuple, :math:`\langle S, A, R, P, \rho_0 \rangle`, where
+我们已经非正式地讨论了智能体的环境，但是如果你深入研究，可能会发现这样的标准数学形式：**马尔科夫决策过程** (Markov Decision Processes, MDPs).MDP是一个5元组 :math:`\langle S, A, R, P, \rho_0 \rangle`, 其中
 
-* :math:`S` is the set of all valid states,
-* :math:`A` is the set of all valid actions,
-* :math:`R : S \times A \times S \to \mathbb{R}` is the reward function, with :math:`r_t = R(s_t, a_t, s_{t+1})`,
-* :math:`P : S \times A \to \mathcal{P}(S)` is the transition probability function, with :math:`P(s'|s,a)` being the probability of transitioning into state :math:`s'` if you start in state :math:`s` and take action :math:`a`,
+
+* :math:`S` 是所有有效状态的集合,
+* :math:`A` 是所有有效行为的集合,
+* :math:`R : S \times A \times S \to \mathbb{R}` 是奖励函数，其中 :math:`r_t = R(s_t, a_t, s_{t+1})`,
+* :math:`P : S \times A \to \mathcal{P}(S)` 是转态转移的规则，其中 :math:`P(s'|s,a)` 是在状态  :math:`s` 下 采取行动 :math:`a` 转移到状态 :math:`s'` 的概率。 
 * and :math:`\rho_0` is the starting state distribution.
 
-The name Markov Decision Process refers to the fact that the system obeys the `Markov property`_: transitions only depend on the most recent state and action, and no prior history.  
 
 
 
