@@ -1,13 +1,12 @@
 ==========
-Algorithms
+算法
 ==========
 
-.. contents:: Table of Contents
+.. contents:: 目录
 
-What's Included
+包括哪些算法
 ===============
-
-The following algorithms are implemented in the Spinning Up package:
+下面的算法已经在Spinning Up中实现：
 
 - `Vanilla Policy Gradient`_ (VPG)
 - `Trust Region Policy Optimization`_ (TRPO)
@@ -16,7 +15,8 @@ The following algorithms are implemented in the Spinning Up package:
 - `Twin Delayed DDPG`_ (TD3)
 - `Soft Actor-Critic`_ (SAC)
 
-They are all implemented with `MLP`_ (non-recurrent) actor-critics, making them suitable for fully-observed, non-image-based RL environments, eg the `Gym Mujoco`_ environments.
+这些算法全部以 `MLP`_ （非循环） actor-critics 实现，使得他们能够非常适用于全观察、不基于图像的环境，例如 `Gym Mujoco`_ 环境。
+
 
 .. _`Gym Mujoco`: https://gym.openai.com/envs/#mujoco
 .. _`Vanilla Policy Gradient`: ../algorithms/vpg.html
@@ -28,86 +28,84 @@ They are all implemented with `MLP`_ (non-recurrent) actor-critics, making them 
 .. _`MLP`: https://en.wikipedia.org/wiki/Multilayer_perceptron
 
 
-Why These Algorithms?
+为什么是这些算法？
 =====================
 
-We chose the core deep RL algorithms in this package to reflect useful progressions of ideas from the recent history of the field, culminating in two algorithms in particular---PPO and SAC---which are close to SOTA on reliability and sample efficiency among policy-learning algorithms. They also expose some of the trade-offs that get made in designing and using algorithms in deep RL.
+我们在这个包中选取了能够呈现强化学习近些年发展历程的核心算法。目前，在可靠性(stability)和采样效率(sample efficiency)这两个因素上表现最优的策略学习算法是PPO和SAC。从这些深度强化学习算法的设计和应用中，可以看出可靠性和采样效率的这两者的权衡。
 
-The On-Policy Algorithms
+
+On-Policy 算法
 ------------------------
 
-Vanilla Policy Gradient is the most basic, entry-level algorithm in the deep RL space because it completely predates the advent of deep RL altogether. The core elements of VPG go all the way back to the late 80s / early 90s. It started a trail of research which ultimately led to stronger algorithms such as TRPO and then PPO soon after. 
+Vanilla Policy Gradient(VPG) 是深度强化学习领域最基础、入门级的算法，远早于深度强化学习出现。VPG算法的核心部分可以追溯到上世纪80年代末、90年代初。TRPO和PPO等更好的算法也在这之后产生。
 
-A key feature of this line of work is that all of these algorithms are *on-policy*: that is, they don't use old data, which makes them weaker on sample efficiency. But this is for a good reason: these algorithms directly optimize the objective you care about---policy performance---and it works out mathematically that you need on-policy data to calculate the updates. So, this family of algorithms trades off sample efficiency in favor of stability---but you can see the progression of techniques (from VPG to TRPO to PPO) working to make up the deficit on sample efficiency.
+这一系列工作的共同特征是这些算法都是有模型学习的，也就是说，他们不使用旧数据，因此他们在采用效率上表现相对较差。但这也是有原因的：这些算法直接优化你关心的目标——策略表现。所以这个系列的算法都是用采样效率换取可靠性，但是从VPG到TRPO再到PPO，都在不断地弥补采样效率方面的不足。
 
-
-The Off-Policy Algorithms
+Off-Policy 算法
 -------------------------
 
-DDPG is a similarly foundational algorithm to VPG, although much younger---the theory of deterministic policy gradients, which led to DDPG, wasn't published until 2014. DDPG is closely connected to Q-learning algorithms, and it concurrently learns a Q-function and a policy which are updated to improve each other. 
+DDPG是一个和VPG同样重要的算法，尽管相对来说年轻很多。确定策略梯度（Deterministic Policy Gradients，DPG）理论，直到2014年才发表，而DDPG正是基于DPG提出的。DDPG和Q-learning算法很相似，同时学习Q函数和策略并通过更新相互提高。
 
-Algorithms like DDPG and Q-Learning are *off-policy*, so they are able to reuse old data very efficiently. They gain this benefit by exploiting Bellman's equations for optimality, which a Q-function can be trained to satisfy using *any* environment interaction data (as long as there's enough experience from the high-reward areas in the environment). 
+DDPG和Q-Learning算法是 *off-policy* ，所以它们能够有效的重复利用旧数据——这一点是通过对贝尔曼方程（Bellman’s equations,也称动态规划方程）的优化实现，
 
-But problematically, there are no guarantees that doing a good job of satisfying Bellman's equations leads to having great policy performance. *Empirically* one can get great performance---and when it happens, the sample efficiency is wonderful---but the absence of guarantees makes algorithms in this class potentially brittle and unstable. TD3 and SAC are descendants of DDPG which make use of a variety of insights to mitigate these issues.
+但问题是，满足贝尔曼方程并不能保证一定有很好的策略性能。经验告诉我们，这样（满足贝尔曼方程）能取得很好的性能，同时采样效率很不错，但是由于缺乏保证，使得这类算法变得非常脆弱和不稳定。TD3和SAC是基于DDPG提出了很多新的方案来缓解这些问题。
 
-
-Code Format
+代码格式
 ===========
 
-All implementations in Spinning Up adhere to a standard template. They are split into two files: an algorithm file, which contains the core logic of the algorithm, and a core file, which contains various utilities needed to run the algorithm.
+所有Spinning Up的算法都按照固定的模板来实现。每个算法分为两个文件：一个算法文件，包括算法的核心逻辑，一个核心文件，包括各种运行算法所需的工具类。
 
-The Algorithm File
+算法文件
 ------------------
 
-The algorithm file always starts with a class definition for an experience buffer object, which is used to store information from agent-environment interactions.
+算法文件最开始是经验存储类的定义，作用是存储智能体和环境的互动信息。
 
-Next, there is a single function which runs the algorithm, performing the following tasks (in this order):
+接下来有一个运行算法，以及以下算法：
     
-    1) Logger setup
+    1) Logger输出设定
 
-    2) Random seed setting
+    2) 随机种子的设定
     
-    3) Environment instantiation
+    3) 环境实例化
     
-    4) Making placeholders for the computation graph
+    4) 为计算图创建placeholder
     
-    5) Building the actor-critic computation graph via the ``actor_critic`` function passed to the algorithm function as an argument
-    
-    6) Instantiating the experience buffer
-    
-    7) Building the computation graph for loss functions and diagnostics specific to the algorithm
-    
-    8) Making training ops
-    
-    9) Making the TF Session and initializing parameters
-    
-    10) Setting up model saving through the logger
-    
-    11) Defining functions needed for running the main loop of the algorithm (eg the core update function, get action function, and test agent function, depending on the algorithm)
-    
-    12) Running the main loop of the algorithm:
-    
-        a) Run the agent in the environment
-    
-        b) Periodically update the parameters of the agent according to the main equations of the algorithm
-    
-        c) Log key performance metrics and save agent
+    5) 通过actor-critic函数传递算法函数
 
-
-Finally, there's some support for directly running the algorithm in Gym environments from the command line.
+    6) 实例化经验缓存
+    
+    7) 损失函数和一些其他的函数
+    
+    8) 构建训练ops
+    
+    9) 构建TF Session并初始化参数
+    
+    10) 通过logger保存模型
+    
+    11) 定义运行算法主循环需要的函数（例如核心更新函数，获取行动函数，测试智能体函数等，取决于具体的算法）
+    
+    12) 运行算法主循环
+    
+        a) 让智能体在环境中开始运行
+    
+        b) 根据算法的主要方程式，周期性更新参数
+    
+        c) 打印核心性能数据并保存智能体
 
 
-The Core File
+最后是从命令行读入设置的代码(ArgumentParser)。
+
+核心文件
 -------------
 
-The core files don't adhere as closely as the algorithms files to a template, but do have some approximate structure:
+核心文件并没有附在这里作为模板，但也有一些相似的结构。
 
-    1) Functions related to making and managing placeholders
+    1) 关于构建和管理的函数
 
-    2) Functions for building sections of computation graph relevant to the ``actor_critic`` method for a particular algorithm
+    2) 用于建立与actor-critic有关计算图的函数
 
-    3) Any other useful functions
+    3) 其他有用的函数
 
-    4) Implementations for an MLP actor-critic compatible with the algorithm, where both the policy and the value function(s) are represented by simple MLPs
+    4) 与算法兼容的MLP actor-critic实现，策略和值函数都是通过简单的MLP来表示
 
 
