@@ -12,7 +12,7 @@
 * 高层次的讲解：关于强化学习算法究竟能做什么（尽量避免如何做这个话题）
 * 算法背后的核心数学知识
 
-总的来说，强化学习是关于智能体以及它们如何通过反复试错来学习的研究。它定义了通过奖励或者惩罚智能体的行为，从而使它未来更容易重复或者放弃某一行为的思想。
+总的来说，强化学习是关于智能体以及它们如何通过反复试错来学习的研究。它定义了通过奖励或者惩罚智能体的动作，从而使它未来更容易重复或者放弃某一动作的思想。
 
 
 强化学习能做什么
@@ -50,53 +50,49 @@
 .. figure:: ../images/rl_diagram_transparent_bg.png
     :align: center
     
-    Agent-environment interaction loop.
+    智能体和环境的相互循环
 
-The main characters of RL are the **agent** and the **environment**. The environment is the world that the agent lives in and interacts with. At every step of interaction, the agent sees a (possibly partial) observation of the state of the world, and then decides on an action to take. The environment changes when the agent acts on it, but may also change on its own.
+强化学习的主要角色是 **智能体** 和 **环境** ,环境是智能体存在和互动的世界。智能体在每一步的交互中，都会获得（有可能只是部分）这个环境的状态的一部分观察，然后决定下一步要采取的动作。环境会因为智能体对它的动作而改变，也可能自己改变。
 
-The agent also perceives a **reward** signal from the environment, a number that tells it how good or bad the current world state is. The goal of the agent is to maximize its cumulative reward, called **return**. Reinforcement learning methods are ways that the agent can learn behaviors to achieve its goal.
+智能体也会从环境中感知到 **奖励** 信号，一个表明当前状态好坏的数字。智能体的目标是最大化累计奖励，也就是 **回报** 。强化学习就是智能体通过学习来完成目标的方法。
 
-To talk more specifically what RL does, we need to introduce additional terminology. We need to talk about
+这里我们介绍一些术语，以便后面了解强化学习能做什么：
 
-* states and observations,
-* action spaces,
-* policies,
-* trajectories,
-* different formulations of return,
-* the RL optimization problem,
-* and value functions.
+* 状态和观察
+* 动作空间
+* 策略
+* 轨迹
+* 不同形式的输出
+* 深度学习优化问题
+* 值函数
 
-
-States and Observations
+状态和观察
 -----------------------
+一个 **状态** :math:`s` 是一个关于这个世界的完整描述，没有隐藏的信息。而 **观察** :math:`o` 是指对于一个状态的部分描述，会漏掉一些信息。
 
-A **state** :math:`s` is a complete description of the state of the world. There is no information about the world which is hidden from the state. An **observation** :math:`o` is a partial description of a state, which may omit information. 
+在深度强化学习中，我们会用 `实数向量、矩阵或者更高阶的张量（tensor）`_ 表示状态和观察。比如说，视觉上的观察可以用RGB矩阵的方式表示其像素值；机器人的状态可以通过关节角度和速度来表示。
 
-In deep RL, we almost always represent states and observations by a `real-valued vector, matrix, or higher-order tensor`_. For instance, a visual observation could be represented by the RGB matrix of its pixel values; the state of a robot might be represented by its joint angles and velocities. 
+如果智能体能够对于环境的所有状态有全面的观察，我们通常说环境是被 **全面观察** 的。如果智能体只能观察到一部分，我们称之为 **部分观察 ** 。
 
-When the agent is able to observe the complete state of the environment, we say that the environment is **fully observed**. When the agent can only see a partial observation, we say that the environment is **partially observed**.
+.. admonition:: 你应该知道
 
-.. admonition:: You Should Know
+    强化学习有时候用这个符号 :math:`s` 代表状态 , 有些地方会用观察的符号来表示 :math:`o`.  尤其这种情况会出现：当智能体在决定采取什么动作的时候：我们会用符号表示动作是基于状态的，实际操作的事情，动作是基于观察的，因为智能体并不能知道所有的状态。
 
-    Reinforcement learning notation sometimes puts the symbol for state, :math:`s`, in places where it would be technically more appropriate to write the symbol for observation, :math:`o`. Specifically, this happens when talking about how the agent decides an action: we often signal in notation that the action is conditioned on the state, when in practice, the action is conditioned on the observation because the agent does not have access to the state.
+    在我们的教程中，我们会严格遵守标准规定，但是你应该能从上下文中看出是什么意思。如果有些内容不清楚，那么，请提issue！我们的目的是教学，不是混淆。
 
-    In our guide, we'll follow standard conventions for notation, but it should be clear from context which is meant. If something is unclear, though, please raise an issue! Our goal is to teach, not to confuse.
+.. _`实数向量、矩阵或者更高阶的张量（tensor）`: https://en.wikipedia.org/wiki/Real_coordinate_space
 
-.. _`real-valued vector, matrix, or higher-order tensor`: https://en.wikipedia.org/wiki/Real_coordinate_space
-
-
-Action Spaces
+动作空间
 -------------
 
-Different environments allow different kinds of actions. The set of all valid actions in a given environment is often called the **action space**. Some environments, like Atari and Go, have **discrete action spaces**, where only a finite number of moves are available to the agent. Other environments, like where the agent controls a robot in a physical world, have **continuous action spaces**. In continuous spaces, actions are real-valued vectors.
+不同的环境有不同的动作。所有有效动作的集合称之为 **动作空间**。有些环境，比如说Atari游戏和围棋，具有的是 **离散动作空间**，这种情况下智能体只能采取有限的动作。其他的一些环境，比如智能体在物理世界控制机器人，属于 **连续动作空间**。在连续动作空间中，动作是实数向量。
 
-This distinction has some quite-profound consequences for methods in deep RL. Some families of algorithms can only be directly applied in one case, and would have to be substantially reworked for the other. 
+这种区别对于深度强化学习有重要的影响。有些种类的算法只能用在某一些案例上，如果想用在另一个案例上可能需要大量的代码重写。
 
-
-Policies
+策略
 --------
 
-A **policy** is a rule used by an agent to decide what actions to take. It can be deterministic, in which case it is usually denoted by :math:`\mu`:
+**策略** 是智能体使用的用于决定下一步采取什么行动的规则。可以是确定性的，例如：:math:`\u`:
 
 .. math::
 
@@ -120,7 +116,7 @@ We often denote the parameters of such a policy by :math:`\theta` or :math:`\phi
     a_t &\sim \pi_{\theta}(\cdot | s_t).
 
 
-Deterministic Policies
+确定性策略
 ^^^^^^^^^^^^^^^^^^^^^^
 
 **Example: Deterministic Policies.** Here is a code snippet for building a simple deterministic policy for a continuous action space in Tensorflow:
@@ -133,7 +129,7 @@ Deterministic Policies
 
 where ``mlp`` is a function that stacks multiple ``dense`` layers on top of each other with the given sizes and activation.
 
-Stochastic Policies
+随机性策略
 ^^^^^^^^^^^^^^^^^^^
 
 The two most common kinds of stochastic policies in deep RL are **categorical policies** and **diagonal Gaussian policies**. 
@@ -196,7 +192,7 @@ In what follows, we'll describe how to do these for both categorical and diagona
 .. _`tf.random_normal`: https://www.tensorflow.org/api_docs/python/tf/random_normal
 .. _`tf.distributions.Normal`: https://www.tensorflow.org/api_docs/python/tf/distributions/Normal
 
-Trajectories
+轨迹
 ------------
 
 A trajectory :math:`\tau` is a sequence of states and actions in the world,
@@ -230,7 +226,7 @@ Actions come from an agent according to its policy.
     Trajectories are also frequently called **episodes** or **rollouts**.
 
 
-Reward and Return
+奖励和返回
 -----------------
 
 The reward function :math:`R` is critically important in reinforcement learning. It depends on the current state of the world, the action just taken, and the next state of the world:
@@ -264,7 +260,7 @@ Why would we ever want a discount factor, though? Don't we just want to get *all
 
 .. _`may not converge`: https://en.wikipedia.org/wiki/Convergent_series
 
-The RL Problem
+强化学习问题
 --------------
 
 Whatever the choice of return measure (whether infinite-horizon discounted, or finite-horizon undiscounted), and whatever the choice of policy, the goal in RL is to select a policy which maximizes **expected return** when the agent acts according to it.
@@ -294,7 +290,7 @@ The central optimization problem in RL can then be expressed by
 with :math:`\pi^*` being the **optimal policy**. 
 
 
-Value Functions
+值函数
 ---------------
 
 It's often useful to know the **value** of a state, or state-action pair. By value, we mean the expected return if you start in that state or state-action pair, and then act according to a particular policy forever after. **Value functions** are used, one way or another, in almost every RL algorithm.
@@ -362,7 +358,7 @@ The optimal policy in :math:`s` will select whichever action maximizes the expec
 Note: there may be multiple actions which maximize :math:`Q^*(s,a)`, in which case, all of them are optimal, and the optimal policy may randomly select any of them. But there is always an optimal policy which deterministically selects an action.
 
 
-Bellman Equations
+贝尔曼方程
 -----------------
 
 All four of the value functions obey special self-consistency equations called **Bellman equations**. The basic idea behind the Bellman equations is this:
@@ -416,18 +412,18 @@ The advantage function :math:`A^{\pi}(s,a)` corresponding to a policy :math:`\pi
 
 
 
-（可选）
+（可选）数学模型
 ====================
 
-So far, we've discussed the agent's environment in an informal way, but if you try to go digging through the literature, you're likely to run into the standard mathematical formalism for this setting: **Markov Decision Processes** (MDPs). An MDP is a 5-tuple, :math:`\langle S, A, R, P, \rho_0 \rangle`, where
+我们已经非正式地讨论了智能体的环境，但是如果你深入研究，可能会发现这样的标准数学形式：**马尔科夫决策过程** (Markov Decision Processes, MDPs).MDP是一个5元组 :math:`\langle S, A, R, P, \rho_0 \rangle`, 其中
 
-* :math:`S` is the set of all valid states,
-* :math:`A` is the set of all valid actions,
-* :math:`R : S \times A \times S \to \mathbb{R}` is the reward function, with :math:`r_t = R(s_t, a_t, s_{t+1})`,
-* :math:`P : S \times A \to \mathcal{P}(S)` is the transition probability function, with :math:`P(s'|s,a)` being the probability of transitioning into state :math:`s'` if you start in state :math:`s` and take action :math:`a`,
+
+* :math:`S` 是所有有效状态的集合,
+* :math:`A` 是所有有效动作的集合,
+* :math:`R : S \times A \times S \to \mathbb{R}` 是奖励函数，其中 :math:`r_t = R(s_t, a_t, s_{t+1})`,
+* :math:`P : S \times A \to \mathcal{P}(S)` 是转态转移的规则，其中 :math:`P(s'|s,a)` 是在状态  :math:`s` 下 采取动作 :math:`a` 转移到状态 :math:`s'` 的概率。 
 * and :math:`\rho_0` is the starting state distribution.
 
-The name Markov Decision Process refers to the fact that the system obeys the `Markov property`_: transitions only depend on the most recent state and action, and no prior history.  
 
 
 
