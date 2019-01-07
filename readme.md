@@ -1,7 +1,10 @@
 **Status:** Active (under active development, breaking changes may occur)
 
+[![Documentation Status](https://readthedocs.org/projects/spinningup/badge/?version=latest)](https://spinningup.readthedocs.io/zh_CN/latest/?badge=latest)
+
 Welcome to Spinning Up in Deep RL! 
 ==================================
+
 
 This is an educational resource produced by OpenAI that makes it easier to learn about deep reinforcement learning (deep RL).
 
@@ -15,4 +18,8 @@ This module contains a variety of helpful resources, including:
 - a well-documented [code repo](https://github.com/openai/spinningup) of short, standalone implementations of key algorithms,
 - and a few [exercises](https://spinningup.openai.com/en/latest/spinningup/exercises.html) to serve as warm-ups.
 
+中文翻译版地址：[深度强化学习：Spinning Up](https://spinningup.readthedocs.io/zh_CN/latest/)
+
 Get started at [spinningup.openai.com](https://spinningup.openai.com)!
+
+
