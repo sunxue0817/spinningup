@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-深度强化学习教程：Spinning Up项目 中文版
+深度强化学习教程：Spinning Up项目中文版
 ==================================
 
 .. image:: images/spinning-up-in-rl.png
@@ -62,10 +62,13 @@
 
    etc/acknowledgements
    etc/author
+   etc/translator
 
 索引和目录
 ==================
 
-* :ref:`索引`
-* :ref:`模块索引`
-* :ref:`搜索页面`
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
+

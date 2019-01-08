@@ -1,5 +1,5 @@
 ======
-Logger
+日志打印
 ======
 
 .. contents:: Table of Contents
@@ -167,3 +167,4 @@ Key     Value
 ======  ===============================================
 
 The relevant value functions for an algorithm are also typically stored. For details of what else gets saved by a given algorithm, see its documentation page.
+

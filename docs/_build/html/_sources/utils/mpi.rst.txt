@@ -1,5 +1,5 @@
 =========
-MPI Tools
+MPI 工具
 =========
 
 .. contents:: Table of Contents
@@ -20,3 +20,4 @@ The ``spinup.utils.mpi_tf`` contains a a few tools to make it easy to use the Ad
 
 .. automodule:: spinup.utils.mpi_tf
     :members:
+

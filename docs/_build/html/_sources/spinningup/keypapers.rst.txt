@@ -1,5 +1,5 @@
 =====================
-Key Papers in Deep RL
+深度强化学习的核心论文
 =====================
 
 What follows is a list of papers in deep RL that are worth reading. This is *far* from comprehensive, but should provide a useful starting point for someone looking to do research in the field.
@@ -8,10 +8,10 @@ What follows is a list of papers in deep RL that are worth reading. This is *far
     :depth: 2
 
 
-1. Model-Free RL
+1. 免模型强化学习
 ================
 
-a. Deep Q-Learning
+a. 深度 Q-learning 
 ------------------
 
 
@@ -28,7 +28,7 @@ a. Deep Q-Learning
 .. [#] `Rainbow: Combining Improvements in Deep Reinforcement Learning <https://arxiv.org/abs/1710.02298>`_, Hessel et al, 2017. **Algorithm: Rainbow DQN.**
 
 
-b. Policy Gradients
+b. 策略梯度
 -------------------
 
 
@@ -48,7 +48,7 @@ b. Policy Gradients
 
 .. [#] `Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor <https://arxiv.org/abs/1801.01290>`_, Haarnoja et al, 2018. **Algorithm: SAC.**
 
-c. Deterministic Policy Gradients
+c. 确定策略梯度
 ---------------------------------
 
 
@@ -59,7 +59,7 @@ c. Deterministic Policy Gradients
 .. [#] `Addressing Function Approximation Error in Actor-Critic Methods <https://arxiv.org/abs/1802.09477>`_, Fujimoto et al, 2018. **Algorithm: TD3.**
 
 
-d. Distributional RL
+d. 分布式强化学习
 --------------------
 
 .. [#] `A Distributional Perspective on Reinforcement Learning <https://arxiv.org/abs/1707.06887>`_, Bellemare et al, 2017. **Algorithm: C51.** 
@@ -70,7 +70,7 @@ d. Distributional RL
 
 .. [#] `Dopamine: A Research Framework for Deep Reinforcement Learning <https://openreview.net/forum?id=ByG_3s09KX>`_, Anonymous, 2018. **Contribution:** Introduces Dopamine, a code repository containing implementations of DQN, C51, IQN, and Rainbow. `Code link. <https://github.com/google/dopamine>`_
 
-e. Policy Gradients with Action-Dependent Baselines
+e. 动作依赖性策略梯度
 ---------------------------------------------------
 
 .. [#] `Q-Prop: Sample-Efficient Policy Gradient with An Off-Policy Critic <https://arxiv.org/abs/1611.02247>`_, Gu et al, 2016. **Algorithm: Q-Prop.**
@@ -80,7 +80,7 @@ e. Policy Gradients with Action-Dependent Baselines
 .. [#] `The Mirage of Action-Dependent Baselines in Reinforcement Learning <https://arxiv.org/abs/1802.10031>`_, Tucker et al, 2018. **Contribution:** interestingly, critiques and reevaluates claims from earlier papers (including Q-Prop and stein control variates) and finds important methodological errors in them.
 
 
-f. Path-Consistency Learning
+f. 路径一致性学习(Path-Consistency Learning)
 ----------------------------
 
 .. [#] `Bridging the Gap Between Value and Policy Based Reinforcement Learning <https://arxiv.org/abs/1702.08892>`_, Nachum et al, 2017. **Algorithm: PCL.**
@@ -99,17 +99,17 @@ g. Other Directions for Combining Policy-Learning and Q-Learning
 .. [#] `Equivalence Between Policy Gradients and Soft Q-Learning <https://arxiv.org/abs/1704.06440>`_, Schulman et al, 2017. **Contribution:** Reveals a theoretical link between these two families of RL algorithms.
 
 
-h. Evolutionary Algorithms
+h. 进化(Evolutionary)算法
 --------------------------
 
 .. [#] `Evolution Strategies as a Scalable Alternative to Reinforcement Learning <https://arxiv.org/abs/1703.03864>`_, Salimans et al, 2017. **Algorithm: ES.**
 
 
 
-2. Exploration
+2. 探索(Exploration)
 ==============
 
-a. Intrinsic Motivation
+a. 内在激励(Intrinsic Motivation)
 -----------------------
 
 .. [#] `VIME: Variational Information Maximizing Exploration <https://arxiv.org/abs/1605.09674>`_, Houthooft et al, 2016. **Algorithm: VIME.**
@@ -129,7 +129,7 @@ a. Intrinsic Motivation
 .. [#] `Exploration by Random Network Distillation <https://arxiv.org/abs/1810.12894>`_, Burda et al, 2018. **Algorithm: RND.**
 
 
-b. Unsupervised RL
+b. 非监督强化学习
 ------------------
 
 .. [#] `Variational Intrinsic Control <https://arxiv.org/abs/1611.07507>`_, Gregor et al, 2016. **Algorithm: VIC.**
@@ -139,7 +139,7 @@ b. Unsupervised RL
 .. [#] `Variational Option Discovery Algorithms <https://arxiv.org/abs/1807.10299>`_, Achiam et al, 2018. **Algorithm: VALOR.**
 
 
-3. Transfer and Multitask RL
+3. 迁移和多任务强化学习
 ============================
 
 .. [#] `Progressive Neural Networks <https://arxiv.org/abs/1606.04671>`_, Rusu et al, 2016. **Algorithm: Progressive Networks.**
@@ -158,7 +158,7 @@ b. Unsupervised RL
 
 .. [#] `Hindsight Experience Replay <https://arxiv.org/abs/1707.01495>`_, Andrychowicz et al, 2017. **Algorithm: Hindsight Experience Replay (HER).**
 
-4. Hierarchy
+4. 层次(Hierarchy)
 ============
 
 .. [#] `Strategic Attentive Writer for Learning Macro-Actions <https://arxiv.org/abs/1606.04695>`_, Vezhnevets et al, 2016. **Algorithm: STRAW.**
@@ -167,7 +167,7 @@ b. Unsupervised RL
 
 .. [#] `Data-Efficient Hierarchical Reinforcement Learning <https://arxiv.org/abs/1805.08296>`_, Nachum et al, 2018. **Algorithm: HIRO.**
 
-5. Memory
+5. 记忆(Memory)
 =========
 
 .. [#] `Model-Free Episodic Control <https://arxiv.org/abs/1606.04460>`_, Blundell et al, 2016. **Algorithm: MFEC.**
@@ -181,10 +181,10 @@ b. Unsupervised RL
 
 .. [#] `Relational Recurrent Neural Networks <https://arxiv.org/abs/1806.01822>`_, Santoro et al, 2018. **Algorithm: RMC.**
 
-6. Model-Based RL
+6. 有模型强化学习
 =================
 
-a. Model is Learned
+a. 模型可被学习
 -------------------
 
 .. [#] `Imagination-Augmented Agents for Deep Reinforcement Learning <https://arxiv.org/abs/1707.06203>`_, Weber et al, 2017. **Algorithm: I2A.**
@@ -201,14 +201,14 @@ a. Model is Learned
 
 .. [#] `Recurrent World Models Facilitate Policy Evolution <https://arxiv.org/abs/1809.01999>`_, Ha and Schmidhuber, 2018. 
 
-b. Model is Given
+b. 模型已知
 -----------------
 
 .. [#] `Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm <https://arxiv.org/abs/1712.01815>`_, Silver et al, 2017. **Algorithm: AlphaZero.**
 
 .. [#] `Thinking Fast and Slow with Deep Learning and Tree Search <https://arxiv.org/abs/1705.08439>`_, Anthony et al, 2017. **Algorithm: ExIt.**
 
-7. Meta-RL
+7. 元学习(Meta-RL)
 ==========
 
 .. [#] `RL^2: Fast Reinforcement Learning via Slow Reinforcement Learning <https://arxiv.org/abs/1611.02779>`_, Duan et al, 2016. **Algorithm: RL^2.**
@@ -233,7 +233,7 @@ b. Model is Given
 .. [#] `RLlib: Abstractions for Distributed Reinforcement Learning <https://arxiv.org/abs/1712.09381>`_, Liang et al, 2017. **Contribution:** A scalable library of RL algorithm implementations. `Documentation link. <https://ray.readthedocs.io/en/latest/rllib.html>`_
 
 
-9. RL in the Real World
+9. 现实世界的强化学习
 =======================
 
 .. [#] `Benchmarking Reinforcement Learning Algorithms on Real-World Robots <https://arxiv.org/abs/1809.07731>`_, Mahmood et al, 2018. 
@@ -245,7 +245,7 @@ b. Model is Given
 .. [#] `Horizon: Facebook's Open Source Applied Reinforcement Learning Platform <https://arxiv.org/abs/1811.00260>`_, Gauci et al, 2018. 
 
 
-10. Safety
+10. 安全
 ==========
 
 .. [#] `Concrete Problems in AI Safety <https://arxiv.org/abs/1606.06565>`_, Amodei et al, 2016. **Contribution:** establishes a taxonomy of safety problems, serving as an important jumping-off point for future research. We need to solve these!
@@ -261,7 +261,7 @@ b. Model is Given
 .. [#] `Leave No Trace: Learning to Reset for Safe and Autonomous Reinforcement Learning <https://arxiv.org/abs/1711.06782>`_, Eysenbach et al, 2017. **Algorithm: Leave No Trace.**
 
 
-11. Imitation Learning and Inverse Reinforcement Learning
+11. 模仿学习和逆强化学习
 =========================================================
 
 .. [#] `Modeling Purposeful Adaptive Behavior with the Principle of Maximum Causal Entropy <http://www.cs.cmu.edu/~bziebart/publications/thesis-bziebart.pdf>`_, Ziebart 2010. **Contributions:** Crisp formulation of maximum entropy IRL.
@@ -277,7 +277,7 @@ b. Model is Given
 .. [#] `One-Shot High-Fidelity Imitation: Training Large-Scale Deep Nets with RL <https://arxiv.org/abs/1810.05017>`_, Le Paine et al, 2018. **Algorithm: MetaMimic.**
 
 
-12. Reproducibility, Analysis, and Critique
+12. 可复现、分析和评价
 ===========================================
 
 .. [#] `Benchmarking Deep Reinforcement Learning for Continuous Control <https://arxiv.org/abs/1604.06778>`_, Duan et al, 2016. **Contribution: rllab.**
@@ -292,7 +292,7 @@ b. Model is Given
 
 .. [#] `Simple Random Search Provides a Competitive Approach to Reinforcement Learning <https://arxiv.org/abs/1803.07055>`_, Mania et al, 2018.
 
-13. Bonus: Classic Papers in RL Theory or Review
+13. 额外奖励：强化学习理论的经典论文
 ================================================
 
 .. [#] `Policy Gradient Methods for Reinforcement Learning with Function Approximation <https://papers.nips.cc/paper/1713-policy-gradient-methods-for-reinforcement-learning-with-function-approximation.pdf>`_, Sutton et al, 2000. **Contributions:** Established policy gradient theorem and showed convergence of policy gradient algorithm for arbitrary policy classes. 
@@ -306,3 +306,5 @@ b. Model is Given
 .. [#] `A Natural Policy Gradient <https://papers.nips.cc/paper/2073-a-natural-policy-gradient.pdf>`_, Kakade, 2002. **Contributions:** Brought natural gradients into RL, later leading to TRPO, ACKTR, and several other methods in deep RL.
 
 .. [#] `Algorithms for Reinforcement Learning <https://sites.ualberta.ca/~szepesva/papers/RLAlgsInMDPs.pdf>`_, Szepesvari, 2009. **Contributions:** Unbeatable reference on RL before deep RL, containing foundations and theoretical background.
+
+

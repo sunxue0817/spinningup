@@ -110,13 +110,13 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../spinningup/rl_intro.html">第一部分：强化学习中的核心概念</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../spinningup/rl_intro2.html">第二部分：各种各种的强化学习算法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../spinningup/rl_intro3.html">Part 3: Intro to Policy Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spinningup/rl_intro3.html">第三部分：策略优化介绍</a></li>
 </ul>
 <p class="caption"><span class="caption-text">资源</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../spinningup/spinningup.html">Spinning Up as a Deep RL Researcher</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../spinningup/keypapers.html">Key Papers in Deep RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../spinningup/exercises.html">Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spinningup/keypapers.html">深度强化学习的核心论文</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spinningup/exercises.html">练习</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../spinningup/bench.html">Benchmarks for Spinning Up Implementations</a></li>
 </ul>
 <p class="caption"><span class="caption-text">算法文档</span></p>
@@ -130,15 +130,16 @@
 </ul>
 <p class="caption"><span class="caption-text">工具文档</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../utils/logger.html">Logger</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../utils/plotter.html">Plotter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../utils/mpi.html">MPI Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../utils/run_utils.html">Run Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/logger.html">日志打印</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/plotter.html">绘图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/mpi.html">MPI 工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/run_utils.html">运行工具</a></li>
 </ul>
 <p class="caption"><span class="caption-text">其他</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../etc/acknowledgements.html">Acknowledgements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../etc/author.html">About the Author</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/acknowledgements.html">致谢</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/author.html">作者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/translator.html">关于译者</a></li>
 </ul>
 
             
@@ -243,25 +244,25 @@
 <div class="section" id="on-policy">
 <h3><a class="toc-backref" href="#id12">同策略（On-Policy）算法</a><a class="headerlink" href="#on-policy" title="Permalink to this headline">¶</a></h3>
 <p>Vanilla Policy Gradient(VPG) 是深度强化学习领域最基础也是入门级的算法，发表时间远早于深度强化学习。VPG 算法的核心思想可以追溯到上世纪 80 年代末、90年代初。在那之后，TRPO（2015）和 PPO(2017) 等更好的算法才相继诞生。</p>
-<p>上述系列工作都是基于不使用旧数据的同策略，因此在采样效率上表现相对较差。但这也是有原因的：它们直接优化我们关心的目标——策略表现。这个系列的算法都是用采样效率换取可靠性，之后提出的算法，从 VPG 到TRPO 再到 PPO，都是在不断弥补采样效率方面的不足。</p>
+<p>上述系列工作都是基于不使用旧数据的同策略，因此在采样效率上表现相对较差。但这也是有原因的：它们直接优化我们关心的目标 —— 策略表现。这个系列的算法都是用采样效率换取可靠性，之后提出的算法，从 VPG 到TRPO 再到 PPO，都是在不断弥补采样效率方面的不足。</p>
 </div>
 <div class="section" id="off-policy">
 <h3><a class="toc-backref" href="#id13">异策略（Off-Policy）算法</a><a class="headerlink" href="#off-policy" title="Permalink to this headline">¶</a></h3>
 <p>DDPG 是一个和 VPG 同样重要的算法，尽管它的提出时间较晚。确定策略梯度（Deterministic Policy Gradients，DPG）理论是在 2014 年提出的，是 DDPG 算法的基础。DDPG 算法和 Q-learning 算法很相似，都是同时学习 Q 函数和策略并通过更新相互提高。</p>
 <p>DDPG 和 Q-Learning 属于 <em>异策略</em> 算法，他们通过对贝尔曼方程（Bellman’s equations,也称动态规划方程）的优化，实现对旧数据的有效利用。</p>
-<p>但问题是，满足贝尔曼方程并不能保证一定有很好的策略性能。尽管经验告诉我们，满足贝尔曼方程可以取得不错的性能，同时采样效率很好。但由于缺乏这种必然性的保证，这类算法很不稳定。基于 DDPG的 TD3 和 SAC 提出了很多新的方案来缓解这些问题。</p>
+<p>但问题是，满足贝尔曼方程并不能保证一定有很好的策略性能。从经验上讲，满足贝尔曼方程可以有不错的性能、很好的采样效率,但也由于没有这种必然性的保证，这类算法没有那么稳定。基于 DDPG的后续工作 TD3 和 SAC 提出了很多新的方案来缓解这些问题。</p>
 </div>
 </div>
 <div class="section" id="id6">
 <h2><a class="toc-backref" href="#id14">代码格式</a><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
-<p>Spinning Up 项目的算法都按照固定的模板来实现。每个算法分为两个文件：</p>
+<p>Spinning Up 项目的算法都按照固定的模板来实现。每个算法由两个文件组成：</p>
 <ul class="simple">
 <li>算法文件，主要是算法的核心逻辑</li>
 <li>核心文件，包括各种运行算法所需的工具类。</li>
 </ul>
 <div class="section" id="id7">
 <h3><a class="toc-backref" href="#id15">算法文件</a><a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
-<p>算法文件最开始是经验存储类的定义，作用是存储智能体和环境的互动信息。</p>
+<p>算法文件最开始是经验存储类(experience buffer)的定义，作用是存储智能体和环境的互动信息。</p>
 <p>接下来有一个运行算法，以及以下算法：</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -269,7 +270,7 @@
 <li>随机种子的设定</li>
 <li>环境实例化</li>
 <li>为计算图创建 placeholder</li>
-<li>通过 actor-critic 函数传递算法函数</li>
+<li>通过 <em>actor-critic</em> 函数传递算法函数</li>
 <li>实例化经验缓存</li>
 <li>损失函数和一些其他的函数</li>
 <li>构建训练 ops</li>
@@ -292,9 +293,9 @@
 <blockquote>
 <div><ol class="arabic simple">
 <li>构建 placeholder 的函数</li>
-<li>actor-critic 有关函数</li>
+<li><em>actor-critic</em> 有关函数</li>
 <li>其他有用的函数</li>
-<li>与算法兼容的多层感知机 actor-critic 实现，策略和值函数都是通过简单的多层感知机来表示</li>
+<li>与算法兼容的多层感知机 actor-critic 实现，策略和值函数(value function)都是通过简单的多层感知机来表示</li>
 </ol>
 </div></blockquote>
 </div>

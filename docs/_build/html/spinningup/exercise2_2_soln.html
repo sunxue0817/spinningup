@@ -85,23 +85,23 @@
               <p class="caption"><span class="caption-text">用户文档</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../user/introduction.html">介绍</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/installation.html">安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user/algorithms.html">算法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/running.html">Running Experiments</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/saving_and_loading.html">Experiment Outputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/plotting.html">Plotting Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/running.html">运行试验</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/saving_and_loading.html">试验输出</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/plotting.html">绘制结果</a></li>
 </ul>
 <p class="caption"><span class="caption-text">强化学习介绍</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="rl_intro.html">Part 1: Key Concepts in RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rl_intro2.html">Part 2: Kinds of RL Algorithms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rl_intro3.html">Part 3: Intro to Policy Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rl_intro.html">第一部分：强化学习中的核心概念</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rl_intro2.html">第二部分：各种各种的强化学习算法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rl_intro3.html">第三部分：策略优化介绍</a></li>
 </ul>
 <p class="caption"><span class="caption-text">资源</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="spinningup.html">Spinning Up as a Deep RL Researcher</a></li>
-<li class="toctree-l1"><a class="reference internal" href="keypapers.html">Key Papers in Deep RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keypapers.html">深度强化学习的核心论文</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">练习</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bench.html">Benchmarks for Spinning Up Implementations</a></li>
 </ul>
 <p class="caption"><span class="caption-text">算法文档</span></p>
@@ -115,15 +115,16 @@
 </ul>
 <p class="caption"><span class="caption-text">工具文档</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../utils/logger.html">Logger</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../utils/plotter.html">Plotter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../utils/mpi.html">MPI Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../utils/run_utils.html">Run Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/logger.html">日志打印</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/plotter.html">绘图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/mpi.html">MPI 工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/run_utils.html">运行工具</a></li>
 </ul>
 <p class="caption"><span class="caption-text">其他</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../etc/acknowledgements.html">Acknowledgements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../etc/author.html">About the Author</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/acknowledgements.html">致谢</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/author.html">作者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/translator.html">关于译者</a></li>
 </ul>
 
             
@@ -286,19 +287,272 @@
 <p>Broadcast error 1: <code class="docutils literal"><span class="pre">(1</span> <span class="pre">-</span> <span class="pre">d_ph)</span> <span class="pre">*</span> <span class="pre">q_pi_targ</span></code> becomes a <code class="docutils literal"><span class="pre">[batch</span> <span class="pre">size,</span> <span class="pre">batch</span> <span class="pre">size]</span></code> tensor containing the outer product of the mask with the target network Q-values.</p>
 <p>Broadcast error 2: <code class="docutils literal"><span class="pre">r_ph</span></code> then gets treated as a row vector and added to each row of <code class="docutils literal"><span class="pre">(1</span> <span class="pre">-</span> <span class="pre">d_ph)</span> <span class="pre">*</span> <span class="pre">q_pi_targ</span></code> separately.</p>
 <p>Broadcast error 3: <code class="docutils literal"><span class="pre">q_loss</span></code> depends on <code class="docutils literal"><span class="pre">q</span> <span class="pre">-</span> <span class="pre">backup</span></code>, which involves another bad broadcast between <code class="docutils literal"><span class="pre">q</span></code> (shape <code class="docutils literal"><span class="pre">[batch</span> <span class="pre">size,</span> <span class="pre">1]</span></code>) and <code class="docutils literal"><span class="pre">backup</span></code> (shape <code class="docutils literal"><span class="pre">[batch</span> <span class="pre">size,</span> <span class="pre">batch</span> <span class="pre">size]</span></code>).</p>
-<p>To put it mathematically: let <img class="math" src="../_images/math/daba3e876d43fa9d818d638f9913777fcc80b363.svg" alt="q"/>, <img class="math" src="../_images/math/1b010cfe4b9ad4a54f668b8e2ae1d2dc65ffbd57.svg" alt="q'"/>, <img class="math" src="../_images/math/dbf18beb64ca1fdf76bde5abbebab172c0a427d2.svg" alt="r"/>, <img class="math" src="../_images/math/dcb88eb0117e005c37557afd791bf0dbc90733a4.svg" alt="d"/> denote vectors containing the q-values, target q-values, rewards, and dones for a given batch, where there are <img class="math" src="../_images/math/b4ef37d0fe59960f8dbd307ee538e538e6d51e9a.svg" alt="n"/> entries in the batch. The correct backup is</p>
-<div class="math">
-<p><img src="../_images/math/0ae2a85ffe04b3e5ff9d56e4846f994fc11024fa.svg" alt="z_i = r_i + \gamma (1-d_i) q'_i,"/></p>
-</div><p>and the correct loss function is</p>
-<div class="math">
-<p><img src="../_images/math/af10c7e7561a9d41ce0daf7df05d9c81d62fd5dc.svg" alt="\frac{1}{n} \sum_{i=1}^n (q_i - z_i)^2."/></p>
-</div><p>But with these errors, what gets computed is a backup <em>matrix</em>,</p>
-<div class="math">
-<p><img src="../_images/math/3fbd1adcd20bbf168c35f71d60584643abcb0f1f.svg" alt="z_{ij} = r_j + \gamma (1-d_j) q'_i,"/></p>
-</div><p>and a messed up loss function</p>
-<div class="math">
-<p><img src="../_images/math/4b5d281c8d8d6f15edd88daa522f90d03804e89d.svg" alt="\frac{1}{n^2} \sum_{i=1}^n \sum_{j=1}^n (q_j - z_{ij})^2."/></p>
-</div><p>If you leave this to run in HalfCheetah long enough, you&#8217;ll actually see some non-trivial learning process, because weird details specific to this environment partly cancel out the errors. But almost everywhere else, it fails completely.</p>
+<p>To put it mathematically: let <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">q</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+, <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">q'</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+, <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">r</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+, <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">d</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ denote vectors containing the q-values, target q-values, rewards, and dones for a given batch, where there are <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">n</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ entries in the batch. The correct backup is</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">z_i = r_i + \gamma (1-d_i) q'_i,</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>and the correct loss function is</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\frac{1}{n} \sum_{i=1}^n (q_i - z_i)^2.</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>But with these errors, what gets computed is a backup <em>matrix</em>,</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">z_{ij} = r_j + \gamma (1-d_j) q'_i,</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>and a messed up loss function</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\frac{1}{n^2} \sum_{i=1}^n \sum_{j=1}^n (q_j - z_{ij})^2.</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>If you leave this to run in HalfCheetah long enough, you&#8217;ll actually see some non-trivial learning process, because weird details specific to this environment partly cancel out the errors. But almost everywhere else, it fails completely.</p>
 </div>
 </div>
 

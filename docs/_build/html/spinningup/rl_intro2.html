@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="../_static/css/modify.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Part 3: Intro to Policy Optimization" href="rl_intro3.html" />
+    <link rel="next" title="第三部分：策略优化介绍" href="rl_intro3.html" />
     <link rel="prev" title="第一部分：强化学习中的核心概念" href="rl_intro.html" /> 
 
   
@@ -98,7 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="rl_intro.html">第一部分：强化学习中的核心概念</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">第二部分：各种各种的强化学习算法</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#id3">强化学习算法的分类</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#model-free-vs-model-based">免模型学习（Model-Free） VS 有模型学习（Model-Based）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#model-free-vs-model-based">免模型学习（Model-Free） vs 有模型学习（Model-Based）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id4">要学习什么</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id5">免模型学习中要学习什么</a></li>
 </ul>
@@ -106,16 +106,16 @@
 <li class="toctree-l3"><a class="reference internal" href="#id14">有模型强化学习要学习什么</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id17">分类中提到的算法链接</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">分类中提到的算法链接</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="rl_intro3.html">Part 3: Intro to Policy Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rl_intro3.html">第三部分：策略优化介绍</a></li>
 </ul>
 <p class="caption"><span class="caption-text">资源</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="spinningup.html">Spinning Up as a Deep RL Researcher</a></li>
-<li class="toctree-l1"><a class="reference internal" href="keypapers.html">Key Papers in Deep RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keypapers.html">深度强化学习的核心论文</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">练习</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bench.html">Benchmarks for Spinning Up Implementations</a></li>
 </ul>
 <p class="caption"><span class="caption-text">算法文档</span></p>
@@ -129,15 +129,16 @@
 </ul>
 <p class="caption"><span class="caption-text">工具文档</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../utils/logger.html">Logger</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../utils/plotter.html">Plotter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../utils/mpi.html">MPI Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../utils/run_utils.html">Run Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/logger.html">日志打印</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/plotter.html">绘图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/mpi.html">MPI 工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/run_utils.html">运行工具</a></li>
 </ul>
 <p class="caption"><span class="caption-text">其他</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../etc/acknowledgements.html">Acknowledgements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../etc/author.html">About the Author</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/acknowledgements.html">致谢</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/author.html">作者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/translator.html">关于译者</a></li>
 </ul>
 
             
@@ -203,34 +204,35 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1><a class="toc-backref" href="#id35">第二部分：各种各种的强化学习算法</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id33">第二部分：各种各种的强化学习算法</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="id2">
 <p class="topic-title first">目录</p>
 <ul class="simple">
-<li><a class="reference internal" href="#id1" id="id35">第二部分：各种各种的强化学习算法</a><ul>
-<li><a class="reference internal" href="#id3" id="id36">强化学习算法的分类</a></li>
-<li><a class="reference internal" href="#id17" id="id37">分类中提到的算法链接</a></li>
+<li><a class="reference internal" href="#id1" id="id33">第二部分：各种各种的强化学习算法</a><ul>
+<li><a class="reference internal" href="#id3" id="id34">强化学习算法的分类</a></li>
+<li><a class="reference internal" href="#id15" id="id35">分类中提到的算法链接</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<p>我们已经介绍了深度学习的基础术语和符号，现在可以讨论更有丰富的资料：现代强化学习的整体发展和算法设计时候要考虑的各种因素之间的权衡。</p>
+<p>我们已经介绍了深度学习的基础术语和符号，现在可以讨论更丰富的资料：现代强化学习的整体发展和算法设计时候要考虑的各种因素之间的权衡。</p>
 <div class="section" id="id3">
-<h2><a class="toc-backref" href="#id36">强化学习算法的分类</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-center" id="id34">
-<img alt="../_images/rl_algorithms_9_15.svg" src="../_images/rl_algorithms_9_15.svg" /><p class="caption"><span class="caption-text">一个不是很详细但是十分有用的现代强化学习算法分类。  <a class="reference internal" href="#id18">引用自</a></span></p>
+<h2><a class="toc-backref" href="#id34">强化学习算法的分类</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center" id="id32">
+<img alt="../_images/rl_algorithms_9_15.svg" src="../_images/rl_algorithms_9_15.svg" /><p class="caption"><span class="caption-text">一个不是很详细但是十分有用的现代强化学习算法分类。  <a class="reference internal" href="#id16">参见</a></span></p>
 </div>
-<p>要先声明的是：很难准确、全面的把所有现代强化学习算法列出来，因为这些算法并不能很好的用树形结构表示。同时，要把这么多内容放在一篇文章里并且要求便于理解消化，我们必须省略掉一些更加先进的资料，例如探索（exploration），迁移学习（transfer learning），元学习（meta learning）等。也就是说，我们的目标是：</p>
+<p>要先声明的是：很难准确全面的把所有现代强化学习算法都列举出来，因为这些不适合用树形结构展示。同时，要把这么多内容放在一篇文章里，还要便于理解，必须省略掉一些更加先进的内容，例如探索（exploration），迁移学习（transfer learning），元学习（meta learning）等。</p>
+<p>我们的目标是：</p>
 <ul class="simple">
-<li>只强调深度强化学习中，关于学习什么和怎么学习的最基础的设计选择</li>
-<li>to expose the trade-offs in those choices,</li>
-<li>and to place a few prominent modern algorithms into context with respect to those choices.</li>
+<li>只强调深度强化学习中最基础的设计选择：学习什么和怎么学习</li>
+<li>揭示这些选择中的权衡</li>
+<li>把其中特别优秀的算法介绍给大家</li>
 </ul>
 <div class="section" id="model-free-vs-model-based">
-<h3>免模型学习（Model-Free） VS 有模型学习（Model-Based）<a class="headerlink" href="#model-free-vs-model-based" title="Permalink to this headline">¶</a></h3>
-<p>强化学习算法最重要的区分点之一就是 <strong>智能体是否能完整获得或学习到所在环境的模型</strong>。 环境的模型，指的是一个预测状态转换和奖励的函数。</p>
-<p>有模型学习最大的优势在于智能体能够 <strong>看的更远从而做出计划</strong>，走到每一步的时候，都提前尝试未来可能的选择，然后很清晰地从这些候选项中进行选择。</p>
-<p>最大的缺点就是智能体往往不能获得环境的真实模型。如果智能体想在一个场景下使用模型，那它必须完全从经验中学习，这就带来很多挑战。最大的挑战就是，智能体探索出来的模型和真实模型之间的误差，会导致智能体在已学习到的模型中表现很好，但是在真实的环境中表现得不是最优（甚至很差）。从根本上来，基于模型的学习是非常困难的，即便是你愿意花费大量的时间和计算力，最终的结果也有可能达不到预期的效果。</p>
+<h3>免模型学习（Model-Free） vs 有模型学习（Model-Based）<a class="headerlink" href="#model-free-vs-model-based" title="Permalink to this headline">¶</a></h3>
+<p>强化学习算法最重要的区分点之一就是 <strong>智能体是否能完整了解或学习到所在环境的模型</strong>。 环境的模型是指一个预测状态转换和奖励的函数。</p>
+<p>有模型学习最大的优势在于智能体能够 <strong>看的更远从而做出计划</strong>，走到每一步的时候，都提前尝试未来可能的选择，然后很清晰地从这些候选项中进行选择。智能体可以把提前计划得知的结果提取为一个学习到的策略。这其中最著名的例子就是 <a class="reference external" href="https://arxiv.org/abs/1712.01815">AlphaZero</a>。这个方法奏效的话，可以大幅度提升采样效率 —— 相对于那些没有模型的方法。</p>
+<p>有模型学习最大的缺点就是智能体往往不能获得环境的真实模型。如果智能体想在一个场景下使用模型，那它必须完全从经验中学习，这会带来很多挑战。最大的挑战就是，智能体探索出来的模型和真实模型之间存在的误差，会导致智能体在学习到的模型中表现很好，但是在真实的环境中表现得不好（甚至很差）。从本质上讲，基于模型的学习非常困难，即使你愿意花费大量的时间和计算力，最终的结果也可能达不到预期的效果。</p>
 </div>
 <div class="section" id="id4">
 <h3>要学习什么<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
@@ -244,7 +246,65 @@
 <div class="section" id="id5">
 <h4>免模型学习中要学习什么<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
 <p>有两种用来表示和训练免模型学习强化学习算法的方式：</p>
-<p><strong>策略优化（Policy Optimization）</strong>：这个系列的方法可以表示为： <img class="math" src="../_images/math/8bc2ffb416e6b729009dac19bf9efe3c144cc2ac.svg" alt="\pi_{\theta}(a|s)"/> 。 它们直接对目标函数进行梯度下降进行优化，或者间接地，对目标函数的局部近似函数进行优化。优化基本都是基于 <a href="#id6"><span class="problematic" id="id7">**</span></a>同策路**的，也就是说每一步更新只会用到最新的策略执行时采集到的数据。策略优化也包括学习出 <img class="math" src="../_images/math/9810155b30a8fc71eaed8c6f0f62a228c21f11ed.svg" alt="V_{\phi}(s)"/>，作为 :math:<a href="#id8"><span class="problematic" id="id9">`</span></a>V^{pi}(s)`的近似，从而知道如何更新策略。</p>
+<p><strong>策略优化（Policy Optimization）</strong>：这个系列的方法可以表示为： <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\pi_{\theta}(a|s)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ 。 它们直接对目标函数进行梯度下降进行优化，或者间接地，对目标函数的局部近似函数进行优化。优化基本都是基于 <a href="#id6"><span class="problematic" id="id7">**</span></a>同策路**的，也就是说每一步更新只会用到最新的策略执行时采集到的数据。策略优化也包括学习出 <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">V_{\phi}(s)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+，作为 :math:<a href="#id8"><span class="problematic" id="id9">`</span></a>V^{pi}(s)`的近似，从而知道如何更新策略。</p>
 <p>基于策略优化的方法举例：</p>
 <ul class="simple">
 <li><a class="reference external" href="https://arxiv.org/abs/1602.01783">A2C / A3C</a>, 通过梯度下降直接最大化性能</li>
@@ -258,11 +318,98 @@
 <p>基于Q-Learning优化的方法</p>
 <ul class="simple">
 <li><a class="reference external" href="https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf">DQN</a>, 一个让深度强化学习得到发展的经典方法</li>
-<li>and <a class="reference external" href="https://arxiv.org/abs/1707.06887">C51</a>, a variant that learns a distribution over return whose expectation is <img class="math" src="../_images/math/27e0f032982b38571547cc19a81946ebdb69e1b9.svg" alt="Q^*"/>.</li>
-<li>以及 <a class="reference external" href="https://arxiv.org/abs/1707.06887">C51</a>, 学习一个关于回报的分布函数，其期望是 <img class="math" src="../_images/math/27e0f032982b38571547cc19a81946ebdb69e1b9.svg" alt="Q^*"/></li>
+<li>and <a class="reference external" href="https://arxiv.org/abs/1707.06887">C51</a>, a variant that learns a distribution over return whose expectation is <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">Q^*</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+.</li>
+<li>以及 <a class="reference external" href="https://arxiv.org/abs/1707.06887">C51</a>, 学习一个关于回报的分布函数，其期望是 <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">Q^*</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+</li>
 </ul>
-<p><strong>策略优化和Q-Learning的比较</strong> 策略优化的主要优势是这类方法很稳定很可靠，从直觉上将，你是直接在优化你想要的东西。Q-learning方法通过训练 <img class="math" src="../_images/math/cd8d851b25e574efd2664f88ccddda3e165cb693.svg" alt="Q_{\theta}"/> 以满足自我一致，间接地优化智能体的表现。这种方法有很多失败的情况，所以相对来说没有那么稳定。<a class="footnote-reference" href="#id13" id="id12">[1]</a> 但是，Q-learning有效的时候能获得更好的采样效率，因为它们能够比策略优化更加有效地重用数据。</p>
-<p><strong>策略优化和Q-learning的融合方法</strong> 意外的是，策略优化和Q-learning并不是不能兼容的（在某些场景下，它们两者是 <a href="#id38"><span class="problematic" id="id39">`等价的`_</span></a> ），也有很多算法介于两种极端之间。这个范围之类的算法能够很好的平衡好两者之间的优点和缺点，比如说：</p>
+<p><strong>策略优化和Q-Learning的比较</strong> 策略优化的主要优势是这类方法很稳定很可靠，从直觉上将，你是直接在优化你想要的东西。Q-learning方法通过训练 <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">Q_{\theta}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ 以满足自我一致，间接地优化智能体的表现。这种方法有很多失败的情况，所以相对来说没有那么稳定。<a class="footnote-reference" href="#id13" id="id12">[1]</a> 但是，Q-learning有效的时候能获得更好的采样效率，因为它们能够比策略优化更加有效地重用数据。</p>
+<p><strong>策略优化和Q-learning的融合方法</strong> 意外的是，策略优化和Q-learning并不是不能兼容的（在某些场景下，它们两者是 <a href="#id36"><span class="problematic" id="id37">`等价的`_</span></a> ），也有很多算法介于两种极端之间。这个范围之类的算法能够很好的平衡好两者之间的优点和缺点，比如说：</p>
 <ul class="simple">
 <li><a class="reference external" href="https://arxiv.org/abs/1509.02971">DDPG</a> ，同时学习确定性策略和Q-函数，并通过彼此互相提升</li>
 <li><a class="reference external" href="https://arxiv.org/abs/1801.01290">SAC</a> ，使用随机策略、熵正则化和一些其它技巧来稳定学习并在标准基准上得分高于DDPG的变种</li>
@@ -277,18 +424,76 @@
 </div>
 <div class="section" id="id14">
 <h3>有模型强化学习要学习什么<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
-<p>不同于免模型学习，有模型学习方法不是很好分类：很多方法之间都会有交叉。我们会列举一些例子，当然肯定不够详尽，覆盖不到全部。在这些例子里面， <a href="#id15"><span class="problematic" id="id16">**</span></a>模型**有么已知要么可以学习到。</p>
-<p><strong>背景：纯规划</strong> 这个最基础的方法，从不用表示策略，而是纯使用计划技术来选择行动，比如 <a class="reference external" href="https://en.wikipedia.org/wiki/Model_predictive_control">model-predictive control</a> (MPC)。在MPC中，智能体每次观察环境的时候，都会计算出一个对于当前模型最优的计划，这里的计划指的是未来一个固定时间段内，智能体会采取的行动。（超过视野的未来奖励可以通过）
-<strong>Background: Pure Planning.</strong> The most basic approach <em>never</em> explicitly represents the policy, and instead, uses pure planning techniques like <a class="reference external" href="https://en.wikipedia.org/wiki/Model_predictive_control">model-predictive control</a> (MPC) to select actions. In MPC, each time the agent observes the environment, it computes a plan which is optimal with respect to the model, where the plan describes all actions to take over some fixed window of time after the present. (Future rewards beyond the horizon may be considered by the planning algorithm through the use of a learned value function.) The agent then executes the first action of the plan, and immediately discards the rest of it. It computes a new plan each time it prepares to interact with the environment, to avoid using an action from a plan with a shorter-than-desired planning horizon.</p>
+<p>不同于免模型学习，有模型学习方法不是很好分类：很多方法之间都会有交叉。我们会列举一些例子，当然肯定不够详尽，覆盖不到全部。在这些例子里面， <strong>模型</strong> 有么已知要么可以学习到。</p>
+<p><strong>背景：纯规划</strong> 这个最基础的方法，从不用表示策略，而是纯使用计划技术来选择行动，比如 <a href="#id38"><span class="problematic" id="id39">`模型预测控制`_</span></a> (model-predictive control, MPC)。在模型预测控制中，智能体每次观察环境的时候，都会计算出一个对于当前模型最优的计划，这里的计划指的是未来一个固定时间段内，智能体会采取的行动。（超过视野的未来奖励可以通过）</p>
+<p><strong>Background: Pure Planning.</strong> The most basic approach <em>never</em> explicitly represents the policy, and instead, uses pure planning techniques like <a class="reference external" href="https://en.wikipedia.org/wiki/Model_predictive_control">model-predictive control</a> (MPC) to select actions. In MPC, each time the agent observes the environment, it computes a plan which is optimal with respect to the model, where the plan describes all actions to take over some fixed window of time after the present. (Future rewards beyond the horizon may be considered by the planning algorithm through the use of a learned value function.) The agent then executes the first action of the plan, and immediately discards the rest of it. It computes a new plan each time it prepares to interact with the environment, to avoid using an action from a plan with a shorter-than-desired planning horizon.</p>
 <ul class="simple">
-<li>The <a class="reference external" href="https://sites.google.com/view/mbmf">MBMF</a> work explores MPC with learned environment models on some standard benchmark tasks for deep RL.</li>
+<li><a class="reference external" href="https://sites.google.com/view/mbmf">MBMF</a></li>
 </ul>
-<p><strong>Expert Iteration.</strong> A straightforward follow-on to pure planning involves using and learning an explicit representation of the policy, <img class="math" src="../_images/math/8bc2ffb416e6b729009dac19bf9efe3c144cc2ac.svg" alt="\pi_{\theta}(a|s)"/>. The agent uses a planning algorithm (like Monte Carlo Tree Search) in the model, generating candidate actions for the plan by sampling from its current policy. The planning algorithm produces an action which is better than what the policy alone would have produced, hence it is an &#8220;expert&#8221; relative to the policy. The policy is afterwards updated to produce an action more like the planning algorithm&#8217;s output.</p>
-<ul class="simple">
-<li>The <a class="reference external" href="https://arxiv.org/abs/1705.08439">ExIt</a> algorithm uses this approach to train deep neural networks to play Hex.</li>
-<li><a class="reference external" href="https://arxiv.org/abs/1712.01815">AlphaZero</a> is another example of this approach.</li>
-</ul>
-<p><strong>Data Augmentation for Model-Free Methods.</strong> Use a model-free RL algorithm to train a policy or Q-function, but either 1) augment real experiences with fictitious ones in updating the agent, or 2) use <em>only</em> fictitous experience for updating the agent.</p>
+<p><strong>Expert Iteration.</strong> A straightforward follow-on to pure planning involves using and learning an explicit representation of the policy, <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\pi_{\theta}(a|s)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+. The agent uses a planning algorithm (like Monte Carlo Tree Search) in the model, generating candidate actions for the plan by sampling from its current policy. The planning algorithm produces an action which is better than what the policy alone would have produced, hence it is an &#8220;expert&#8221; relative to the policy. The policy is afterwards updated to produce an action more like the planning algorithm&#8217;s output.</p>
+<p><strong>专家迭代</strong> 一个基于纯计划直接前向 <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\pi_{\theta}(a|s)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+
+* <a class="reference external" href="https://arxiv.org/abs/1705.08439">ExIt</a> 算法用这种算法训练深层神经网络来玩 Hex
+* <a class="reference external" href="https://arxiv.org/abs/1712.01815">AlphaZero</a> 是这种方法的另一个例子</p>
+<p><strong>Data Augmentation for Model-Free Methods.</strong> Use a model-free RL algorithm to train a policy or Q-function, but either 1) augment real experiences with fictitious ones in updating the agent, or 2) use <em>only</em> fictitous experience for updating the agent.
+<strong>免模型方法的数据增强</strong> 使用免模型算法来训练策略或者 Q 函数，</p>
 <ul class="simple">
 <li>See <a class="reference external" href="https://arxiv.org/abs/1803.00101">MBVE</a> for an example of augmenting real experiences with fictitious ones.</li>
 <li>See <a class="reference external" href="https://worldmodels.github.io/">World Models</a> for an example of using purely fictitious experience to train the agent, which they call &#8220;training in the dream.&#8221;</li>
@@ -299,93 +504,93 @@
 </ul>
 </div>
 </div>
-<div class="section" id="id17">
-<h2><a class="toc-backref" href="#id37">分类中提到的算法链接</a><a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="id18"></span><table class="docutils footnote" frame="void" id="id19" rules="none">
+<div class="section" id="id15">
+<h2><a class="toc-backref" href="#id35">分类中提到的算法链接</a><a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="id16"></span><table class="docutils footnote" frame="void" id="id17" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[2]</td><td><a class="reference external" href="https://arxiv.org/abs/1602.01783">A2C / A3C</a> (Asynchronous Advantage Actor-Critic): Mnih et al, 2016</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id20" rules="none">
+<table class="docutils footnote" frame="void" id="id18" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[3]</td><td><a class="reference external" href="https://arxiv.org/abs/1707.06347">PPO</a> (Proximal Policy Optimization): Schulman et al, 2017</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id21" rules="none">
+<table class="docutils footnote" frame="void" id="id19" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[4]</td><td><a class="reference external" href="https://arxiv.org/abs/1502.05477">TRPO</a> (Trust Region Policy Optimization): Schulman et al, 2015</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id22" rules="none">
+<table class="docutils footnote" frame="void" id="id20" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[5]</td><td><a class="reference external" href="https://arxiv.org/abs/1509.02971">DDPG</a> (Deep Deterministic Policy Gradient): Lillicrap et al, 2015</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id23" rules="none">
+<table class="docutils footnote" frame="void" id="id21" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[6]</td><td><a class="reference external" href="https://arxiv.org/abs/1802.09477">TD3</a> (Twin Delayed DDPG): Fujimoto et al, 2018</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id24" rules="none">
+<table class="docutils footnote" frame="void" id="id22" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[7]</td><td><a class="reference external" href="https://arxiv.org/abs/1801.01290">SAC</a> (Soft Actor-Critic): Haarnoja et al, 2018</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id25" rules="none">
+<table class="docutils footnote" frame="void" id="id23" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[8]</td><td><a class="reference external" href="https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf">DQN</a> (Deep Q-Networks): Mnih et al, 2013</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id26" rules="none">
+<table class="docutils footnote" frame="void" id="id24" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[9]</td><td><a class="reference external" href="https://arxiv.org/abs/1707.06887">C51</a> (Categorical 51-Atom DQN): Bellemare et al, 2017</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id27" rules="none">
+<table class="docutils footnote" frame="void" id="id25" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[10]</td><td><a class="reference external" href="https://arxiv.org/abs/1710.10044">QR-DQN</a> (Quantile Regression DQN): Dabney et al, 2017</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id28" rules="none">
+<table class="docutils footnote" frame="void" id="id26" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[11]</td><td><a class="reference external" href="https://arxiv.org/abs/1707.01495">HER</a> (Hindsight Experience Replay): Andrychowicz et al, 2017</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id29" rules="none">
+<table class="docutils footnote" frame="void" id="id27" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[12]</td><td><a class="reference external" href="https://worldmodels.github.io/">World Models</a>: Ha and Schmidhuber, 2018</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id30" rules="none">
+<table class="docutils footnote" frame="void" id="id28" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[13]</td><td><a class="reference external" href="https://arxiv.org/abs/1707.06203">I2A</a> (Imagination-Augmented Agents): Weber et al, 2017</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id31" rules="none">
+<table class="docutils footnote" frame="void" id="id29" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[14]</td><td><a class="reference external" href="https://sites.google.com/view/mbmf">MBMF</a> (Model-Based RL with Model-Free Fine-Tuning): Nagabandi et al, 2017</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id32" rules="none">
+<table class="docutils footnote" frame="void" id="id30" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[15]</td><td><a class="reference external" href="https://arxiv.org/abs/1803.00101">MBVE</a> (Model-Based Value Expansion): Feinberg et al, 2018</td></tr>
 </tbody>
 </table>
-<table class="docutils footnote" frame="void" id="id33" rules="none">
+<table class="docutils footnote" frame="void" id="id31" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
 <tr><td class="label">[16]</td><td><a class="reference external" href="https://arxiv.org/abs/1712.01815">AlphaZero</a>: Silver et al, 2017</td></tr>
@@ -402,7 +607,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="rl_intro3.html" class="btn btn-neutral float-right" title="Part 3: Intro to Policy Optimization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="rl_intro3.html" class="btn btn-neutral float-right" title="第三部分：策略优化介绍" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="rl_intro.html" class="btn btn-neutral" title="第一部分：强化学习中的核心概念" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

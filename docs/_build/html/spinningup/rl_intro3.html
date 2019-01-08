@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Part 3: Intro to Policy Optimization &mdash; Spinning Up  documentation</title>
+  <title>第三部分：策略优化介绍 &mdash; Spinning Up  documentation</title>
   
 
   
@@ -32,7 +32,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Spinning Up as a Deep RL Researcher" href="spinningup.html" />
-    <link rel="prev" title="Part 2: Kinds of RL Algorithms" href="rl_intro2.html" /> 
+    <link rel="prev" title="第二部分：各种各种的强化学习算法" href="rl_intro2.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -87,17 +87,17 @@
               <p class="caption"><span class="caption-text">用户文档</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../user/introduction.html">介绍</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/installation.html">安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user/algorithms.html">算法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/running.html">Running Experiments</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/saving_and_loading.html">Experiment Outputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/plotting.html">Plotting Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/running.html">运行试验</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/saving_and_loading.html">试验输出</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/plotting.html">绘制结果</a></li>
 </ul>
 <p class="caption"><span class="caption-text">强化学习介绍</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="rl_intro.html">Part 1: Key Concepts in RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rl_intro2.html">Part 2: Kinds of RL Algorithms</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Part 3: Intro to Policy Optimization</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="rl_intro.html">第一部分：强化学习中的核心概念</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rl_intro2.html">第二部分：各种各种的强化学习算法</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第三部分：策略优化介绍</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#deriving-the-simplest-policy-gradient">Deriving the Simplest Policy Gradient</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#implementing-the-simplest-policy-gradient">Implementing the Simplest Policy Gradient</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#expected-grad-log-prob-lemma">Expected Grad-Log-Prob Lemma</a></li>
@@ -112,8 +112,8 @@
 <p class="caption"><span class="caption-text">资源</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="spinningup.html">Spinning Up as a Deep RL Researcher</a></li>
-<li class="toctree-l1"><a class="reference internal" href="keypapers.html">Key Papers in Deep RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exercises.html">Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="keypapers.html">深度强化学习的核心论文</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">练习</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bench.html">Benchmarks for Spinning Up Implementations</a></li>
 </ul>
 <p class="caption"><span class="caption-text">算法文档</span></p>
@@ -127,15 +127,16 @@
 </ul>
 <p class="caption"><span class="caption-text">工具文档</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../utils/logger.html">Logger</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../utils/plotter.html">Plotter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../utils/mpi.html">MPI Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../utils/run_utils.html">Run Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/logger.html">日志打印</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/plotter.html">绘图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/mpi.html">MPI 工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/run_utils.html">运行工具</a></li>
 </ul>
 <p class="caption"><span class="caption-text">其他</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../etc/acknowledgements.html">Acknowledgements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../etc/author.html">About the Author</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/acknowledgements.html">致谢</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/author.html">作者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/translator.html">关于译者</a></li>
 </ul>
 
             
@@ -181,7 +182,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Part 3: Intro to Policy Optimization</li>
+      <li>第三部分：策略优化介绍</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -200,20 +201,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="part-3-intro-to-policy-optimization">
-<h1><a class="toc-backref" href="#id5">Part 3: Intro to Policy Optimization</a><a class="headerlink" href="#part-3-intro-to-policy-optimization" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="id1">
+<h1><a class="toc-backref" href="#id6">第三部分：策略优化介绍</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="table-of-contents">
 <p class="topic-title first">Table of Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#part-3-intro-to-policy-optimization" id="id5">Part 3: Intro to Policy Optimization</a><ul>
-<li><a class="reference internal" href="#deriving-the-simplest-policy-gradient" id="id6">Deriving the Simplest Policy Gradient</a></li>
-<li><a class="reference internal" href="#implementing-the-simplest-policy-gradient" id="id7">Implementing the Simplest Policy Gradient</a></li>
-<li><a class="reference internal" href="#expected-grad-log-prob-lemma" id="id8">Expected Grad-Log-Prob Lemma</a></li>
-<li><a class="reference internal" href="#don-t-let-the-past-distract-you" id="id9">Don&#8217;t Let the Past Distract You</a></li>
-<li><a class="reference internal" href="#implementing-reward-to-go-policy-gradient" id="id10">Implementing Reward-to-Go Policy Gradient</a></li>
-<li><a class="reference internal" href="#baselines-in-policy-gradients" id="id11">Baselines in Policy Gradients</a></li>
-<li><a class="reference internal" href="#other-forms-of-the-policy-gradient" id="id12">Other Forms of the Policy Gradient</a></li>
-<li><a class="reference internal" href="#recap" id="id13">Recap</a></li>
+<li><a class="reference internal" href="#id1" id="id6">第三部分：策略优化介绍</a><ul>
+<li><a class="reference internal" href="#deriving-the-simplest-policy-gradient" id="id7">Deriving the Simplest Policy Gradient</a></li>
+<li><a class="reference internal" href="#implementing-the-simplest-policy-gradient" id="id8">Implementing the Simplest Policy Gradient</a></li>
+<li><a class="reference internal" href="#expected-grad-log-prob-lemma" id="id9">Expected Grad-Log-Prob Lemma</a></li>
+<li><a class="reference internal" href="#don-t-let-the-past-distract-you" id="id10">Don&#8217;t Let the Past Distract You</a></li>
+<li><a class="reference internal" href="#implementing-reward-to-go-policy-gradient" id="id11">Implementing Reward-to-Go Policy Gradient</a></li>
+<li><a class="reference internal" href="#baselines-in-policy-gradients" id="id12">Baselines in Policy Gradients</a></li>
+<li><a class="reference internal" href="#other-forms-of-the-policy-gradient" id="id13">Other Forms of the Policy Gradient</a></li>
+<li><a class="reference internal" href="#recap" id="id14">Recap</a></li>
 </ul>
 </li>
 </ul>
@@ -226,50 +227,790 @@
 </ul>
 <p>In the end, we&#8217;ll tie those results together and describe the advantage-based expression for the policy gradient&#8212;the version we use in our <a class="reference external" href="../algorithms/vpg.html">Vanilla Policy Gradient</a> implementation.</p>
 <div class="section" id="deriving-the-simplest-policy-gradient">
-<h2><a class="toc-backref" href="#id6">Deriving the Simplest Policy Gradient</a><a class="headerlink" href="#deriving-the-simplest-policy-gradient" title="Permalink to this headline">¶</a></h2>
-<p>Here, we consider the case of a stochastic, parameterized policy, <img class="math" src="../_images/math/80088cfe6126980142c5447a9cb12f69ee7fa333.svg" alt="\pi_{\theta}"/>. We aim to maximize the expected return <img class="math" src="../_images/math/48ffbf0dd0274a46574e145ea23e4c174f6dfaa3.svg" alt="J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{R(\tau)}"/>. For the purposes of this derivation, we&#8217;ll take <img class="math" src="../_images/math/27905cd8b349a89eec129f7e3ac3d3ac4c82e501.svg" alt="R(\tau)"/> to give the <a class="reference external" href="../spinningup/rl_intro.html#reward-and-return">finite-horizon undiscounted return</a>, but the derivation for the infinite-horizon discounted return setting is almost identical.</p>
+<h2><a class="toc-backref" href="#id7">Deriving the Simplest Policy Gradient</a><a class="headerlink" href="#deriving-the-simplest-policy-gradient" title="Permalink to this headline">¶</a></h2>
+<p>Here, we consider the case of a stochastic, parameterized policy, <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\pi_{\theta}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+. We aim to maximize the expected return <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{R(\tau)}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+. For the purposes of this derivation, we&#8217;ll take <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">R(\tau)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ to give the <a class="reference external" href="../spinningup/rl_intro.html#reward-and-return">finite-horizon undiscounted return</a>, but the derivation for the infinite-horizon discounted return setting is almost identical.</p>
 <p>We would like to optimize the policy by gradient ascent, eg</p>
-<div class="math">
-<p><img src="../_images/math/237c86938ce2e9de91040e4090f79c6a1125fc00.svg" alt="\theta_{k+1} = \theta_k + \alpha \left. \nabla_{\theta} J(\pi_{\theta}) \right|_{\theta_k}."/></p>
-</div><p>The gradient of policy performance, <img class="math" src="../_images/math/f839e53d1ccacb63d4d86a8be348d9adc86d723a.svg" alt="\nabla_{\theta} J(\pi_{\theta})"/>, is called the <strong>policy gradient</strong>, and algorithms that optimize the policy this way are called <strong>policy gradient algorithms.</strong> (Examples include Vanilla Policy Gradient and TRPO. PPO is often referred to as a policy gradient algorithm, though this is slightly inaccurate.)</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\theta_{k+1} = \theta_k + \alpha \left. \nabla_{\theta} J(\pi_{\theta}) \right|_{\theta_k}.</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>The gradient of policy performance, <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\nabla_{\theta} J(\pi_{\theta})</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+, is called the <strong>policy gradient</strong>, and algorithms that optimize the policy this way are called <strong>policy gradient algorithms.</strong> (Examples include Vanilla Policy Gradient and TRPO. PPO is often referred to as a policy gradient algorithm, though this is slightly inaccurate.)</p>
 <p>To actually use this algorithm, we need an expression for the policy gradient which we can numerically compute. This involves two steps: 1) deriving the analytical gradient of policy performance, which turns out to have the form of an expected value, and then 2) forming a sample estimate of that expected value, which can be computed with data from a finite number of agent-environment interaction steps.</p>
 <p>In this subsection, we&#8217;ll find the simplest form of that expression. In later subsections, we&#8217;ll show how to improve on the simplest form to get the version we actually use in standard policy gradient implementations.</p>
 <p>We&#8217;ll begin by laying out a few facts which are useful for deriving the analytical gradient.</p>
-<p><strong>1. Probability of a Trajectory.</strong> The probability of a trajectory <img class="math" src="../_images/math/8b650845f5290c4327f29ff073a5b1a8dabb7298.svg" alt="\tau = (s_0, a_0, ..., s_{T+1})"/> given that actions come from <img class="math" src="../_images/math/80088cfe6126980142c5447a9cb12f69ee7fa333.svg" alt="\pi_{\theta}"/> is</p>
-<div class="math">
-<p><img src="../_images/math/2cb381fc364780ad05245f41cf88a9467bf4cb2f.svg" alt="P(\tau|\theta) = \rho_0 (s_0) \prod_{t=0}^{T} P(s_{t+1}|s_t, a_t) \pi_{\theta}(a_t |s_t)."/></p>
-</div><p><strong>2. The Log-Derivative Trick.</strong> The log-derivative trick is based on a simple rule from calculus: the derivative of <img class="math" src="../_images/math/ef040455c459db2f570c11ecb75b25853645d90a.svg" alt="\log x"/> with respect to <img class="math" src="../_images/math/a679a9634cd3d168023caa7576bcbcbaeaa0d7d5.svg" alt="x"/> is <img class="math" src="../_images/math/4a5449dd5e4be3a804c40210a24c5154bcd6760e.svg" alt="1/x"/>. When rearranged and combined with chain rule, we get:</p>
-<div class="math">
-<p><img src="../_images/math/2f10287db9a459af5467140025c35bb92e960ee3.svg" alt="\nabla_{\theta} P(\tau | \theta) = P(\tau | \theta) \nabla_{\theta} \log P(\tau | \theta)."/></p>
-</div><p><strong>3. Log-Probability of a Trajectory.</strong> The log-prob of a trajectory is just</p>
-<div class="math">
-<p><img src="../_images/math/1737476897d122c10cec3053f4d360f8b57d0a01.svg" alt="\log P(\tau|\theta) = \log \rho_0 (s_0) + \sum_{t=0}^{T} \bigg( \log P(s_{t+1}|s_t, a_t)  + \log \pi_{\theta}(a_t |s_t)\bigg)."/></p>
-</div><p><strong>4. Gradients of Environment Functions.</strong> The environment has no dependence on <img class="math" src="../_images/math/1a20bd03ccceae216a40cb69d3fb7a3970f6f275.svg" alt="\theta"/>, so gradients of <img class="math" src="../_images/math/b6ef65214189bd57d5130c050c9848928f697389.svg" alt="\rho_0(s_0)"/>, <img class="math" src="../_images/math/acce6f3cb29fba6f467260234cf1ad858c53822d.svg" alt="P(s_{t+1}|s_t, a_t)"/>, and <img class="math" src="../_images/math/27905cd8b349a89eec129f7e3ac3d3ac4c82e501.svg" alt="R(\tau)"/> are zero.</p>
+<p><strong>1. Probability of a Trajectory.</strong> The probability of a trajectory <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\tau = (s_0, a_0, ..., s_{T+1})</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ given that actions come from <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\pi_{\theta}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ is</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">P(\tau|\theta) = \rho_0 (s_0) \prod_{t=0}^{T} P(s_{t+1}|s_t, a_t) \pi_{\theta}(a_t |s_t).</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p><strong>2. The Log-Derivative Trick.</strong> The log-derivative trick is based on a simple rule from calculus: the derivative of <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\log x</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ with respect to <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">x</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ is <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">1/x</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+. When rearranged and combined with chain rule, we get:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\nabla_{\theta} P(\tau | \theta) = P(\tau | \theta) \nabla_{\theta} \log P(\tau | \theta).</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p><strong>3. Log-Probability of a Trajectory.</strong> The log-prob of a trajectory is just</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\log P(\tau|\theta) = \log \rho_0 (s_0) + \sum_{t=0}^{T} \bigg( \log P(s_{t+1}|s_t, a_t)  + \log \pi_{\theta}(a_t |s_t)\bigg).</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p><strong>4. Gradients of Environment Functions.</strong> The environment has no dependence on <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\theta</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+, so gradients of <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\rho_0(s_0)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+, <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">P(s_{t+1}|s_t, a_t)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+, and <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">R(\tau)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ are zero.</p>
 <p><strong>5. Grad-Log-Prob of a Trajectory.</strong> The gradient of the log-prob of a trajectory is thus</p>
-<div class="math">
-<p><img src="../_images/math/5661deae547ee000037bc5ecc5e3077de6ee57db.svg" alt="\nabla_{\theta} \log P(\tau | \theta) &amp;= \cancel{\nabla_{\theta} \log \rho_0 (s_0)} + \sum_{t=0}^{T} \bigg( \cancel{\nabla_{\theta} \log P(s_{t+1}|s_t, a_t)}  + \nabla_{\theta} \log \pi_{\theta}(a_t |s_t)\bigg) \\
-&amp;= \sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t)."/></p>
-</div><p>Putting it all together, we derive the following:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\nabla_{\theta} \log P(\tau | \theta) &amp;= \cancel{\nabla_{\theta} \log \rho_0 (s_0)} + \sum_{t=0}^{T} \bigg( \cancel{\nabla_{\theta} \log P(s_{t+1}|s_t, a_t)}  + \nabla_{\theta} \log \pi_{\theta}(a_t |s_t)\bigg) \\
+&amp;= \sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t).</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>Putting it all together, we derive the following:</p>
 <div class="admonition-derivation-for-basic-policy-gradient admonition">
 <p class="first admonition-title">Derivation for Basic Policy Gradient</p>
-<div class="last math">
-<p><img src="../_images/math/6fcf142138ce8289bb4f5d4656f3f3bf1609214d.svg" alt="\begin{align*}
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\begin{align*}
 \nabla_{\theta} J(\pi_{\theta}) &amp;= \nabla_{\theta} \underE{\tau \sim \pi_{\theta}}{R(\tau)} &amp; \\
 &amp;= \nabla_{\theta} \int_{\tau} P(\tau|\theta) R(\tau) &amp; \text{Expand expectation} \\
 &amp;= \int_{\tau} \nabla_{\theta} P(\tau|\theta) R(\tau) &amp; \text{Bring gradient under integral} \\
 &amp;= \int_{\tau} P(\tau|\theta) \nabla_{\theta} \log P(\tau|\theta) R(\tau) &amp; \text{Log-derivative trick} \\
 &amp;= \underE{\tau \sim \pi_{\theta}}{\nabla_{\theta} \log P(\tau|\theta) R(\tau)} &amp; \text{Return to expectation form} \\
 \therefore \nabla_{\theta} J(\pi_{\theta}) &amp;= \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) R(\tau)} &amp; \text{Expression for grad-log-prob}
-\end{align*}"/></p>
-</div></div>
-<p>This is an expectation, which means that we can estimate it with a sample mean. If we collect a set of trajectories <img class="math" src="../_images/math/2618cb22cf47efc780221f34206472f7bf678097.svg" alt="\mathcal{D} = \{\tau_i\}_{i=1,...,N}"/> where each trajectory is obtained by letting the agent act in the environment using the policy <img class="math" src="../_images/math/80088cfe6126980142c5447a9cb12f69ee7fa333.svg" alt="\pi_{\theta}"/>, the policy gradient can be estimated with</p>
-<div class="math">
-<p><img src="../_images/math/a8ec906d99c7cb540ef0df80d86fa1bca0f33a79.svg" alt="\hat{g} = \frac{1}{|\mathcal{D}|} \sum_{\tau \in \mathcal{D}} \sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) R(\tau),"/></p>
-</div><p>where <img class="math" src="../_images/math/1889e2b0692b42dc0ec4ea24fbbfa98745ac198f.svg" alt="|\mathcal{D}|"/> is the number of trajectories in <img class="math" src="../_images/math/b8fda719f4eca2e94bdde65ed40504645326e5fd.svg" alt="\mathcal{D}"/> (here, <img class="math" src="../_images/math/bc31bc706968058d05385235d40e5be6449ce21a.svg" alt="N"/>).</p>
-<p>This last expression is the simplest version of the computable expression we desired. Assuming that we have represented our policy in a way which allows us to calculate <img class="math" src="../_images/math/dcddd87f44c485d068a897bcdcd421893db63db3.svg" alt="\nabla_{\theta} \log \pi_{\theta}(a|s)"/>, and if we are able to run the policy in the environment to collect the trajectory dataset, we can compute the policy gradient and take an update step.</p>
+\end{align*}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+</div>
+<p>This is an expectation, which means that we can estimate it with a sample mean. If we collect a set of trajectories <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\mathcal{D} = \{\tau_i\}_{i=1,...,N}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ where each trajectory is obtained by letting the agent act in the environment using the policy <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\pi_{\theta}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+, the policy gradient can be estimated with</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\hat{g} = \frac{1}{|\mathcal{D}|} \sum_{\tau \in \mathcal{D}} \sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) R(\tau),</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>where <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">|\mathcal{D}|</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ is the number of trajectories in <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\mathcal{D}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ (here, <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">N</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+).</p>
+<p>This last expression is the simplest version of the computable expression we desired. Assuming that we have represented our policy in a way which allows us to calculate <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\nabla_{\theta} \log \pi_{\theta}(a|s)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+, and if we are able to run the policy in the environment to collect the trajectory dataset, we can compute the policy gradient and take an update step.</p>
 </div>
 <div class="section" id="implementing-the-simplest-policy-gradient">
-<h2><a class="toc-backref" href="#id7">Implementing the Simplest Policy Gradient</a><a class="headerlink" href="#implementing-the-simplest-policy-gradient" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id8">Implementing the Simplest Policy Gradient</a><a class="headerlink" href="#implementing-the-simplest-policy-gradient" title="Permalink to this headline">¶</a></h2>
 <p>We give a short Tensorflow implementation of this simple version of the policy gradient algorithm in <code class="docutils literal"><span class="pre">spinup/examples/pg_math/1_simple_pg.py</span></code>. (It can also be viewed <a class="reference external" href="https://github.com/openai/spinningup/blob/master/spinup/examples/pg_math/1_simple_pg.py">on github</a>.) It is only 122 lines long, so we highly recommend reading through it in depth. While we won&#8217;t go through the entirety of the code here, we&#8217;ll highlight and explain a few important pieces.</p>
 <p><strong>1. Making the Policy Network.</strong></p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>25
@@ -305,8 +1046,66 @@
 <p class="first admonition-title">You Should Know</p>
 <p>Even though we describe this as a loss function, it is <strong>not</strong> a loss function in the typical sense from supervised learning. There are two main differences from standard loss functions.</p>
 <p><strong>1. The data distribution depends on the parameters.</strong> A loss function is usually defined on a fixed data distribution which is independent of the parameters we aim to optimize. Not so here, where the data must be sampled on the most recent policy.</p>
-<p><strong>2. It doesn&#8217;t measure performance.</strong> A loss function usually evaluates the performance metric that we care about. Here, we care about expected return, <img class="math" src="../_images/math/bac2be784363161f5e76c206e3319aa035c066fc.svg" alt="J(\pi_{\theta})"/>, but our &#8220;loss&#8221; function does not approximate this at all, even in expectation. This &#8220;loss&#8221; function is only useful to us because, when evaluated at the current parameters, with data generated by the current parameters, it has the negative gradient of performance.</p>
-<p>But after that first step of gradient descent, there is no more connection to performance. This means that minimizing this &#8220;loss&#8221; function, for a given batch of data, has <em>no</em> guarantee whatsoever of improving expected return. You can send this loss to <img class="math" src="../_images/math/5b06f1fe8ec90d14f7597c7bf106758a9fed48f8.svg" alt="-\infty"/> and policy performance could crater; in fact, it usually will. Sometimes a deep RL researcher might describe this outcome as the policy &#8220;overfitting&#8221; to a batch of data. This is descriptive, but should not be taken literally because it does not refer to generalization error.</p>
+<p><strong>2. It doesn&#8217;t measure performance.</strong> A loss function usually evaluates the performance metric that we care about. Here, we care about expected return, <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">J(\pi_{\theta})</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+, but our &#8220;loss&#8221; function does not approximate this at all, even in expectation. This &#8220;loss&#8221; function is only useful to us because, when evaluated at the current parameters, with data generated by the current parameters, it has the negative gradient of performance.</p>
+<p>But after that first step of gradient descent, there is no more connection to performance. This means that minimizing this &#8220;loss&#8221; function, for a given batch of data, has <em>no</em> guarantee whatsoever of improving expected return. You can send this loss to <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">-\infty</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ and policy performance could crater; in fact, it usually will. Sometimes a deep RL researcher might describe this outcome as the policy &#8220;overfitting&#8221; to a batch of data. This is descriptive, but should not be taken literally because it does not refer to generalization error.</p>
 <p class="last">We raise this point because it is common for ML practitioners to interpret a loss function as a useful signal during training&#8212;&#8221;if the loss goes down, all is well.&#8221; In policy gradients, this intuition is wrong, and you should only care about average return. The loss function means nothing.</p>
 </div>
 <div class="admonition-you-should-know admonition">
@@ -447,48 +1246,324 @@
 <p>The main loop of the algorithm just repeatedly calls <code class="docutils literal"><span class="pre">train_one_epoch()</span></code>.</p>
 </div>
 <div class="section" id="expected-grad-log-prob-lemma">
-<h2><a class="toc-backref" href="#id8">Expected Grad-Log-Prob Lemma</a><a class="headerlink" href="#expected-grad-log-prob-lemma" title="Permalink to this headline">¶</a></h2>
-<p>In this subsection, we will derive an intermediate result which is extensively used throughout the theory of policy gradients. We will call it the Expected Grad-Log-Prob (EGLP) lemma. <a class="footnote-reference" href="#id2" id="id1">[1]</a></p>
-<p><strong>EGLP Lemma.</strong> Suppose that <img class="math" src="../_images/math/16b92ba11837118ba08f3bf14c65e6151a9def9a.svg" alt="P_{\theta}"/> is a parameterized probability distribution over a random variable, <img class="math" src="../_images/math/a679a9634cd3d168023caa7576bcbcbaeaa0d7d5.svg" alt="x"/>. Then:</p>
-<div class="math">
-<p><img src="../_images/math/458b0eb0829ecd27ff745f9329fdc0fbd56295bf.svg" alt="\underE{x \sim P_{\theta}}{\nabla_{\theta} \log P_{\theta}(x)} = 0."/></p>
-</div><div class="admonition-proof admonition">
+<h2><a class="toc-backref" href="#id9">Expected Grad-Log-Prob Lemma</a><a class="headerlink" href="#expected-grad-log-prob-lemma" title="Permalink to this headline">¶</a></h2>
+<p>In this subsection, we will derive an intermediate result which is extensively used throughout the theory of policy gradients. We will call it the Expected Grad-Log-Prob (EGLP) lemma. <a class="footnote-reference" href="#id3" id="id2">[1]</a></p>
+<p><strong>EGLP Lemma.</strong> Suppose that <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">P_{\theta}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ is a parameterized probability distribution over a random variable, <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">x</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+. Then:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\underE{x \sim P_{\theta}}{\nabla_{\theta} \log P_{\theta}(x)} = 0.</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<div class="admonition-proof admonition">
 <p class="first admonition-title">Proof</p>
 <p>Recall that all probability distributions are <em>normalized</em>:</p>
-<div class="math">
-<p><img src="../_images/math/1ccff802b56424217fbdb65469e70a2780a676e2.svg" alt="\int_x P_{\theta}(x) = 1."/></p>
-</div><p>Take the gradient of both sides of the normalization condition:</p>
-<div class="math">
-<p><img src="../_images/math/e9271f247e0b161843ba47329c92cd43e7395a7f.svg" alt="\nabla_{\theta} \int_x P_{\theta}(x) = \nabla_{\theta} 1 = 0."/></p>
-</div><p>Use the log derivative trick to get:</p>
-<div class="last math">
-<p><img src="../_images/math/2f52c5df9b4abb4b165f4e4a938d877d6441c2d3.svg" alt="0 &amp;= \nabla_{\theta} \int_x P_{\theta}(x) \\
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\int_x P_{\theta}(x) = 1.</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>Take the gradient of both sides of the normalization condition:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\nabla_{\theta} \int_x P_{\theta}(x) = \nabla_{\theta} 1 = 0.</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>Use the log derivative trick to get:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">0 &amp;= \nabla_{\theta} \int_x P_{\theta}(x) \\
 &amp;= \int_x \nabla_{\theta} P_{\theta}(x) \\
 &amp;= \int_x P_{\theta}(x) \nabla_{\theta} \log P_{\theta}(x) \\
-\therefore 0 &amp;= \underE{x \sim P_{\theta}}{\nabla_{\theta} \log P_{\theta}(x)}."/></p>
-</div></div>
-<table class="docutils footnote" frame="void" id="id2" rules="none">
+\therefore 0 &amp;= \underE{x \sim P_{\theta}}{\nabla_{\theta} \log P_{\theta}(x)}.</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+</div>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>The author of this article is not aware of this lemma being given a standard name anywhere in the literature. But given how often it comes up, it seems pretty worthwhile to give it some kind of name for ease of reference.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>The author of this article is not aware of this lemma being given a standard name anywhere in the literature. But given how often it comes up, it seems pretty worthwhile to give it some kind of name for ease of reference.</td></tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="don-t-let-the-past-distract-you">
-<h2><a class="toc-backref" href="#id9">Don&#8217;t Let the Past Distract You</a><a class="headerlink" href="#don-t-let-the-past-distract-you" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id10">Don&#8217;t Let the Past Distract You</a><a class="headerlink" href="#don-t-let-the-past-distract-you" title="Permalink to this headline">¶</a></h2>
 <p>Examine our most recent expression for the policy gradient:</p>
-<div class="math">
-<p><img src="../_images/math/777ef86f94711dca46888226a5f5dd9ee40811db.svg" alt="\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) R(\tau)}."/></p>
-</div><p>Taking a step with this gradient pushes up the log-probabilities of each action in proportion to <img class="math" src="../_images/math/27905cd8b349a89eec129f7e3ac3d3ac4c82e501.svg" alt="R(\tau)"/>, the sum of <em>all rewards ever obtained</em>. But this doesn&#8217;t make much sense.</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) R(\tau)}.</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>Taking a step with this gradient pushes up the log-probabilities of each action in proportion to <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">R(\tau)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+, the sum of <em>all rewards ever obtained</em>. But this doesn&#8217;t make much sense.</p>
 <p>Agents should really only reinforce actions on the basis of their <em>consequences</em>. Rewards obtained before taking an action have no bearing on how good that action was: only rewards that come <em>after</em>.</p>
 <p>It turns out that this intuition shows up in the math, and we can show that the policy gradient can also be expressed by</p>
-<div class="math">
-<p><img src="../_images/math/9926209f608ff0134af57f8b5fa4ecf0ea515480.svg" alt="\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) \sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1})}."/></p>
-</div><p>In this form, actions are only reinforced based on rewards obtained after they are taken.</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) \sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1})}.</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>In this form, actions are only reinforced based on rewards obtained after they are taken.</p>
 <p>We&#8217;ll call this form the &#8220;reward-to-go policy gradient,&#8221; because the sum of rewards after a point in a trajectory,</p>
-<div class="math">
-<p><img src="../_images/math/1bccba32148775ea311d8c14933c6232e0828315.svg" alt="\hat{R}_t \doteq \sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1}),"/></p>
-</div><p>is called the <strong>reward-to-go</strong> from that point, and this policy gradient expression depends on the reward-to-go from state-action pairs.</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\hat{R}_t \doteq \sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1}),</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>is called the <strong>reward-to-go</strong> from that point, and this policy gradient expression depends on the reward-to-go from state-action pairs.</p>
 <div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
 <p class="last"><strong>But how is this better?</strong> A key problem with policy gradients is how many sample trajectories are needed to get a low-variance sample estimate for them. The formula we started with included terms for reinforcing actions proportional to past rewards, all of which had zero mean, but nonzero variance: as a result, they would just add noise to sample estimates of the policy gradient. By removing them, we reduce the number of sample trajectories needed.</p>
@@ -496,7 +1571,7 @@
 <p>An (optional) proof of this claim can be found <a class="reference external" href="../spinningup/extra_pg_proof1.html">here</a>, and it ultimately depends on the EGLP lemma.</p>
 </div>
 <div class="section" id="implementing-reward-to-go-policy-gradient">
-<h2><a class="toc-backref" href="#id10">Implementing Reward-to-Go Policy Gradient</a><a class="headerlink" href="#implementing-reward-to-go-policy-gradient" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id11">Implementing Reward-to-Go Policy Gradient</a><a class="headerlink" href="#implementing-reward-to-go-policy-gradient" title="Permalink to this headline">¶</a></h2>
 <p>We give a short Tensorflow implementation of the reward-to-go policy gradient in <code class="docutils literal"><span class="pre">spinup/examples/pg_math/2_rtg_pg.py</span></code>. (It can also be viewed <a class="reference external" href="https://github.com/openai/spinningup/blob/master/spinup/examples/pg_math/2_rtg_pg.py">on github</a>.)</p>
 <p>The only thing that has changed from <code class="docutils literal"><span class="pre">1_simple_pg.py</span></code> is that we now use different weights in the loss function. The code modification is very slight: we add a new function, and change two other lines. The new function is:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>12
@@ -526,63 +1601,811 @@
 </td></tr></table></div>
 </div>
 <div class="section" id="baselines-in-policy-gradients">
-<h2><a class="toc-backref" href="#id11">Baselines in Policy Gradients</a><a class="headerlink" href="#baselines-in-policy-gradients" title="Permalink to this headline">¶</a></h2>
-<p>An immediate consequence of the EGLP lemma is that for any function <img class="math" src="../_images/math/39198dc626d803f8b1266d70dabb59b1ac38b6d2.svg" alt="b"/> which only depends on state,</p>
-<div class="math">
-<p><img src="../_images/math/18738f8112fa4138e032a4be06e898543e587346.svg" alt="\underE{a_t \sim \pi_{\theta}}{\nabla_{\theta} \log \pi_{\theta}(a_t|s_t) b(s_t)} = 0."/></p>
-</div><p>This allows us to add or subtract any number of terms like this from our expression for the policy gradient, without changing it in expectation:</p>
-<div class="math">
-<p><img src="../_images/math/a68f53bd1391212d17d426dafeb71a39c10c9189.svg" alt="\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) \left(\sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1}) - b(s_t)\right)}."/></p>
-</div><p>Any function <img class="math" src="../_images/math/39198dc626d803f8b1266d70dabb59b1ac38b6d2.svg" alt="b"/> used in this way is called a <strong>baseline</strong>.</p>
-<p>The most common choice of baseline is the <a class="reference external" href="../spinningup/rl_intro.html#value-functions">on-policy value function</a> <img class="math" src="../_images/math/d1a28691e5690a9f6b7bce161b03bd1fc8eadbd8.svg" alt="V^{\pi}(s_t)"/>. Recall that this is the average return an agent gets if it starts in state <img class="math" src="../_images/math/8b415ee5fdf45796473d9a05615664c67e20af3d.svg" alt="s_t"/> and then acts according to policy <img class="math" src="../_images/math/b8a498bfdeca84b973d6222e08a6d04321d65dc3.svg" alt="\pi"/> for the rest of its life.</p>
-<p>Empirically, the choice <img class="math" src="../_images/math/2221a29de2953ebb8930423425ed4d0feea27b25.svg" alt="b(s_t) = V^{\pi}(s_t)"/> has the desirable effect of reducing variance in the sample estimate for the policy gradient. This results in faster and more stable policy learning. It is also appealing from a conceptual angle: it encodes the intuition that if an agent gets what it expected, it should &#8220;feel&#8221; neutral about it.</p>
+<h2><a class="toc-backref" href="#id12">Baselines in Policy Gradients</a><a class="headerlink" href="#baselines-in-policy-gradients" title="Permalink to this headline">¶</a></h2>
+<p>An immediate consequence of the EGLP lemma is that for any function <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">b</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ which only depends on state,</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\underE{a_t \sim \pi_{\theta}}{\nabla_{\theta} \log \pi_{\theta}(a_t|s_t) b(s_t)} = 0.</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>This allows us to add or subtract any number of terms like this from our expression for the policy gradient, without changing it in expectation:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) \left(\sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1}) - b(s_t)\right)}.</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>Any function <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">b</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ used in this way is called a <strong>baseline</strong>.</p>
+<p>The most common choice of baseline is the <a class="reference external" href="../spinningup/rl_intro.html#value-functions">on-policy value function</a> <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">V^{\pi}(s_t)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+. Recall that this is the average return an agent gets if it starts in state <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">s_t</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ and then acts according to policy <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\pi</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ for the rest of its life.</p>
+<p>Empirically, the choice <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">b(s_t) = V^{\pi}(s_t)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ has the desirable effect of reducing variance in the sample estimate for the policy gradient. This results in faster and more stable policy learning. It is also appealing from a conceptual angle: it encodes the intuition that if an agent gets what it expected, it should &#8220;feel&#8221; neutral about it.</p>
 <div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
-<p>In practice, <img class="math" src="../_images/math/d1a28691e5690a9f6b7bce161b03bd1fc8eadbd8.svg" alt="V^{\pi}(s_t)"/> cannot be computed exactly, so it has to be approximated. This is usually done with a neural network, <img class="math" src="../_images/math/a133925364fc62de281e792d4a41fbc9c360967f.svg" alt="V_{\phi}(s_t)"/>, which is updated concurrently with the policy (so that the value network always approximates the value function of the most recent policy).</p>
-<p>The simplest method for learning <img class="math" src="../_images/math/662f11bc664c365835c552ff09b43fc4bc88f721.svg" alt="V_{\phi}"/>, used in most implementations of policy optimization algorithms (including VPG, TRPO, PPO, and A2C), is to minimize a mean-squared-error objective:</p>
-<div class="math">
-<p><img src="../_images/math/e72767ea0e9d0fba2e5ab7af60aad01af4cdf0e0.svg" alt="\phi_k = \arg \min_{\phi} \underE{s_t, \hat{R}_t \sim \pi_k}{\left( V_{\phi}(s_t) - \hat{R}_t \right)^2},"/></p>
-</div><div class="line-block">
+<p>In practice, <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">V^{\pi}(s_t)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ cannot be computed exactly, so it has to be approximated. This is usually done with a neural network, <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">V_{\phi}(s_t)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+, which is updated concurrently with the policy (so that the value network always approximates the value function of the most recent policy).</p>
+<p>The simplest method for learning <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">V_{\phi}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+, used in most implementations of policy optimization algorithms (including VPG, TRPO, PPO, and A2C), is to minimize a mean-squared-error objective:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\phi_k = \arg \min_{\phi} \underE{s_t, \hat{R}_t \sim \pi_k}{\left( V_{\phi}(s_t) - \hat{R}_t \right)^2},
+
+</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p class="last">where <img class="math" src="../_images/math/9a2555f9b7533949f38b997c919bf86862ec0fae.svg" alt="\pi_k"/> is the policy at epoch <img class="math" src="../_images/math/ce641c655353b854e8d2ae836c6f97df9ace9984.svg" alt="k"/>. This is done with one or more steps of gradient descent, starting from the previous value parameters <img class="math" src="../_images/math/7681f537ec31c9bc1c811dd0f33f46aa9aaabebf.svg" alt="\phi_{k-1}"/>.</p>
+<p class="last">where <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\pi_k</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ is the policy at epoch <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">k</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+. This is done with one or more steps of gradient descent, starting from the previous value parameters <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\phi_{k-1}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+.</p>
 </div>
 </div>
 <div class="section" id="other-forms-of-the-policy-gradient">
-<h2><a class="toc-backref" href="#id12">Other Forms of the Policy Gradient</a><a class="headerlink" href="#other-forms-of-the-policy-gradient" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id13">Other Forms of the Policy Gradient</a><a class="headerlink" href="#other-forms-of-the-policy-gradient" title="Permalink to this headline">¶</a></h2>
 <p>What we have seen so far is that the policy gradient has the general form</p>
-<div class="math">
-<p><img src="../_images/math/1485ca5baaa09ed99fbcc54ba600e36852afd36c.svg" alt="\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) \Phi_t},"/></p>
-</div><p>where <img class="math" src="../_images/math/aaba82ffd0d44c6c1a14a125c83424b1a63ca7fb.svg" alt="\Phi_t"/> could be any of</p>
-<div class="math">
-<p><img src="../_images/math/d728e9e6107056e4411a184d1a57f1510f79fa7d.svg" alt="\Phi_t &amp;= R(\tau),"/></p>
-</div><p>or</p>
-<div class="math">
-<p><img src="../_images/math/c9dd451211b3afb0bc9dc0c19d477b23e931598a.svg" alt="\Phi_t &amp;= \sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1}),"/></p>
-</div><p>or</p>
-<div class="math">
-<p><img src="../_images/math/92ea8688d614735fd59cf9ecd9a36672ab5d7def.svg" alt="\Phi_t &amp;= \sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1}) - b(s_t)."/></p>
-</div><p>All of these choices lead to the same expected value for the policy gradient, despite having different variances. It turns out that there are two more valid choices of weights <img class="math" src="../_images/math/aaba82ffd0d44c6c1a14a125c83424b1a63ca7fb.svg" alt="\Phi_t"/> which are important to know.</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) \Phi_t},</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>where <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\Phi_t</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ could be any of</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\Phi_t &amp;= R(\tau),
+
+</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>or</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\Phi_t &amp;= \sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1}),
+
+</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>or</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\Phi_t &amp;= \sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1}) - b(s_t).
+
+</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>All of these choices lead to the same expected value for the policy gradient, despite having different variances. It turns out that there are two more valid choices of weights <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\Phi_t</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ which are important to know.</p>
 <p><strong>1. On-Policy Action-Value Function.</strong> The choice</p>
-<div class="math">
-<p><img src="../_images/math/bf6f5680c7568790c744baf59bbc27831603f200.svg" alt="\Phi_t = Q^{\pi_{\theta}}(s_t, a_t)"/></p>
-</div><p>is also valid. See <a class="reference external" href="../spinningup/extra_pg_proof2.html">this page</a> for an (optional) proof of this claim.</p>
-<p><strong>2. The Advantage Function.</strong> Recall that the <a class="reference external" href="../spinningup/rl_intro.html#advantage-functions">advantage of an action</a>, defined by <img class="math" src="../_images/math/b01b7882de374f84fd2686fab209b641d8e7277b.svg" alt="A^{\pi}(s_t,a_t) = Q^{\pi}(s_t,a_t) - V^{\pi}(s_t)"/>,  describes how much better or worse it is than other actions on average (relative to the current policy). This choice,</p>
-<div class="math">
-<p><img src="../_images/math/06e42f4a5a133c3a56d70aaa098c23c3f0a37df2.svg" alt="\Phi_t = A^{\pi_{\theta}}(s_t, a_t)"/></p>
-</div><p>is also valid. The proof is that it&#8217;s equivalent to using <img class="math" src="../_images/math/2e609266200dc3d0c82e592e1be4755f6e3c564c.svg" alt="\Phi_t = Q^{\pi_{\theta}}(s_t, a_t)"/> and then using a value function baseline, which we are always free to do.</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\Phi_t = Q^{\pi_{\theta}}(s_t, a_t)
+
+</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>is also valid. See <a class="reference external" href="../spinningup/extra_pg_proof2.html">this page</a> for an (optional) proof of this claim.</p>
+<p><strong>2. The Advantage Function.</strong> Recall that the <a class="reference external" href="../spinningup/rl_intro.html#advantage-functions">advantage of an action</a>, defined by <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">A^{\pi}(s_t,a_t) = Q^{\pi}(s_t,a_t) - V^{\pi}(s_t)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+,  describes how much better or worse it is than other actions on average (relative to the current policy). This choice,</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\Phi_t = A^{\pi_{\theta}}(s_t, a_t)
+
+</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>is also valid. The proof is that it&#8217;s equivalent to using <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\Phi_t = Q^{\pi_{\theta}}(s_t, a_t)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ and then using a value function baseline, which we are always free to do.</p>
 <div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
 <p class="last">The formulation of policy gradients with advantage functions is extremely common, and there are many different ways of estimating the advantage function used by different algorithms.</p>
 </div>
 <div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
-<p>For a more detailed treatment of this topic, you should read the paper on <a class="reference external" href="https://arxiv.org/abs/1506.02438">Generalized Advantage Estimation</a> (GAE), which goes into depth about different choices of <img class="math" src="../_images/math/aaba82ffd0d44c6c1a14a125c83424b1a63ca7fb.svg" alt="\Phi_t"/> in the background sections.</p>
+<p>For a more detailed treatment of this topic, you should read the paper on <a class="reference external" href="https://arxiv.org/abs/1506.02438">Generalized Advantage Estimation</a> (GAE), which goes into depth about different choices of <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\Phi_t</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ in the background sections.</p>
 <p class="last">That paper then goes on to describe GAE, a method for approximating the advantage function in policy optimization algorithms which enjoys widespread use. For instance, Spinning Up&#8217;s implementations of VPG, TRPO, and PPO make use of it. As a result, we strongly advise you to study it.</p>
 </div>
 </div>
 <div class="section" id="recap">
-<h2><a class="toc-backref" href="#id13">Recap</a><a class="headerlink" href="#recap" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id14">Recap</a><a class="headerlink" href="#recap" title="Permalink to this headline">¶</a></h2>
 <p>In this chapter, we described the basic theory of policy gradient methods and connected some of the early results to code examples. The interested student should continue from here by studying how the later results (value function baselines and the advantage formulation of policy gradients) translate into Spinning Up&#8217;s implementation of <a class="reference external" href="../algorithms/vpg.html">Vanilla Policy Gradient</a>.</p>
 </div>
 </div>
@@ -598,7 +2421,7 @@
         <a href="spinningup.html" class="btn btn-neutral float-right" title="Spinning Up as a Deep RL Researcher" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="rl_intro2.html" class="btn btn-neutral" title="Part 2: Kinds of RL Algorithms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="rl_intro2.html" class="btn btn-neutral" title="第二部分：各种各种的强化学习算法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

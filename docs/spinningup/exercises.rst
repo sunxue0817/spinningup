@@ -1,5 +1,5 @@
 =========
-Exercises
+练习
 =========
 
 
@@ -126,3 +126,4 @@ Challenges
 
     * `Requests for Research 1 <https://openai.com/requests-for-research/>`_
     * `Requests for Research 2 <https://blog.openai.com/requests-for-research-2/>`_
+

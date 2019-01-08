@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="../_static/css/modify.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Logger" href="../utils/logger.html" />
+    <link rel="next" title="日志打印" href="../utils/logger.html" />
     <link rel="prev" title="Twin Delayed DDPG" href="td3.html" /> 
 
   
@@ -87,23 +87,23 @@
               <p class="caption"><span class="caption-text">用户文档</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../user/introduction.html">介绍</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/installation.html">安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user/algorithms.html">算法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/running.html">Running Experiments</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/saving_and_loading.html">Experiment Outputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/plotting.html">Plotting Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/running.html">运行试验</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/saving_and_loading.html">试验输出</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/plotting.html">绘制结果</a></li>
 </ul>
 <p class="caption"><span class="caption-text">强化学习介绍</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../spinningup/rl_intro.html">Part 1: Key Concepts in RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../spinningup/rl_intro2.html">Part 2: Kinds of RL Algorithms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../spinningup/rl_intro3.html">Part 3: Intro to Policy Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spinningup/rl_intro.html">第一部分：强化学习中的核心概念</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spinningup/rl_intro2.html">第二部分：各种各种的强化学习算法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spinningup/rl_intro3.html">第三部分：策略优化介绍</a></li>
 </ul>
 <p class="caption"><span class="caption-text">资源</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../spinningup/spinningup.html">Spinning Up as a Deep RL Researcher</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../spinningup/keypapers.html">Key Papers in Deep RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../spinningup/exercises.html">Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spinningup/keypapers.html">深度强化学习的核心论文</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spinningup/exercises.html">练习</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../spinningup/bench.html">Benchmarks for Spinning Up Implementations</a></li>
 </ul>
 <p class="caption"><span class="caption-text">算法文档</span></p>
@@ -139,15 +139,16 @@
 </ul>
 <p class="caption"><span class="caption-text">工具文档</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../utils/logger.html">Logger</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../utils/plotter.html">Plotter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../utils/mpi.html">MPI Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../utils/run_utils.html">Run Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/logger.html">日志打印</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/plotter.html">绘图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/mpi.html">MPI 工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/run_utils.html">运行工具</a></li>
 </ul>
 <p class="caption"><span class="caption-text">其他</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../etc/acknowledgements.html">Acknowledgements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../etc/author.html">About the Author</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/acknowledgements.html">致谢</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/author.html">作者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/translator.html">关于译者</a></li>
 </ul>
 
             
@@ -262,74 +263,1264 @@
 <div class="section" id="entropy-regularized-reinforcement-learning">
 <h4><a class="toc-backref" href="#id6">Entropy-Regularized Reinforcement Learning</a><a class="headerlink" href="#entropy-regularized-reinforcement-learning" title="Permalink to this headline">¶</a></h4>
 <p>Entropy is a quantity which, roughly speaking, says how random a random variable is. If a coin is weighted so that it almost always comes up heads, it has low entropy; if it&#8217;s evenly weighted and has a half chance of either outcome, it has high entropy.</p>
-<p>Let <img class="math" src="../_images/math/a679a9634cd3d168023caa7576bcbcbaeaa0d7d5.svg" alt="x"/> be a random variable with probability mass or density function <img class="math" src="../_images/math/fda9c3d12bc5face394db0eecc0a54d1bff5b46a.svg" alt="P"/>. The entropy <img class="math" src="../_images/math/b9d29b0250dbf71e8858eba83d7d2bf4f6c32e4a.svg" alt="H"/> of <img class="math" src="../_images/math/a679a9634cd3d168023caa7576bcbcbaeaa0d7d5.svg" alt="x"/> is computed from its distribution <img class="math" src="../_images/math/fda9c3d12bc5face394db0eecc0a54d1bff5b46a.svg" alt="P"/> according to</p>
-<div class="math">
-<p><img src="../_images/math/b3d05fa94f0a18323c8c1dca703982855b1ba514.svg" alt="H(P) = \underE{x \sim P}{-\log P(x)}."/></p>
-</div><p>In entropy-regularized reinforcement learning, the agent gets a bonus reward at each time step proportional to the entropy of the policy at that timestep. This changes <a class="reference external" href="../spinningup/rl_intro.html#the-rl-problem">the RL problem</a> to:</p>
-<div class="math">
-<p><img src="../_images/math/96a8f8d1621fedfc2a633d1bb55fde203bd44ab9.svg" alt="\pi^* = \arg \max_{\pi} \underE{\tau \sim \pi}{ \sum_{t=0}^{\infty} \gamma^t \bigg( R(s_t, a_t, s_{t+1}) + \alpha H\left(\pi(\cdot|s_t)\right) \bigg)},"/></p>
-</div><p>where <img class="math" src="../_images/math/dee787f38c91d2cbcd96b8b8b9694eac695ef98c.svg" alt="\alpha &gt; 0"/> is the trade-off coefficient. (Note: we&#8217;re assuming an infinite-horizon discounted setting here, and we&#8217;ll do the same for the rest of this page.) We can now define the slightly-different value functions in this setting. <img class="math" src="../_images/math/f857ab97cf4591adcaac91f1d072868338bc5bfe.svg" alt="V^{\pi}"/> is changed to include the entropy bonuses from every timestep:</p>
-<div class="math">
-<p><img src="../_images/math/0968b9e16194afccc4d8bfc2a4a081d266087433.svg" alt="V^{\pi}(s) = \underE{\tau \sim \pi}{ \left. \sum_{t=0}^{\infty} \gamma^t \bigg( R(s_t, a_t, s_{t+1}) + \alpha H\left(\pi(\cdot|s_t)\right) \bigg) \right| s_0 = s}"/></p>
-</div><p><img class="math" src="../_images/math/d450c2b5a28043ac0eb590b277d53ba7d5866799.svg" alt="Q^{\pi}"/> is changed to include the entropy bonuses from every timestep <em>except the first</em>:</p>
-<div class="math">
-<p><img src="../_images/math/920644da88017126ee516b08aee186696bda7152.svg" alt="Q^{\pi}(s,a) = \underE{\tau \sim \pi}{ \left. \sum_{t=0}^{\infty} \gamma^t  R(s_t, a_t, s_{t+1}) + \alpha \sum_{t=1}^{\infty} \gamma^t H\left(\pi(\cdot|s_t)\right)\right| s_0 = s, a_0 = a}"/></p>
-</div><p>With these definitions, <img class="math" src="../_images/math/f857ab97cf4591adcaac91f1d072868338bc5bfe.svg" alt="V^{\pi}"/> and <img class="math" src="../_images/math/d450c2b5a28043ac0eb590b277d53ba7d5866799.svg" alt="Q^{\pi}"/> are connected by:</p>
-<div class="math">
-<p><img src="../_images/math/b726a1d37859b4b8eb8ed169d215b074933d1df6.svg" alt="V^{\pi}(s) = \underE{a \sim \pi}{Q^{\pi}(s,a)} + \alpha H\left(\pi(\cdot|s)\right)"/></p>
-</div><p>and the Bellman equation for <img class="math" src="../_images/math/d450c2b5a28043ac0eb590b277d53ba7d5866799.svg" alt="Q^{\pi}"/> is</p>
-<div class="math">
-<p><img src="../_images/math/33f7821425215be70a10b71279ef0dc8a7c9079a.svg" alt="Q^{\pi}(s,a) &amp;= \underE{s' \sim P \\ a' \sim \pi}{R(s,a,s') + \gamma\left(Q^{\pi}(s',a') + \alpha H\left(\pi(\cdot|s')\right) \right)} \\
-&amp;= \underE{s' \sim P}{R(s,a,s') + \gamma V^{\pi}(s')}."/></p>
-</div><div class="admonition-you-should-know admonition">
+<p>Let <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">x</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ be a random variable with probability mass or density function <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">P</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+. The entropy <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">H</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ of <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">x</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ is computed from its distribution <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">P</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ according to</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">H(P) = \underE{x \sim P}{-\log P(x)}.</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>In entropy-regularized reinforcement learning, the agent gets a bonus reward at each time step proportional to the entropy of the policy at that timestep. This changes <a class="reference external" href="../spinningup/rl_intro.html#the-rl-problem">the RL problem</a> to:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\pi^* = \arg \max_{\pi} \underE{\tau \sim \pi}{ \sum_{t=0}^{\infty} \gamma^t \bigg( R(s_t, a_t, s_{t+1}) + \alpha H\left(\pi(\cdot|s_t)\right) \bigg)},</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>where <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\alpha &gt; 0</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ is the trade-off coefficient. (Note: we&#8217;re assuming an infinite-horizon discounted setting here, and we&#8217;ll do the same for the rest of this page.) We can now define the slightly-different value functions in this setting. <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">V^{\pi}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ is changed to include the entropy bonuses from every timestep:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">V^{\pi}(s) = \underE{\tau \sim \pi}{ \left. \sum_{t=0}^{\infty} \gamma^t \bigg( R(s_t, a_t, s_{t+1}) + \alpha H\left(\pi(\cdot|s_t)\right) \bigg) \right| s_0 = s}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p><div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">Q^{\pi}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ is changed to include the entropy bonuses from every timestep <em>except the first</em>:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">Q^{\pi}(s,a) = \underE{\tau \sim \pi}{ \left. \sum_{t=0}^{\infty} \gamma^t  R(s_t, a_t, s_{t+1}) + \alpha \sum_{t=1}^{\infty} \gamma^t H\left(\pi(\cdot|s_t)\right)\right| s_0 = s, a_0 = a}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>With these definitions, <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">V^{\pi}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ and <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">Q^{\pi}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ are connected by:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">V^{\pi}(s) = \underE{a \sim \pi}{Q^{\pi}(s,a)} + \alpha H\left(\pi(\cdot|s)\right)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>and the Bellman equation for <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">Q^{\pi}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ is</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">Q^{\pi}(s,a) &amp;= \underE{s' \sim P \\ a' \sim \pi}{R(s,a,s') + \gamma\left(Q^{\pi}(s',a') + \alpha H\left(\pi(\cdot|s')\right) \right)} \\
+&amp;= \underE{s' \sim P}{R(s,a,s') + \gamma V^{\pi}(s')}.</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
-<p class="last">The way we&#8217;ve set up the value functions in the entropy-regularized setting is a little bit arbitrary, and actually we could have done it differently (eg make <img class="math" src="../_images/math/d450c2b5a28043ac0eb590b277d53ba7d5866799.svg" alt="Q^{\pi}"/> include the entropy bonus at the first timestep). The choice of definition may vary slightly across papers on the subject.</p>
+<p class="last">The way we&#8217;ve set up the value functions in the entropy-regularized setting is a little bit arbitrary, and actually we could have done it differently (eg make <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">Q^{\pi}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ include the entropy bonus at the first timestep). The choice of definition may vary slightly across papers on the subject.</p>
 </div>
 </div>
 <div class="section" id="id1">
 <h4><a class="toc-backref" href="#id7">Soft Actor-Critic</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
-<p>SAC concurrently learns a policy <img class="math" src="../_images/math/80088cfe6126980142c5447a9cb12f69ee7fa333.svg" alt="\pi_{\theta}"/>, two Q-functions <img class="math" src="../_images/math/213a47cc1d5ab93ba1e7101e3869903f40e52df8.svg" alt="Q_{\phi_1}, Q_{\phi_2}"/>, and a value function <img class="math" src="../_images/math/9ebf8cd5585270a258da5a299e7db7229c9fddaf.svg" alt="V_{\psi}"/>.</p>
+<p>SAC concurrently learns a policy <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\pi_{\theta}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+, two Q-functions <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">Q_{\phi_1}, Q_{\phi_2}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+, and a value function <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">V_{\psi}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+.</p>
 <p><strong>Learning Q.</strong> The Q-functions are learned by MSBE minimization, using a <strong>target value network</strong> to form the Bellman backups. They both use the same target, like in TD3, and have loss functions:</p>
-<div class="math">
-<p><img src="../_images/math/0a1fc500475d85a71984c03f94462b075da698c3.svg" alt="L(\phi_i, {\mathcal D}) = \underset{(s,a,r,s',d) \sim {\mathcal D}}{{\mathrm E}}\left[
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">L(\phi_i, {\mathcal D}) = \underset{(s,a,r,s',d) \sim {\mathcal D}}{{\mathrm E}}\left[
     \Bigg( Q_{\phi_i}(s,a) - \left(r + \gamma (1 - d) V_{\psi_{\text{targ}}}(s') \right) \Bigg)^2
-    \right]."/></p>
-</div><p>The target value network, like the target networks in DDPG and TD3, is obtained by polyak averaging the value network parameters over the course of training.</p>
-<p><strong>Learning V.</strong> The value function is learned by exploiting (a sample-based approximation of) the connection between <img class="math" src="../_images/math/d450c2b5a28043ac0eb590b277d53ba7d5866799.svg" alt="Q^{\pi}"/> and <img class="math" src="../_images/math/f857ab97cf4591adcaac91f1d072868338bc5bfe.svg" alt="V^{\pi}"/>. Before we go into the learning rule, let&#8217;s first rewrite the connection equation by using the definition of entropy to obtain:</p>
-<div class="math">
-<p><img src="../_images/math/51bf906bb7631d4354e52f5069ef0242bd2a2d96.svg" alt="V^{\pi}(s) &amp;= \underE{a \sim \pi}{Q^{\pi}(s,a)} + \alpha H\left(\pi(\cdot|s)\right) \\
-&amp;= \underE{a \sim \pi}{Q^{\pi}(s,a) - \alpha \log \pi(a|s)}."/></p>
-</div><p>The RHS is an expectation over actions, so we can approximate it by sampling from the policy:</p>
-<div class="math">
-<p><img src="../_images/math/4843a432be98c7c7b50100e5227bc43ab4acd691.svg" alt="V^{\pi}(s) \approx Q^{\pi}(s,\tilde{a}) - \alpha \log \pi(\tilde{a}|s), \;\;\;\;\; \tilde{a} \sim \pi(\cdot|s)."/></p>
-</div><p>SAC sets up a mean-squared-error loss for <img class="math" src="../_images/math/9ebf8cd5585270a258da5a299e7db7229c9fddaf.svg" alt="V_{\psi}"/> based on this approximation. But what Q-value do we use? SAC uses <strong>clipped double-Q</strong> like TD3 for learning the value function, and takes the minimum Q-value between the two approximators. So the SAC loss for value function parameters is:</p>
-<div class="math">
-<p><img src="../_images/math/d44a3cfb903ec8530a5880aa718aa5cf0dad28f8.svg" alt="L(\psi, {\mathcal D}) = \underE{s \sim \mathcal{D} \\ \tilde{a} \sim \pi_{\theta}}{\Bigg(V_{\psi}(s) - \left(\min_{i=1,2} Q_{\phi_i}(s,\tilde{a}) - \alpha \log \pi_{\theta}(\tilde{a}|s) \right)\Bigg)^2}."/></p>
-</div><p>Importantly, we do <strong>not</strong> use actions from the replay buffer here: these actions are sampled fresh from the current version of the policy.</p>
-<p><strong>Learning the Policy.</strong> The policy should, in each state, act to maximize the expected future return plus expected future entropy. That is, it should maximize <img class="math" src="../_images/math/3c343749cc2f7804a670b618d03d056d7e35b5eb.svg" alt="V^{\pi}(s)"/>, which we expand out (as before) into</p>
-<div class="math">
-<p><img src="../_images/math/d3deca00a02e211a85278358f902e3ab0683c8a5.svg" alt="\underE{a \sim \pi}{Q^{\pi}(s,a) - \alpha \log \pi(a|s)}."/></p>
-</div><p>The way we optimize the policy makes use of the <strong>reparameterization trick</strong>, in which a sample from <img class="math" src="../_images/math/f85b799256ad373b882e9d0760b03ffcc297627e.svg" alt="\pi_{\theta}(\cdot|s)"/> is drawn by computing a deterministic function of state, policy parameters, and independent noise. To illustrate: following the authors of the SAC paper, we use a squashed Gaussian policy, which means that samples are obtained according to</p>
-<div class="math">
-<p><img src="../_images/math/905cd42f4795d08f38be91a4affaed472941799a.svg" alt="\tilde{a}_{\theta}(s, \xi) = \tanh\left( \mu_{\theta}(s) + \sigma_{\theta}(s) \odot \xi \right), \;\;\;\;\; \xi \sim \mathcal{N}(0, I)."/></p>
-</div><div class="admonition-you-should-know admonition">
+    \right].</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>The target value network, like the target networks in DDPG and TD3, is obtained by polyak averaging the value network parameters over the course of training.</p>
+<p><strong>Learning V.</strong> The value function is learned by exploiting (a sample-based approximation of) the connection between <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">Q^{\pi}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ and <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">V^{\pi}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+. Before we go into the learning rule, let&#8217;s first rewrite the connection equation by using the definition of entropy to obtain:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">V^{\pi}(s) &amp;= \underE{a \sim \pi}{Q^{\pi}(s,a)} + \alpha H\left(\pi(\cdot|s)\right) \\
+&amp;= \underE{a \sim \pi}{Q^{\pi}(s,a) - \alpha \log \pi(a|s)}.</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>The RHS is an expectation over actions, so we can approximate it by sampling from the policy:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">V^{\pi}(s) \approx Q^{\pi}(s,\tilde{a}) - \alpha \log \pi(\tilde{a}|s), \;\;\;\;\; \tilde{a} \sim \pi(\cdot|s).</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>SAC sets up a mean-squared-error loss for <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">V_{\psi}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ based on this approximation. But what Q-value do we use? SAC uses <strong>clipped double-Q</strong> like TD3 for learning the value function, and takes the minimum Q-value between the two approximators. So the SAC loss for value function parameters is:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">L(\psi, {\mathcal D}) = \underE{s \sim \mathcal{D} \\ \tilde{a} \sim \pi_{\theta}}{\Bigg(V_{\psi}(s) - \left(\min_{i=1,2} Q_{\phi_i}(s,\tilde{a}) - \alpha \log \pi_{\theta}(\tilde{a}|s) \right)\Bigg)^2}.</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>Importantly, we do <strong>not</strong> use actions from the replay buffer here: these actions are sampled fresh from the current version of the policy.</p>
+<p><strong>Learning the Policy.</strong> The policy should, in each state, act to maximize the expected future return plus expected future entropy. That is, it should maximize <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">V^{\pi}(s)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+, which we expand out (as before) into</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\underE{a \sim \pi}{Q^{\pi}(s,a) - \alpha \log \pi(a|s)}.</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>The way we optimize the policy makes use of the <strong>reparameterization trick</strong>, in which a sample from <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\pi_{\theta}(\cdot|s)</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ is drawn by computing a deterministic function of state, policy parameters, and independent noise. To illustrate: following the authors of the SAC paper, we use a squashed Gaussian policy, which means that samples are obtained according to</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\tilde{a}_{\theta}(s, \xi) = \tanh\left( \mu_{\theta}(s) + \sigma_{\theta}(s) \odot \xi \right), \;\;\;\;\; \xi \sim \mathcal{N}(0, I).</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
 <p>This policy has two key differences from the policies we use in the other policy optimization algorithms:</p>
-<p><strong>1. The squashing function.</strong> The <img class="math" src="../_images/math/21166b68ac043adf354c550774eed2b507231426.svg" alt="\tanh"/> in the SAC policy ensures that actions are bounded to a finite range. This is absent in the VPG, TRPO, and PPO policies. It also changes the distribution: before the <img class="math" src="../_images/math/21166b68ac043adf354c550774eed2b507231426.svg" alt="\tanh"/> the SAC policy is a factored Gaussian like the other algorithms&#8217; policies, but after the <img class="math" src="../_images/math/21166b68ac043adf354c550774eed2b507231426.svg" alt="\tanh"/> it is not. (You can still compute the log-probabilities of actions in closed form, though: see the paper appendix for details.)</p>
+<p><strong>1. The squashing function.</strong> The <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\tanh</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ in the SAC policy ensures that actions are bounded to a finite range. This is absent in the VPG, TRPO, and PPO policies. It also changes the distribution: before the <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\tanh</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ the SAC policy is a factored Gaussian like the other algorithms&#8217; policies, but after the <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\tanh</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ it is not. (You can still compute the log-probabilities of actions in closed form, though: see the paper appendix for details.)</p>
 <p class="last"><strong>2. The way standard deviations are parameterized.</strong> In VPG, TRPO, and PPO, we represent the log std devs with state-independent parameter vectors. In SAC, we represent the log std devs as outputs from the neural network, meaning that they depend on state in a complex way. SAC with state-independent log std devs, in our experience, did not work. (Can you think of why? Or better yet: run an experiment to verify?)</p>
 </div>
 <p>The reparameterization trick allows us to rewrite the expectation over actions (which contains a pain point: the distribution depends on the policy parameters) into an expectation over noise (which removes the pain point: the distribution now has no dependence on parameters):</p>
-<div class="math">
-<p><img src="../_images/math/5bb18b5df7cf3c929debb1cf1e38e14af6ed96ca.svg" alt="\underE{a \sim \pi_{\theta}}{Q^{\pi_{\theta}}(s,a) - \alpha \log \pi_{\theta}(a|s)} = \underE{\xi \sim \mathcal{N}}{Q^{\pi_{\theta}}(s,\tilde{a}_{\theta}(s,\xi)) - \alpha \log \pi_{\theta}(\tilde{a}_{\theta}(s,\xi)|s)}"/></p>
-</div><p>To get the policy loss, the final step is that we need to substitute <img class="math" src="../_images/math/0d33c407d2046710a84c9e7f5c35ddf432d08da9.svg" alt="Q^{\pi_{\theta}}"/> with one of our function approximators. The same as in TD3, we use <img class="math" src="../_images/math/d0ce34d2d12b36de9ee3689921ea102f5ef641ce.svg" alt="Q_{\phi_1}"/>. The policy is thus optimized according to</p>
-<div class="math">
-<p><img src="../_images/math/4d5b512d3799ef605088739a2503b7b248a54ac7.svg" alt="\max_{\theta} \underE{s \sim \mathcal{D} \\ \xi \sim \mathcal{N}}{Q_{\phi_1}(s,\tilde{a}_{\theta}(s,\xi)) - \alpha \log \pi_{\theta}(\tilde{a}_{\theta}(s,\xi)|s)},"/></p>
-</div><p>which is almost the same as the DDPG and TD3 policy optimization, except for the stochasticity and entropy term.</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\underE{a \sim \pi_{\theta}}{Q^{\pi_{\theta}}(s,a) - \alpha \log \pi_{\theta}(a|s)} = \underE{\xi \sim \mathcal{N}}{Q^{\pi_{\theta}}(s,\tilde{a}_{\theta}(s,\xi)) - \alpha \log \pi_{\theta}(\tilde{a}_{\theta}(s,\xi)|s)}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>To get the policy loss, the final step is that we need to substitute <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">Q^{\pi_{\theta}}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ with one of our function approximators. The same as in TD3, we use <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">Q_{\phi_1}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+. The policy is thus optimized according to</p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\max_{\theta} \underE{s \sim \mathcal{D} \\ \xi \sim \mathcal{N}}{Q_{\phi_1}(s,\tilde{a}_{\theta}(s,\xi)) - \alpha \log \pi_{\theta}(\tilde{a}_{\theta}(s,\xi)|s)},</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>which is almost the same as the DDPG and TD3 policy optimization, except for the stochasticity and entropy term.</p>
 </div>
 </div>
 <div class="section" id="exploration-vs-exploitation">
 <h3><a class="toc-backref" href="#id8">Exploration vs. Exploitation</a><a class="headerlink" href="#exploration-vs-exploitation" title="Permalink to this headline">¶</a></h3>
-<p>SAC trains a stochastic policy with entropy regularization, and explores in an on-policy way. The entropy regularization coefficient <img class="math" src="../_images/math/e37a3c8967bacd71f976963d8ff117f6dd0ad132.svg" alt="\alpha"/> explicitly controls the explore-exploit tradeoff, with higher <img class="math" src="../_images/math/e37a3c8967bacd71f976963d8ff117f6dd0ad132.svg" alt="\alpha"/> corresponding to more exploration, and lower <img class="math" src="../_images/math/e37a3c8967bacd71f976963d8ff117f6dd0ad132.svg" alt="\alpha"/> corresponding to more exploitation. The right coefficient (the one which leads to the stablest / highest-reward learning) may vary from environment to environment, and could require careful tuning.</p>
+<p>SAC trains a stochastic policy with entropy regularization, and explores in an on-policy way. The entropy regularization coefficient <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\alpha</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ explicitly controls the explore-exploit tradeoff, with higher <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\alpha</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ corresponding to more exploration, and lower <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\alpha</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ corresponding to more exploitation. The right coefficient (the one which leads to the stablest / highest-reward learning) may vary from environment to environment, and could require careful tuning.</p>
 <p>At test time, to see how well the policy exploits what it has learned, we remove stochasticity and use the mean action instead of a sample from the distribution. This tends to improve performance over the original stochastic policy.</p>
 <div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
@@ -338,8 +1529,8 @@
 </div>
 <div class="section" id="pseudocode">
 <h3><a class="toc-backref" href="#id9">Pseudocode</a><a class="headerlink" href="#pseudocode" title="Permalink to this headline">¶</a></h3>
-<div class="math">
-<p><img src="../_images/math/7ff0536d2e479ae833174c13ccff07b043d7cb55.svg" alt="\begin{algorithm}[H]
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\begin{algorithm}[H]
     \caption{Soft Actor-Critic}
     \label{alg1}
 \begin{algorithmic}[1]
@@ -380,8 +1571,35 @@
         \ENDIF
     \UNTIL{convergence}
 \end{algorithmic}
-\end{algorithm}"/></p>
-</div></div>
+\end{algorithm}</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+</div>
 </div>
 <div class="section" id="documentation">
 <h2><a class="toc-backref" href="#id10">Documentation</a><a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
@@ -496,10 +1714,68 @@ for the agent and the environment in each epoch.</li>
 <li><strong>polyak</strong> (<em>float</em>) &#8211; <p>Interpolation factor in polyak averaging for target
 networks. Target networks are updated towards main networks
 according to:</p>
-<div class="math">
-<p><img src="../_images/math/3714bdd41380a369cd9fb38e2c4a8c5712ff0048.svg" alt="\theta_{\text{targ}} \leftarrow
-\rho \theta_{\text{targ}} + (1-\rho) \theta"/></p>
-</div><p>where <img class="math" src="../_images/math/aa9d23401f3dfa97ca4762171bd13086d58d89bb.svg" alt="\rho"/> is polyak. (Always between 0 and 1, usually
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\theta_{\text{targ}} \leftarrow
+\rho \theta_{\text{targ}} + (1-\rho) \theta
+
+</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+<p>where <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\rho</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+
+! LaTeX Error: File `utf8x.def&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: def)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.165 \endinput
+               ^^M
+No pages of output.
+Transcript written on math.log.
+</div>
+ is polyak. (Always between 0 and 1, usually
 close to 1.)</p>
 </li>
 <li><strong>lr</strong> (<em>float</em>) &#8211; Learning rate (used for both policy and value learning).</li>
@@ -589,7 +1865,7 @@ the current policy and value function.</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../utils/logger.html" class="btn btn-neutral float-right" title="Logger" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../utils/logger.html" class="btn btn-neutral float-right" title="日志打印" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="td3.html" class="btn btn-neutral" title="Twin Delayed DDPG" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

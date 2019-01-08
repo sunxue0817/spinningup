@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Plotter &mdash; Spinning Up  documentation</title>
+  <title>绘图 &mdash; Spinning Up  documentation</title>
   
 
   
@@ -31,8 +31,8 @@
   <link rel="stylesheet" href="../_static/css/modify.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="MPI Tools" href="mpi.html" />
-    <link rel="prev" title="Logger" href="logger.html" /> 
+    <link rel="next" title="MPI 工具" href="mpi.html" />
+    <link rel="prev" title="日志打印" href="logger.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -87,23 +87,23 @@
               <p class="caption"><span class="caption-text">用户文档</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../user/introduction.html">介绍</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/installation.html">安装</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user/algorithms.html">算法</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/running.html">Running Experiments</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/saving_and_loading.html">Experiment Outputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/plotting.html">Plotting Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/running.html">运行试验</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/saving_and_loading.html">试验输出</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/plotting.html">绘制结果</a></li>
 </ul>
 <p class="caption"><span class="caption-text">强化学习介绍</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../spinningup/rl_intro.html">Part 1: Key Concepts in RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../spinningup/rl_intro2.html">Part 2: Kinds of RL Algorithms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../spinningup/rl_intro3.html">Part 3: Intro to Policy Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spinningup/rl_intro.html">第一部分：强化学习中的核心概念</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spinningup/rl_intro2.html">第二部分：各种各种的强化学习算法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spinningup/rl_intro3.html">第三部分：策略优化介绍</a></li>
 </ul>
 <p class="caption"><span class="caption-text">资源</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../spinningup/spinningup.html">Spinning Up as a Deep RL Researcher</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../spinningup/keypapers.html">Key Papers in Deep RL</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../spinningup/exercises.html">Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spinningup/keypapers.html">深度强化学习的核心论文</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spinningup/exercises.html">练习</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../spinningup/bench.html">Benchmarks for Spinning Up Implementations</a></li>
 </ul>
 <p class="caption"><span class="caption-text">算法文档</span></p>
@@ -117,15 +117,16 @@
 </ul>
 <p class="caption"><span class="caption-text">工具文档</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="logger.html">Logger</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Plotter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mpi.html">MPI Tools</a></li>
-<li class="toctree-l1"><a class="reference internal" href="run_utils.html">Run Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logger.html">日志打印</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">绘图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpi.html">MPI 工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="run_utils.html">运行工具</a></li>
 </ul>
 <p class="caption"><span class="caption-text">其他</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../etc/acknowledgements.html">Acknowledgements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../etc/author.html">About the Author</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/acknowledgements.html">致谢</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/author.html">作者</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../etc/translator.html">关于译者</a></li>
 </ul>
 
             
@@ -171,7 +172,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Plotter</li>
+      <li>绘图</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -190,8 +191,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="plotter">
-<h1>Plotter<a class="headerlink" href="#plotter" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="id1">
+<h1>绘图<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p>See the page on <a class="reference external" href="../user/plotting.html">plotting results</a> for documentation of the plotter.</p>
 </div>
 
@@ -203,10 +204,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="mpi.html" class="btn btn-neutral float-right" title="MPI Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="mpi.html" class="btn btn-neutral float-right" title="MPI 工具" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="logger.html" class="btn btn-neutral" title="Logger" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="logger.html" class="btn btn-neutral" title="日志打印" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

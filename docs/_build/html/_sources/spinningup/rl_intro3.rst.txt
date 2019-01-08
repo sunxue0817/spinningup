@@ -1,5 +1,5 @@
 ====================================
-Part 3: Intro to Policy Optimization
+第三部分：策略优化介绍
 ====================================
 
 .. contents:: Table of Contents
@@ -436,3 +436,4 @@ In this chapter, we described the basic theory of policy gradient methods and co
 .. _`this page`: ../spinningup/extra_pg_proof2.html
 .. _`Generalized Advantage Estimation`: https://arxiv.org/abs/1506.02438
 .. _`Vanilla Policy Gradient`: ../algorithms/vpg.html
+
