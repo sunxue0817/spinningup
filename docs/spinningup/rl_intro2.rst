@@ -1,5 +1,5 @@
 ==============================
-第一部分：各种各种的强化学习算法
+第二部分：各种各种的强化学习算法
 ==============================
 
 .. contents:: 目录
@@ -15,20 +15,22 @@
 
     一个不是很详细但是十分有用的现代强化学习算法分类。  `引用自`_
 
-要先声明的是：很难准确、全面的把所有现代强化学习算法列出来，因为这些算法并不能很好的用树形结构表示。同时，要把这么多内容放在一篇文章里并且要求便于理解消化，我们必须省略掉一些更加先进的资料，例如探索（exploration），迁移学习（transfer learning），元学习（meta learning）等。也就是说，我们的目标是：
+要先声明的是：很难准确全面的把所有现代强化学习算法都列举出来，因为这些不适合用树形结构展示。同时，要把这么多内容放在一篇文章里，还要便于理解，必须省略掉一些更加先进的内容，例如探索（exploration），迁移学习（transfer learning），元学习（meta learning）等。
 
-* 只强调深度强化学习中，关于学习什么和怎么学习的最基础的设计选择
-* to expose the trade-offs in those choices,
-* and to place a few prominent modern algorithms into context with respect to those choices.
+我们的目标是：
 
-免模型学习（Model-Free） VS 有模型学习（Model-Based）
+* 只强调深度强化学习中最基础的设计选择：学习什么和怎么学习
+* 揭示这些选择中的权衡
+* 把其中特别优秀的算法介绍给大家
+
+免模型学习（Model-Free） vs 有模型学习（Model-Based）
 ----------------------------
 
-强化学习算法最重要的区分点之一就是 **智能体是否能完整获得或学习到所在环境的模型**。 环境的模型，指的是一个预测状态转换和奖励的函数。
+强化学习算法最重要的区分点之一就是 **智能体是否能完整了解或学习到所在环境的模型**。 环境的模型是指一个预测状态转换和奖励的函数。
 
-有模型学习最大的优势在于智能体能够 **看的更远从而做出计划**，走到每一步的时候，都提前尝试未来可能的选择，然后很清晰地从这些候选项中进行选择。
+有模型学习最大的优势在于智能体能够 **看的更远从而做出计划**，走到每一步的时候，都提前尝试未来可能的选择，然后很清晰地从这些候选项中进行选择。智能体可以把提前计划得知的结果提取为一个学习到的策略。这其中最著名的例子就是 `AlphaZero`_。这个方法奏效的话，可以大幅度提升采样效率 —— 相对于那些没有模型的方法。
 
-最大的缺点就是智能体往往不能获得环境的真实模型。如果智能体想在一个场景下使用模型，那它必须完全从经验中学习，这就带来很多挑战。最大的挑战就是，智能体探索出来的模型和真实模型之间的误差，会导致智能体在已学习到的模型中表现很好，但是在真实的环境中表现得不是最优（甚至很差）。从根本上来，基于模型的学习是非常困难的，即便是你愿意花费大量的时间和计算力，最终的结果也有可能达不到预期的效果。
+有模型学习最大的缺点就是智能体往往不能获得环境的真实模型。如果智能体想在一个场景下使用模型，那它必须完全从经验中学习，这会带来很多挑战。最大的挑战就是，智能体探索出来的模型和真实模型之间存在的误差，会导致智能体在学习到的模型中表现很好，但是在真实的环境中表现得不好（甚至很差）。从本质上讲，基于模型的学习非常困难，即使你愿意花费大量的时间和计算力，最终的结果也可能达不到预期的效果。
 
 要学习什么
 -------------
@@ -82,19 +84,22 @@
 有模型强化学习要学习什么
 -------------------------------
 
-不同于免模型学习，有模型学习方法不是很好分类：很多方法之间都会有交叉。我们会列举一些例子，当然肯定不够详尽，覆盖不到全部。在这些例子里面， **模型**有么已知要么可以学习到。
+不同于免模型学习，有模型学习方法不是很好分类：很多方法之间都会有交叉。我们会列举一些例子，当然肯定不够详尽，覆盖不到全部。在这些例子里面， **模型** 有么已知要么可以学习到。
 
-**背景：纯规划** 这个最基础的方法，从不用表示策略，而是纯使用计划技术来选择行动，比如 `model-predictive control`_ (MPC)。在MPC中，智能体每次观察环境的时候，都会计算出一个对于当前模型最优的计划，这里的计划指的是未来一个固定时间段内，智能体会采取的行动。（超过视野的未来奖励可以通过）
+**背景：纯规划** 这个最基础的方法，从不用表示策略，而是纯使用计划技术来选择行动，比如 `模型预测控制`_ (model-predictive control, MPC)。在模型预测控制中，智能体每次观察环境的时候，都会计算出一个对于当前模型最优的计划，这里的计划指的是未来一个固定时间段内，智能体会采取的行动。（超过视野的未来奖励可以通过）
+
 **Background: Pure Planning.** The most basic approach *never* explicitly represents the policy, and instead, uses pure planning techniques like `model-predictive control`_ (MPC) to select actions. In MPC, each time the agent observes the environment, it computes a plan which is optimal with respect to the model, where the plan describes all actions to take over some fixed window of time after the present. (Future rewards beyond the horizon may be considered by the planning algorithm through the use of a learned value function.) The agent then executes the first action of the plan, and immediately discards the rest of it. It computes a new plan each time it prepares to interact with the environment, to avoid using an action from a plan with a shorter-than-desired planning horizon.
 
-* The `MBMF`_ work explores MPC with learned environment models on some standard benchmark tasks for deep RL.
+* `MBMF`_ 
 
 **Expert Iteration.** A straightforward follow-on to pure planning involves using and learning an explicit representation of the policy, :math:`\pi_{\theta}(a|s)`. The agent uses a planning algorithm (like Monte Carlo Tree Search) in the model, generating candidate actions for the plan by sampling from its current policy. The planning algorithm produces an action which is better than what the policy alone would have produced, hence it is an "expert" relative to the policy. The policy is afterwards updated to produce an action more like the planning algorithm's output.
 
-* The `ExIt`_ algorithm uses this approach to train deep neural networks to play Hex.
-* `AlphaZero`_ is another example of this approach.
+**专家迭代** 一个基于纯计划直接前向 :math:`\pi_{\theta}(a|s)`
+* `ExIt`_ 算法用这种算法训练深层神经网络来玩 Hex
+* `AlphaZero`_ 是这种方法的另一个例子
 
 **Data Augmentation for Model-Free Methods.** Use a model-free RL algorithm to train a policy or Q-function, but either 1) augment real experiences with fictitious ones in updating the agent, or 2) use *only* fictitous experience for updating the agent. 
+**免模型方法的数据增强** 使用免模型算法来训练策略或者 Q 函数，
 
 * See `MBVE`_ for an example of augmenting real experiences with fictitious ones.
 * See `World Models`_ for an example of using purely fictitious experience to train the agent, which they call "training in the dream."

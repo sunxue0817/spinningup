@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="../_static/css/modify.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Part 2: Kinds of RL Algorithms" href="rl_intro2.html" />
+    <link rel="next" title="第二部分：各种各种的强化学习算法" href="rl_intro2.html" />
     <link rel="prev" title="绘制结果" href="../user/plotting.html" /> 
 
   
@@ -117,7 +117,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#id19">（可选）数学模型</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="rl_intro2.html">Part 2: Kinds of RL Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rl_intro2.html">第二部分：各种各种的强化学习算法</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rl_intro3.html">Part 3: Intro to Policy Optimization</a></li>
 </ul>
 <p class="caption"><span class="caption-text">资源</span></p>
@@ -277,56 +277,27 @@
 </div>
 <div class="section" id="id11">
 <h3>策略<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
-<p><strong>策略</strong> 是智能体使用的用于决定下一步采取什么行动的规则。可以是确定性的，例如：<div class="system-message">
-<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">\u</tt>)</p>
-latex exited with error
-[stdout]
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
- restricted \write18 enabled.
-entering extended mode
-(./math.tex
-LaTeX2e &lt;2018-04-01&gt; patch level 2
-Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
-(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
-(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
-
-! LaTeX Error: File `utf8x.def&#8217; not found.
-
-Type X to quit or &lt;RETURN&gt; to proceed,
-or enter new name. (Default extension: def)
-
-Enter file name: 
-! Emergency stop.
-&lt;read *&gt; 
-         
-l.165 \endinput
-               ^^M
-No pages of output.
-Transcript written on math.log.
-</div>
-:</p>
+<p><strong>策略</strong> 是智能体使用的用于决定下一步采取什么行动的规则。可以是确定性的，一般表示为：<img class="math" src="../_images/math/0e287adf9726dd38024f3426abea7e2c0b7b2fc9.svg" alt="\mu"/>:</p>
 <div class="math">
 <p><img src="../_images/math/0f5d8b3765b28c1b5d94231b7c3f855b3dd0f54c.svg" alt="a_t = \mu(s_t),"/></p>
-</div><p>or it may be stochastic, in which case it is usually denoted by <img class="math" src="../_images/math/b8a498bfdeca84b973d6222e08a6d04321d65dc3.svg" alt="\pi"/>:</p>
+</div><p>也可以是随机的，一般表示为 <img class="math" src="../_images/math/b8a498bfdeca84b973d6222e08a6d04321d65dc3.svg" alt="\pi"/>:</p>
 <div class="math">
 <p><img src="../_images/math/46666d6bfea523d1f9284fcc5c6cf68922a08c1f.svg" alt="a_t \sim \pi(\cdot | s_t)."/></p>
-</div><p>Because the policy is essentially the agent&#8217;s brain, it&#8217;s not uncommon to substitute the word &#8220;policy&#8221; for &#8220;agent&#8221;, eg saying &#8220;The policy is trying to maximize reward.&#8221;</p>
-<p>In deep RL, we deal with <strong>parameterized policies</strong>: policies whose outputs are computable functions that depend on a set of parameters (eg the weights and biases of a neural network) which we can adjust to change the behavior via some optimization algorithm.</p>
-<p>We often denote the parameters of such a policy by <img class="math" src="../_images/math/1a20bd03ccceae216a40cb69d3fb7a3970f6f275.svg" alt="\theta"/> or <img class="math" src="../_images/math/7ddd1396111d1df500d7b870560e135893c9b351.svg" alt="\phi"/>, and then write this as a subscript on the policy symbol to highlight the connection:</p>
+</div><p>因为策略就是智能体的大脑，所以很多时候“策略”和“智能体”经常互换，例如：“策略是要最大化奖励”。</p>
+<p>在深度强化学习中，我们处理的是参数化的策略，这些策略的输出是依赖一组参数的计算函数（例如神经网络的权重和误差），我们可以通过策略算法改变智能体的的行为。</p>
+<p>我们经常把这些策略的参数写作 <img class="math" src="../_images/math/1a20bd03ccceae216a40cb69d3fb7a3970f6f275.svg" alt="\theta"/> 或者 <img class="math" src="../_images/math/7ddd1396111d1df500d7b870560e135893c9b351.svg" alt="\phi"/> ，然后把它写作策略的下标来强调两者的联系。</p>
 <div class="math">
 <p><img src="../_images/math/a9bd58c99ec9d2050ce15171a6feca2e754ce8c1.svg" alt="a_t &amp;= \mu_{\theta}(s_t) \\
 a_t &amp;\sim \pi_{\theta}(\cdot | s_t)."/></p>
 </div><div class="section" id="id12">
 <h4>确定性策略<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h4>
-<p><strong>Example: Deterministic Policies.</strong> Here is a code snippet for building a simple deterministic policy for a continuous action space in Tensorflow:</p>
+<p><strong>例子：确定性策略：.</strong> 这是一个简单的基于TensorFlow的在连续动作空间上的确定性的策略：</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">obs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">obs_dim</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 <span class="n">net</span> <span class="o">=</span> <span class="n">mlp</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">hidden_dims</span><span class="o">=</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">64</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">tanh</span><span class="p">)</span>
 <span class="n">actions</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">dense</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="n">act_dim</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>where <code class="docutils literal"><span class="pre">mlp</span></code> is a function that stacks multiple <code class="docutils literal"><span class="pre">dense</span></code> layers on top of each other with the given sizes and activation.</p>
+<p>其中， <code class="docutils literal"><span class="pre">mlp</span></code> 是一个给定大小和激活函数，把多个 <code class="docutils literal"><span class="pre">密集层（dense</span> <span class="pre">layer）</span></code> 相互堆积在一起的函数</p>
 </div>
 <div class="section" id="id13">
 <h4>随机性策略<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h4>
@@ -527,7 +498,7 @@ Q^*(s,a) &amp;= \underE{s'\sim P}{r(s,a) + \gamma \max_{a'} Q^*(s',a')}.
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="rl_intro2.html" class="btn btn-neutral float-right" title="Part 2: Kinds of RL Algorithms" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="rl_intro2.html" class="btn btn-neutral float-right" title="第二部分：各种各种的强化学习算法" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../user/plotting.html" class="btn btn-neutral" title="绘制结果" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

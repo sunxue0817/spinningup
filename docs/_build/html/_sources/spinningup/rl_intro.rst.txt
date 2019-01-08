@@ -92,23 +92,23 @@
 策略
 --------
 
-**策略** 是智能体使用的用于决定下一步采取什么行动的规则。可以是确定性的，例如：:math:`\u`:
+**策略** 是智能体使用的用于决定下一步采取什么行动的规则。可以是确定性的，一般表示为：:math:`\mu`:
 
 .. math::
 
     a_t = \mu(s_t),
 
-or it may be stochastic, in which case it is usually denoted by :math:`\pi`:
+也可以是随机的，一般表示为 :math:`\pi`:
 
 .. math::
 
     a_t \sim \pi(\cdot | s_t).
 
-Because the policy is essentially the agent's brain, it's not uncommon to substitute the word "policy" for "agent", eg saying "The policy is trying to maximize reward."
+因为策略就是智能体的大脑，所以很多时候“策略”和“智能体”经常互换，例如：“策略是要最大化奖励”。
 
-In deep RL, we deal with **parameterized policies**: policies whose outputs are computable functions that depend on a set of parameters (eg the weights and biases of a neural network) which we can adjust to change the behavior via some optimization algorithm. 
+在深度强化学习中，我们处理的是参数化的策略，这些策略的输出是依赖一组参数的计算函数（例如神经网络的权重和误差），我们可以通过策略算法改变智能体的的行为。
 
-We often denote the parameters of such a policy by :math:`\theta` or :math:`\phi`, and then write this as a subscript on the policy symbol to highlight the connection:
+我们经常把这些策略的参数写作 :math:`\theta` 或者 :math:`\phi` ，然后把它写作策略的下标来强调两者的联系。
 
 .. math::
 
@@ -119,7 +119,7 @@ We often denote the parameters of such a policy by :math:`\theta` or :math:`\phi
 确定性策略
 ^^^^^^^^^^^^^^^^^^^^^^
 
-**Example: Deterministic Policies.** Here is a code snippet for building a simple deterministic policy for a continuous action space in Tensorflow:
+**例子：确定性策略：.** 这是一个简单的基于TensorFlow的在连续动作空间上的确定性的策略：
 
 .. code-block:: python
 
@@ -127,7 +127,7 @@ We often denote the parameters of such a policy by :math:`\theta` or :math:`\phi
     net = mlp(obs, hidden_dims=(64,64), activation=tf.tanh)
     actions = tf.layers.dense(net, units=act_dim, activation=None)
 
-where ``mlp`` is a function that stacks multiple ``dense`` layers on top of each other with the given sizes and activation.
+其中， ``mlp`` 是一个给定大小和激活函数，把多个 ``密集层（dense layer）`` 相互堆积在一起的函数
 
 随机性策略
 ^^^^^^^^^^^^^^^^^^^
