@@ -263,6 +263,7 @@ Why would we ever want a discount factor, though? Don't we just want to get *all
 强化学习问题
 --------------
 
+
 Whatever the choice of return measure (whether infinite-horizon discounted, or finite-horizon undiscounted), and whatever the choice of policy, the goal in RL is to select a policy which maximizes **expected return** when the agent acts according to it.
 
 To talk about expected return, we first have to talk about probability distributions over trajectories. 

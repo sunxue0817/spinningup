@@ -55,6 +55,7 @@
 * `PPO`_, 不直接通过最大化性能更新，而是最大化 *目标估计* 函数，这个函数是对目标函数 :math:`J(\pi_{\theta})`的近似估计。
 
 **Q-Learning** 
+
 .. math::
     
     a(s) = \arg \max_a Q_{\theta}(s,a).

@@ -260,18 +260,30 @@ Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
 (/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/utf8x.def))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/ucs.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/data/uni-global.def))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?&#8217; option.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
 
-! LaTeX Error: File `utf8x.def&#8217; not found.
+! LaTeX Error: File `anyfontsize.sty&#8217; not found.
 
 Type X to quit or &lt;RETURN&gt; to proceed,
-or enter new name. (Default extension: def)
+or enter new name. (Default extension: sty)
 
 Enter file name: 
 ! Emergency stop.
 &lt;read *&gt; 
          
-l.165 \endinput
-               ^^M
+l.9 \usepackage
+               {bm}^^M
 No pages of output.
 Transcript written on math.log.
 </div>
@@ -289,18 +301,30 @@ Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
 (/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/utf8x.def))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/ucs.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/data/uni-global.def))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?&#8217; option.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
 
-! LaTeX Error: File `utf8x.def&#8217; not found.
+! LaTeX Error: File `anyfontsize.sty&#8217; not found.
 
 Type X to quit or &lt;RETURN&gt; to proceed,
-or enter new name. (Default extension: def)
+or enter new name. (Default extension: sty)
 
 Enter file name: 
 ! Emergency stop.
 &lt;read *&gt; 
          
-l.165 \endinput
-               ^^M
+l.9 \usepackage
+               {bm}^^M
 No pages of output.
 Transcript written on math.log.
 </div>
@@ -310,10 +334,47 @@ Transcript written on math.log.
 <li><a class="reference external" href="https://arxiv.org/abs/1602.01783">A2C / A3C</a>, 通过梯度下降直接最大化性能</li>
 <li><a class="reference external" href="https://arxiv.org/abs/1707.06347">PPO</a>, 不直接通过最大化性能更新，而是最大化 <em>目标估计</em> 函数，这个函数是对目标函数 :math:<a href="#id10"><span class="problematic" id="id11">`</span></a>J(pi_{theta})`的近似估计。</li>
 </ul>
-<p><strong>Q-Learning</strong>
-.. math:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">=</span> \<span class="n">arg</span> \<span class="n">max_a</span> <span class="n">Q_</span><span class="p">{</span>\<span class="n">theta</span><span class="p">}(</span><span class="n">s</span><span class="p">,</span><span class="n">a</span><span class="p">)</span><span class="o">.</span>
-</pre></div>
+<p><strong>Q-Learning</strong></p>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">a(s) = \arg \max_a Q_{\theta}(s,a).</tt>)</p>
+latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2018-04-01&gt; patch level 2
+Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/utf8x.def))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/ucs.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/data/uni-global.def))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?&#8217; option.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+
+! LaTeX Error: File `anyfontsize.sty&#8217; not found.
+
+Type X to quit or &lt;RETURN&gt; to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+! Emergency stop.
+&lt;read *&gt; 
+         
+l.9 \usepackage
+               {bm}^^M
+No pages of output.
+Transcript written on math.log.
 </div>
 <p>基于Q-Learning优化的方法</p>
 <ul class="simple">
@@ -332,18 +393,30 @@ Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
 (/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/utf8x.def))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/ucs.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/data/uni-global.def))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?&#8217; option.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
 
-! LaTeX Error: File `utf8x.def&#8217; not found.
+! LaTeX Error: File `anyfontsize.sty&#8217; not found.
 
 Type X to quit or &lt;RETURN&gt; to proceed,
-or enter new name. (Default extension: def)
+or enter new name. (Default extension: sty)
 
 Enter file name: 
 ! Emergency stop.
 &lt;read *&gt; 
          
-l.165 \endinput
-               ^^M
+l.9 \usepackage
+               {bm}^^M
 No pages of output.
 Transcript written on math.log.
 </div>
@@ -362,18 +435,30 @@ Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
 (/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/utf8x.def))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/ucs.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/data/uni-global.def))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?&#8217; option.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
 
-! LaTeX Error: File `utf8x.def&#8217; not found.
+! LaTeX Error: File `anyfontsize.sty&#8217; not found.
 
 Type X to quit or &lt;RETURN&gt; to proceed,
-or enter new name. (Default extension: def)
+or enter new name. (Default extension: sty)
 
 Enter file name: 
 ! Emergency stop.
 &lt;read *&gt; 
          
-l.165 \endinput
-               ^^M
+l.9 \usepackage
+               {bm}^^M
 No pages of output.
 Transcript written on math.log.
 </div>
@@ -393,18 +478,30 @@ Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
 (/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/utf8x.def))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/ucs.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/data/uni-global.def))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?&#8217; option.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
 
-! LaTeX Error: File `utf8x.def&#8217; not found.
+! LaTeX Error: File `anyfontsize.sty&#8217; not found.
 
 Type X to quit or &lt;RETURN&gt; to proceed,
-or enter new name. (Default extension: def)
+or enter new name. (Default extension: sty)
 
 Enter file name: 
 ! Emergency stop.
 &lt;read *&gt; 
          
-l.165 \endinput
-               ^^M
+l.9 \usepackage
+               {bm}^^M
 No pages of output.
 Transcript written on math.log.
 </div>
@@ -444,18 +541,30 @@ Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
 (/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/utf8x.def))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/ucs.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/data/uni-global.def))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?&#8217; option.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
 
-! LaTeX Error: File `utf8x.def&#8217; not found.
+! LaTeX Error: File `anyfontsize.sty&#8217; not found.
 
 Type X to quit or &lt;RETURN&gt; to proceed,
-or enter new name. (Default extension: def)
+or enter new name. (Default extension: sty)
 
 Enter file name: 
 ! Emergency stop.
 &lt;read *&gt; 
          
-l.165 \endinput
-               ^^M
+l.9 \usepackage
+               {bm}^^M
 No pages of output.
 Transcript written on math.log.
 </div>
@@ -474,18 +583,30 @@ Babel &lt;3.18&gt; and hyphenation patterns for 22 language(s) loaded.
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/size12.clo))
 (/usr/local/texlive/2018basic/texmf-dist/tex/latex/base/inputenc.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/utf8x.def))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/ucs.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/ucs/data/uni-global.def))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?&#8217; option.
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/local/texlive/2018basic/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
 
-! LaTeX Error: File `utf8x.def&#8217; not found.
+! LaTeX Error: File `anyfontsize.sty&#8217; not found.
 
 Type X to quit or &lt;RETURN&gt; to proceed,
-or enter new name. (Default extension: def)
+or enter new name. (Default extension: sty)
 
 Enter file name: 
 ! Emergency stop.
 &lt;read *&gt; 
          
-l.165 \endinput
-               ^^M
+l.9 \usepackage
+               {bm}^^M
 No pages of output.
 Transcript written on math.log.
 </div>
