@@ -9,28 +9,16 @@
 
 欢迎来到深度强化学习（deep Reinforement Learning）的Spinning Up项目！这是一份由OpenAI提供的教育资源，旨在让深度强化学习的学习变得更加简单。
 
-强化学习，是一种通过教会智能体（agents）反复试错从而完成任务的机器学习方法。深度强化学习指的是强化学习和 `深度学习`_ 的结合。
+`强化学习`_ ，是一种通过教会智能体（agents）反复试错从而完成任务的机器学习方法。深度强化学习指的是强化学习和 `深度学习`_ 的结合。
 
 这个模块包括一系列有用的资源，包括：
 
-- 关于强化学习术语、算法和基础理论的简单`介绍`_
-- 关于如何成为强化学习的研究人员的`文章`_
-- 一个按照主题整理的重要论文`清单`_
+- 关于强化学习术语、算法和基础理论的简单 `介绍`_
+- 关于如何成为强化学习的研究人员的 `文章`_
+- 一个按照主题整理的重要论文 `清单`_
 - 以及一些用来练手的 `项目`_
 
 
-
-Welcome to Spinning Up in Deep RL! This is an educational resource produced by OpenAI that makes it easier to learn about deep reinforcement learning (deep RL).
-
-For the unfamiliar: `reinforcement learning`_ (RL) is a machine learning approach for teaching agents how to solve tasks by trial and error. Deep RL refers to the combination of RL with `deep learning`_. 
-
-This module contains a variety of helpful resources, including:
-
-- a short `introduction`_ to RL terminology, kinds of algorithms, and basic theory,
-- an `essay`_ about how to grow into an RL research role,
-- a `curated list`_ of important papers organized by topic,
-- a well-documented `code repo`_ of short, standalone implementations of key algorithms,
-- and a few `exercises`_ to serve as warm-ups.
 
 
 .. _`强化学习`: https://en.wikipedia.org/wiki/Reinforcement_learning
@@ -117,11 +105,11 @@ Additionally, as discussed in the blog post, we are using Spinning Up in the cur
 
 
 .. _`介绍`: ../spinningup/rl_intro.html
-.. _`essay`: ../spinningup/spinningup.html
+.. _`文章`: ../spinningup/spinningup.html
 .. _`Spinning Up essay`: ../spinningup/spinningup.html
-.. _`curated list`: ../spinningup/keypapers.html
+.. _`清单`: ../spinningup/keypapers.html
 .. _`code repo`: https://github.com/openai/spinningup
-.. _`exercises`: ../spinningup/exercises.html
+.. _`项目`: ../spinningup/exercises.html
 .. _`rllab`: https://github.com/rll/rllab
 .. _`Baselines`: https://github.com/openai/baselines
 .. _`rllib`: https://github.com/ray-project/ray/tree/master/python/ray/rllib
@@ -132,3 +120,5 @@ Additionally, as discussed in the blog post, we are using Spinning Up in the cur
 .. _`benchmarks`: ../spinningup/bench.html
 .. _Scholars : https://jobs.lever.co/openai/cf6de4ed-4afd-4ace-9273-8842c003c842
 .. _Fellows : https://jobs.lever.co/openai/c9ba3f64-2419-4ff9-b81d-0526ae059f57
+
+

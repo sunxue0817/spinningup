@@ -47,12 +47,12 @@
 
 有两种用来表示和训练免模型学习强化学习算法的方式：
 
-**策略优化（Policy Optimization）**：这个系列的方法可以表示为： :math:`\pi_{\theta}(a|s)` 。 它们直接对目标函数进行梯度下降进行优化，或者间接地，对目标函数的局部近似函数进行优化。优化基本都是基于 **同策路**的，也就是说每一步更新只会用到最新的策略执行时采集到的数据。策略优化也包括学习出 :math:`V_{\phi}(s)`，作为 :math:`V^{\pi}(s)`的近似，从而知道如何更新策略。
+**策略优化（Policy Optimization）**：这个系列的方法可以表示为 :math:`\pi_{\theta}(a|s)` 。 它们直接对目标函数进行梯度下降进行优化，或者间接地，对目标函数的局部近似函数进行优化。优化基本都是基于 **同策路** 的，也就是说每一步更新只会用到最新的策略执行时采集到的数据。策略优化也包括学习出 :math:`V_{\phi}(s)` ，作为 :math:`V^{\pi}(s)` 的近似，从而知道如何更新策略。
 
 基于策略优化的方法举例：
 
 * `A2C / A3C`_, 通过梯度下降直接最大化性能
-* `PPO`_, 不直接通过最大化性能更新，而是最大化 *目标估计* 函数，这个函数是对目标函数 :math:`J(\pi_{\theta})`的近似估计。
+* `PPO`_, 不直接通过最大化性能更新，而是最大化 *目标估计* 函数，这个函数是对目标函数math:`J(\pi_{\theta})`的近似估计。
 
 **Q-Learning** 
 
@@ -80,7 +80,7 @@
 .. _`Tsitsiklis and van Roy`: http://web.mit.edu/jnt/www/Papers/J063-97-bvr-td.pdf
 .. _`review by Szepesvari`: https://sites.ualberta.ca/~szepesva/papers/RLAlgsInMDPs.pdf
 .. _`Sutton and Barto`: https://drive.google.com/file/d/1xeUDVGWGUUv1-ccUMAZHJLej2C7aAFWY/view
-.. _`equivalent`: https://arxiv.org/abs/1704.06440
+.. _`等价的`: https://arxiv.org/abs/1704.06440
 
 有模型强化学习要学习什么
 -------------------------------
@@ -109,7 +109,7 @@
 
 * See `I2A`_ for an example of agents being endowed with this style of imagination.
 
-.. _`model-predictive control`: https://en.wikipedia.org/wiki/Model_predictive_control
+.. _`模型预测控制`: https://en.wikipedia.org/wiki/Model_predictive_control
 .. _`ExIt`: https://arxiv.org/abs/1705.08439
 .. _`World Models`: https://worldmodels.github.io/
 

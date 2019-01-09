@@ -16,6 +16,7 @@
 
 
 .. _`Spinning UP`: https://github.com/LJ147/spinningup
-.. _`深度学习`: http://hellogod.cn/
+.. _`一时博客`: http://hellogod.cn/
+
 
 
