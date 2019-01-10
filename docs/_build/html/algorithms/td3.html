@@ -253,27 +253,27 @@
 </div>
 <div class="section" id="key-equations">
 <h3><a class="toc-backref" href="#id4">Key Equations</a><a class="headerlink" href="#key-equations" title="Permalink to this headline">¶</a></h3>
-<p>TD3 concurrently learns two Q-functions, <img class="math" src="../_images/math/d0ce34d2d12b36de9ee3689921ea102f5ef641ce.svg" alt="Q_{\phi_1}"/> and <img class="math" src="../_images/math/edf4a27336858310ecb568984f6c473f6522e499.svg" alt="Q_{\phi_2}"/>, by mean square Bellman error minimization, in almost the same way that DDPG learns its single Q-function. To show exactly how TD3 does this and how it differs from normal DDPG, we&#8217;ll work from the innermost part of the loss function outwards.</p>
-<p>First: <strong>target policy smoothing</strong>. Actions used to form the Q-learning target are based on the target policy, <img class="math" src="../_images/math/976930f5e3d7185ede15f4bb62c23bb845e0b3a6.svg" alt="\mu_{\theta_{\text{targ}}}"/>, but with clipped noise added on each dimension of the action. After adding the clipped noise, the target action is then clipped to lie in the valid action range (all valid actions, <img class="math" src="../_images/math/045c129c396240f9c4f59bee864337cea3896ef0.svg" alt="a"/>, satisfy <img class="math" src="../_images/math/ba8fc97430af0d34114d83492f371bdc9a96e76f.svg" alt="a_{Low} \leq a \leq a_{High}"/>). The target actions are thus:</p>
+<p>TD3 concurrently learns two Q-functions, <img class="math" src="../_images/math/7ef3597bdc6a1cc20c592a7c4e2653c2692fcbd5.svg" alt="Q_{\phi_1}"/> and <img class="math" src="../_images/math/cd4661b795288589ba2271a18593ffd2426427e8.svg" alt="Q_{\phi_2}"/>, by mean square Bellman error minimization, in almost the same way that DDPG learns its single Q-function. To show exactly how TD3 does this and how it differs from normal DDPG, we&#8217;ll work from the innermost part of the loss function outwards.</p>
+<p>First: <strong>target policy smoothing</strong>. Actions used to form the Q-learning target are based on the target policy, <img class="math" src="../_images/math/a218ad27e7f8b07dcb171859e0bab2c1ae1d19f9.svg" alt="\mu_{\theta_{\text{targ}}}"/>, but with clipped noise added on each dimension of the action. After adding the clipped noise, the target action is then clipped to lie in the valid action range (all valid actions, <img class="math" src="../_images/math/7299c243b08052a2a26e53de560e7002cb31b38f.svg" alt="a"/>, satisfy <img class="math" src="../_images/math/b840dee0407e2846b450e0b1e4fcbd03c605805a.svg" alt="a_{Low} \leq a \leq a_{High}"/>). The target actions are thus:</p>
 <div class="math">
-<p><img src="../_images/math/57cfe2cc3413c76757b3c558e1d7606c72d8af8c.svg" alt="a'(s') = \text{clip}\left(\mu_{\theta_{\text{targ}}}(s') + \text{clip}(\epsilon,-c,c), a_{Low}, a_{High}\right), \;\;\;\;\; \epsilon \sim \mathcal{N}(0, \sigma)"/></p>
+<p><img src="../_images/math/c314400c623ebf3f8fa2df8599562fb9fcb1e324.svg" alt="a'(s') = \text{clip}\left(\mu_{\theta_{\text{targ}}}(s') + \text{clip}(\epsilon,-c,c), a_{Low}, a_{High}\right), \;\;\;\;\; \epsilon \sim \mathcal{N}(0, \sigma)"/></p>
 </div><p>Target policy smoothing essentially serves as a regularizer for the algorithm. It addresses a particular failure mode that can happen in DDPG: if the Q-function approximator develops an incorrect sharp peak for some actions, the policy will quickly exploit that peak and then have brittle or incorrect behavior. This can be averted by smoothing out the Q-function over similar actions, which target policy smoothing is designed to do.</p>
 <p>Next: <strong>clipped double-Q learning</strong>. Both Q-functions use a single target, calculated using whichever of the two Q-functions gives a smaller target value:</p>
 <div class="math">
-<p><img src="../_images/math/e578ae5b76fb1b581ec51c205f46abf322162bba.svg" alt="y(r,s',d) = r + \gamma (1 - d) \min_{i=1,2} Q_{\phi_{i, \text{targ}}}(s', a'(s')),"/></p>
+<p><img src="../_images/math/83289bb9e0d5aeef16ac69b6c9bb0b26f3a3976b.svg" alt="y(r,s',d) = r + \gamma (1 - d) \min_{i=1,2} Q_{\phi_{i, \text{targ}}}(s', a'(s')),"/></p>
 </div><p>and then both are learned by regressing to this target:</p>
 <div class="math">
-<p><img src="../_images/math/788a61ed6362934fb5fc028e337c538a7690e208.svg" alt="L(\phi_1, {\mathcal D}) = \underE{(s,a,r,s',d) \sim {\mathcal D}}{
+<p><img src="../_images/math/d165bce46d9297129f2f352c2620aaf418663d55.svg" alt="L(\phi_1, {\mathcal D}) = \underE{(s,a,r,s',d) \sim {\mathcal D}}{
     \Bigg( Q_{\phi_1}(s,a) - y(r,s',d) \Bigg)^2
     },"/></p>
 </div><div class="math">
-<p><img src="../_images/math/2270baecaa35ca052894c2b23f2e9426640fa93e.svg" alt="L(\phi_2, {\mathcal D}) = \underE{(s,a,r,s',d) \sim {\mathcal D}}{
+<p><img src="../_images/math/4e841c2cc11c15d49d5c9bb3e53ebe4d609744fb.svg" alt="L(\phi_2, {\mathcal D}) = \underE{(s,a,r,s',d) \sim {\mathcal D}}{
     \Bigg( Q_{\phi_2}(s,a) - y(r,s',d) \Bigg)^2
     }."/></p>
 </div><p>Using the smaller Q-value for the target, and regressing towards that, helps fend off overestimation in the Q-function.</p>
-<p>Lastly: the policy is learned just by maximizing <img class="math" src="../_images/math/d0ce34d2d12b36de9ee3689921ea102f5ef641ce.svg" alt="Q_{\phi_1}"/>:</p>
+<p>Lastly: the policy is learned just by maximizing <img class="math" src="../_images/math/7ef3597bdc6a1cc20c592a7c4e2653c2692fcbd5.svg" alt="Q_{\phi_1}"/>:</p>
 <div class="math">
-<p><img src="../_images/math/6201b2deecc9ed383a4be65e569e6244043b830e.svg" alt="\max_{\theta} \underset{s \sim {\mathcal D}}{{\mathrm E}}\left[ Q_{\phi_1}(s, \mu_{\theta}(s)) \right],"/></p>
+<p><img src="../_images/math/aab2814788af7823162f126f7f5bed7085b6a88f.svg" alt="\max_{\theta} \underset{s \sim {\mathcal D}}{{\mathrm E}}\left[ Q_{\phi_1}(s, \mu_{\theta}(s)) \right],"/></p>
 </div><p>which is pretty much unchanged from DDPG. However, in TD3, the policy is updated less frequently than the Q-functions are. This helps damp the volatility that normally arises in DDPG because of how a policy update changes the target.</p>
 </div>
 <div class="section" id="exploration-vs-exploitation">
@@ -288,7 +288,7 @@
 <div class="section" id="pseudocode">
 <h3><a class="toc-backref" href="#id6">Pseudocode</a><a class="headerlink" href="#pseudocode" title="Permalink to this headline">¶</a></h3>
 <div class="math">
-<p><img src="../_images/math/52d3d2df4225f9fec06156d6e1d3da26c8b27bc5.svg" alt="\begin{algorithm}[H]
+<p><img src="../_images/math/9237e40955c69d86943657599db7ac2305568901.svg" alt="\begin{algorithm}[H]
     \caption{Twin Delayed DDPG}
     \label{alg1}
 \begin{algorithmic}[1]
@@ -411,9 +411,9 @@ for the agent and the environment in each epoch.</li>
 networks. Target networks are updated towards main networks
 according to:</p>
 <div class="math">
-<p><img src="../_images/math/3714bdd41380a369cd9fb38e2c4a8c5712ff0048.svg" alt="\theta_{\text{targ}} \leftarrow
+<p><img src="../_images/math/cf198270bc54bd6bb89801db8a84684dc458b16b.svg" alt="\theta_{\text{targ}} \leftarrow
 \rho \theta_{\text{targ}} + (1-\rho) \theta"/></p>
-</div><p>where <img class="math" src="../_images/math/aa9d23401f3dfa97ca4762171bd13086d58d89bb.svg" alt="\rho"/> is polyak. (Always between 0 and 1, usually
+</div><p>where <img class="math" src="../_images/math/505b94c9e77f5e2fbb428e477ee489b69d236b10.svg" alt="\rho"/> is polyak. (Always between 0 and 1, usually
 close to 1.)</p>
 </li>
 <li><strong>pi_lr</strong> (<em>float</em>) &#8211; Learning rate for policy.</li>
@@ -519,7 +519,7 @@ the current policy and value function.</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, OpenAI.
+        &copy; Copyright 2018, OpenAI —— 曹真翻译.
 
     </p>
   </div>

@@ -257,43 +257,43 @@
 <h3><a class="toc-backref" href="#id6">Key Equations</a><a class="headerlink" href="#key-equations" title="Permalink to this headline">¶</a></h3>
 <p>PPO-clip updates policies via</p>
 <div class="math">
-<p><img src="../_images/math/b88048725cce4c17044e0042279bc1ecc11d54ff.svg" alt="\theta_{k+1} = \arg \max_{\theta} \underset{s,a \sim \pi_{\theta_k}}{{\mathrm E}}\left[
+<p><img src="../_images/math/d1aa4fa0b90e1b9ca27dddc421493aa8ae8d9a38.svg" alt="\theta_{k+1} = \arg \max_{\theta} \underset{s,a \sim \pi_{\theta_k}}{{\mathrm E}}\left[
     L(s,a,\theta_k, \theta)\right],"/></p>
-</div><p>typically taking multiple steps of (usually minibatch) SGD to maximize the objective. Here <img class="math" src="../_images/math/ca1cdce7e2987d7a178c30816c1d2dd9e7caa707.svg" alt="L"/> is given by</p>
+</div><p>typically taking multiple steps of (usually minibatch) SGD to maximize the objective. Here <img class="math" src="../_images/math/73a6913f8d74996653105b71efe8cc43e93d898c.svg" alt="L"/> is given by</p>
 <div class="math">
-<p><img src="../_images/math/ae2cf1964bcfc3eab6172c6f70722dad8c2ba053.svg" alt="L(s,a,\theta_k,\theta) = \min\left(
+<p><img src="../_images/math/714f7303852d597078a4a6822e550c6833309418.svg" alt="L(s,a,\theta_k,\theta) = \min\left(
 \frac{\pi_{\theta}(a|s)}{\pi_{\theta_k}(a|s)}  A^{\pi_{\theta_k}}(s,a), \;\;
 \text{clip}\left(\frac{\pi_{\theta}(a|s)}{\pi_{\theta_k}(a|s)}, 1 - \epsilon, 1+\epsilon \right) A^{\pi_{\theta_k}}(s,a)
 \right),"/></p>
-</div><p>in which <img class="math" src="../_images/math/6154b9ed20ab7d6b08b76a46a41ddb829b0d5c5f.svg" alt="\epsilon"/> is a (small) hyperparameter which roughly says how far away the new policy is allowed to go from the old.</p>
+</div><p>in which <img class="math" src="../_images/math/524da597ca4782247d06fe97c510078e0da1f8ec.svg" alt="\epsilon"/> is a (small) hyperparameter which roughly says how far away the new policy is allowed to go from the old.</p>
 <p>This is a pretty complex expression, and it&#8217;s hard to tell at first glance what it&#8217;s doing, or how it helps keep the new policy close to the old policy. As it turns out, there&#8217;s a considerably simplified version <a class="footnote-reference" href="#id2" id="id1">[1]</a> of this objective which is a bit easier to grapple with (and is also the version we implement in our code):</p>
 <div class="math">
-<p><img src="../_images/math/f7953201d96f2987f4ca20ba3c90d8182eb95655.svg" alt="L(s,a,\theta_k,\theta) = \min\left(
+<p><img src="../_images/math/76af0ca97d63af4ea943436c6891fe2a9b44a6f5.svg" alt="L(s,a,\theta_k,\theta) = \min\left(
 \frac{\pi_{\theta}(a|s)}{\pi_{\theta_k}(a|s)}  A^{\pi_{\theta_k}}(s,a), \;\;
 g(\epsilon, A^{\pi_{\theta_k}}(s,a))
 \right),"/></p>
 </div><p>where</p>
 <div class="math">
-<p><img src="../_images/math/18865372bbbaa4ed3928483a0e7d428ac93add53.svg" alt="g(\epsilon, A) = \left\{
+<p><img src="../_images/math/490c93b4f16d503716de40d8c12bc0531ea388d7.svg" alt="g(\epsilon, A) = \left\{
     \begin{array}{ll}
     (1 + \epsilon) A &amp; A \geq 0 \\
     (1 - \epsilon) A &amp; A &lt; 0.
     \end{array}
     \right."/></p>
-</div><p>To figure out what intuition to take away from this, let&#8217;s look at a single state-action pair <img class="math" src="../_images/math/49e51158dce6cc6b27224d9685f75a8c0b1e2138.svg" alt="(s,a)"/>, and think of cases.</p>
+</div><p>To figure out what intuition to take away from this, let&#8217;s look at a single state-action pair <img class="math" src="../_images/math/5f7b808b080d4789e7d164c41c5acb575330222e.svg" alt="(s,a)"/>, and think of cases.</p>
 <p><strong>Advantage is positive</strong>: Suppose the advantage for that state-action pair is positive, in which case its contribution to the objective reduces to</p>
 <div class="math">
-<p><img src="../_images/math/9adca8f71a733ab017d44b5dc172dec4d377cc69.svg" alt="L(s,a,\theta_k,\theta) = \min\left(
+<p><img src="../_images/math/97357525bf5d66c8b1afbeb4f4260aedef85915f.svg" alt="L(s,a,\theta_k,\theta) = \min\left(
 \frac{\pi_{\theta}(a|s)}{\pi_{\theta_k}(a|s)}, (1 + \epsilon)
 \right)  A^{\pi_{\theta_k}}(s,a)."/></p>
-</div><p>Because the advantage is positive, the objective will increase if the action becomes more likely&#8212;that is, if <img class="math" src="../_images/math/8bc2ffb416e6b729009dac19bf9efe3c144cc2ac.svg" alt="\pi_{\theta}(a|s)"/> increases. But the min in this term puts a limit to how <em>much</em> the objective can increase. Once <img class="math" src="../_images/math/ca340294448d19823f55056b638ce24b0ee19f10.svg" alt="\pi_{\theta}(a|s) &gt; (1+\epsilon) \pi_{\theta_k}(a|s)"/>, the min kicks in and this term hits a ceiling of <img class="math" src="../_images/math/c65fc17cb6cf16efd619dab0219393d6c6815a0b.svg" alt="(1+\epsilon) A^{\pi_{\theta_k}}(s,a)"/>. Thus: <em>the new policy does not benefit by going far away from the old policy</em>.</p>
+</div><p>Because the advantage is positive, the objective will increase if the action becomes more likely&#8212;that is, if <img class="math" src="../_images/math/942a745636db4c6dc70f144df39fd02c4f2c98a6.svg" alt="\pi_{\theta}(a|s)"/> increases. But the min in this term puts a limit to how <em>much</em> the objective can increase. Once <img class="math" src="../_images/math/1ced10649cbe8d1b7517225c1d0943e1cd3ea509.svg" alt="\pi_{\theta}(a|s) &gt; (1+\epsilon) \pi_{\theta_k}(a|s)"/>, the min kicks in and this term hits a ceiling of <img class="math" src="../_images/math/af714c3b082c821f005a9d25fffaf0025c169056.svg" alt="(1+\epsilon) A^{\pi_{\theta_k}}(s,a)"/>. Thus: <em>the new policy does not benefit by going far away from the old policy</em>.</p>
 <p><strong>Advantage is negative</strong>: Suppose the advantage for that state-action pair is negative, in which case its contribution to the objective reduces to</p>
 <div class="math">
-<p><img src="../_images/math/f39e4ebf0bbf3ea40a74cebd3dcfff7d06cab898.svg" alt="L(s,a,\theta_k,\theta) = \max\left(
+<p><img src="../_images/math/ccf8b210b20c43b2c12baabee5a8484af57b999a.svg" alt="L(s,a,\theta_k,\theta) = \max\left(
 \frac{\pi_{\theta}(a|s)}{\pi_{\theta_k}(a|s)}, (1 - \epsilon)
 \right)  A^{\pi_{\theta_k}}(s,a)."/></p>
-</div><p>Because the advantage is negative, the objective will increase if the action becomes less likely&#8212;that is, if <img class="math" src="../_images/math/8bc2ffb416e6b729009dac19bf9efe3c144cc2ac.svg" alt="\pi_{\theta}(a|s)"/> decreases. But the max in this term puts a limit to how <em>much</em> the objective can increase. Once <img class="math" src="../_images/math/4eb75cc4a21ae59145ab19c7fbc162856bc10280.svg" alt="\pi_{\theta}(a|s) &lt; (1-\epsilon) \pi_{\theta_k}(a|s)"/>, the max kicks in and this term hits a ceiling of <img class="math" src="../_images/math/1acc289a6804fc7ceee8dbc55fce5d0d47e57273.svg" alt="(1-\epsilon) A^{\pi_{\theta_k}}(s,a)"/>. Thus, again: <em>the new policy does not benefit by going far away from the old policy</em>.</p>
-<p>What we have seen so far is that clipping serves as a regularizer by removing incentives for the policy to change dramatically, and the hyperparameter <img class="math" src="../_images/math/6154b9ed20ab7d6b08b76a46a41ddb829b0d5c5f.svg" alt="\epsilon"/> corresponds to how far away the new policy can go from the old while still profiting the objective.</p>
+</div><p>Because the advantage is negative, the objective will increase if the action becomes less likely&#8212;that is, if <img class="math" src="../_images/math/942a745636db4c6dc70f144df39fd02c4f2c98a6.svg" alt="\pi_{\theta}(a|s)"/> decreases. But the max in this term puts a limit to how <em>much</em> the objective can increase. Once <img class="math" src="../_images/math/de42a8d3613770247742b9aca4ab92bcdbf271e0.svg" alt="\pi_{\theta}(a|s) &lt; (1-\epsilon) \pi_{\theta_k}(a|s)"/>, the max kicks in and this term hits a ceiling of <img class="math" src="../_images/math/f1250a389407284fb84e51d072763baa2078a57d.svg" alt="(1-\epsilon) A^{\pi_{\theta_k}}(s,a)"/>. Thus, again: <em>the new policy does not benefit by going far away from the old policy</em>.</p>
+<p>What we have seen so far is that clipping serves as a regularizer by removing incentives for the policy to change dramatically, and the hyperparameter <img class="math" src="../_images/math/524da597ca4782247d06fe97c510078e0da1f8ec.svg" alt="\epsilon"/> corresponds to how far away the new policy can go from the old while still profiting the objective.</p>
 <div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
 <p>While this kind of clipping goes a long way towards ensuring reasonable policy updates, it is still possible to end up with a new policy which is too far from the old policy, and there are a bunch of tricks used by different PPO implementations to stave this off. In our implementation here, we use a particularly simple method: early stopping. If the mean KL-divergence of the new policy from the old grows beyond a threshold, we stop taking gradient steps.</p>
@@ -313,7 +313,7 @@ g(\epsilon, A^{\pi_{\theta_k}}(s,a))
 <div class="section" id="pseudocode">
 <h3><a class="toc-backref" href="#id8">Pseudocode</a><a class="headerlink" href="#pseudocode" title="Permalink to this headline">¶</a></h3>
 <div class="math">
-<p><img src="../_images/math/0a399dc49e3b45664a7edaf485ab5c23a7282f43.svg" alt="\begin{algorithm}[H]
+<p><img src="../_images/math/f46d7b0ebd4b0d15399a5454e44b732194162667.svg" alt="\begin{algorithm}[H]
     \caption{PPO-Clip}
     \label{alg1}
 \begin{algorithmic}[1]
@@ -520,7 +520,7 @@ the current policy and value function.</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, OpenAI.
+        &copy; Copyright 2018, OpenAI —— 曹真翻译.
 
     </p>
   </div>

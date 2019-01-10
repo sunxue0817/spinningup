@@ -21,5 +21,5 @@
 
 
 - 原文地址：[spinningup.openai.com](https://spinningup.openai.com/)
-- 译者： [Alex LJ](https://github.com/LJ147)
+- 译者： [曹真](https://github.com/LJ147)
 

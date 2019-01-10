@@ -287,18 +287,18 @@
 <p>Broadcast error 1: <code class="docutils literal"><span class="pre">(1</span> <span class="pre">-</span> <span class="pre">d_ph)</span> <span class="pre">*</span> <span class="pre">q_pi_targ</span></code> becomes a <code class="docutils literal"><span class="pre">[batch</span> <span class="pre">size,</span> <span class="pre">batch</span> <span class="pre">size]</span></code> tensor containing the outer product of the mask with the target network Q-values.</p>
 <p>Broadcast error 2: <code class="docutils literal"><span class="pre">r_ph</span></code> then gets treated as a row vector and added to each row of <code class="docutils literal"><span class="pre">(1</span> <span class="pre">-</span> <span class="pre">d_ph)</span> <span class="pre">*</span> <span class="pre">q_pi_targ</span></code> separately.</p>
 <p>Broadcast error 3: <code class="docutils literal"><span class="pre">q_loss</span></code> depends on <code class="docutils literal"><span class="pre">q</span> <span class="pre">-</span> <span class="pre">backup</span></code>, which involves another bad broadcast between <code class="docutils literal"><span class="pre">q</span></code> (shape <code class="docutils literal"><span class="pre">[batch</span> <span class="pre">size,</span> <span class="pre">1]</span></code>) and <code class="docutils literal"><span class="pre">backup</span></code> (shape <code class="docutils literal"><span class="pre">[batch</span> <span class="pre">size,</span> <span class="pre">batch</span> <span class="pre">size]</span></code>).</p>
-<p>To put it mathematically: let <img class="math" src="../_images/math/daba3e876d43fa9d818d638f9913777fcc80b363.svg" alt="q"/>, <img class="math" src="../_images/math/1b010cfe4b9ad4a54f668b8e2ae1d2dc65ffbd57.svg" alt="q'"/>, <img class="math" src="../_images/math/dbf18beb64ca1fdf76bde5abbebab172c0a427d2.svg" alt="r"/>, <img class="math" src="../_images/math/dcb88eb0117e005c37557afd791bf0dbc90733a4.svg" alt="d"/> denote vectors containing the q-values, target q-values, rewards, and dones for a given batch, where there are <img class="math" src="../_images/math/b4ef37d0fe59960f8dbd307ee538e538e6d51e9a.svg" alt="n"/> entries in the batch. The correct backup is</p>
+<p>To put it mathematically: let <img class="math" src="../_images/math/0b4947c93d3e8a46460e229d678e5ba4c1fa689c.svg" alt="q"/>, <img class="math" src="../_images/math/b4eab1ea4fba7781039bd219a6c3841a81312345.svg" alt="q'"/>, <img class="math" src="../_images/math/347fbac2bb8f8a6f5276bc070001d0b6c3fa252e.svg" alt="r"/>, <img class="math" src="../_images/math/6cbbe1af3cef72a6eca315a7c2dfd358ec423f6f.svg" alt="d"/> denote vectors containing the q-values, target q-values, rewards, and dones for a given batch, where there are <img class="math" src="../_images/math/ad8d4ff0859e86562d452a1ff581dc460c3be5c1.svg" alt="n"/> entries in the batch. The correct backup is</p>
 <div class="math">
-<p><img src="../_images/math/0ae2a85ffe04b3e5ff9d56e4846f994fc11024fa.svg" alt="z_i = r_i + \gamma (1-d_i) q'_i,"/></p>
+<p><img src="../_images/math/87c78449ed722620ee46ac1af7016068b621890e.svg" alt="z_i = r_i + \gamma (1-d_i) q'_i,"/></p>
 </div><p>and the correct loss function is</p>
 <div class="math">
-<p><img src="../_images/math/af10c7e7561a9d41ce0daf7df05d9c81d62fd5dc.svg" alt="\frac{1}{n} \sum_{i=1}^n (q_i - z_i)^2."/></p>
+<p><img src="../_images/math/5030e9f61cc5c4346460373b0d0635a124f9e256.svg" alt="\frac{1}{n} \sum_{i=1}^n (q_i - z_i)^2."/></p>
 </div><p>But with these errors, what gets computed is a backup <em>matrix</em>,</p>
 <div class="math">
-<p><img src="../_images/math/3fbd1adcd20bbf168c35f71d60584643abcb0f1f.svg" alt="z_{ij} = r_j + \gamma (1-d_j) q'_i,"/></p>
+<p><img src="../_images/math/071ab8d43fb022aed17c23b2631890d3fc01e8b4.svg" alt="z_{ij} = r_j + \gamma (1-d_j) q'_i,"/></p>
 </div><p>and a messed up loss function</p>
 <div class="math">
-<p><img src="../_images/math/4b5d281c8d8d6f15edd88daa522f90d03804e89d.svg" alt="\frac{1}{n^2} \sum_{i=1}^n \sum_{j=1}^n (q_j - z_{ij})^2."/></p>
+<p><img src="../_images/math/551e771fb80421179353425d7ff490ea0acd1147.svg" alt="\frac{1}{n^2} \sum_{i=1}^n \sum_{j=1}^n (q_j - z_{ij})^2."/></p>
 </div><p>If you leave this to run in HalfCheetah long enough, you&#8217;ll actually see some non-trivial learning process, because weird details specific to this environment partly cancel out the errors. But almost everywhere else, it fails completely.</p>
 </div>
 </div>
@@ -314,7 +314,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, OpenAI.
+        &copy; Copyright 2018, OpenAI —— 曹真翻译.
 
     </p>
   </div>

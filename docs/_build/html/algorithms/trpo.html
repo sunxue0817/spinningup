@@ -252,46 +252,46 @@
 </div>
 <div class="section" id="key-equations">
 <h3><a class="toc-backref" href="#id7">Key Equations</a><a class="headerlink" href="#key-equations" title="Permalink to this headline">¶</a></h3>
-<p>Let <img class="math" src="../_images/math/80088cfe6126980142c5447a9cb12f69ee7fa333.svg" alt="\pi_{\theta}"/> denote a policy with parameters <img class="math" src="../_images/math/1a20bd03ccceae216a40cb69d3fb7a3970f6f275.svg" alt="\theta"/>. The theoretical TRPO update is:</p>
+<p>Let <img class="math" src="../_images/math/7dc51a55461de2c1a3d25bea3f53bfe034295878.svg" alt="\pi_{\theta}"/> denote a policy with parameters <img class="math" src="../_images/math/a9bf14f8a79463d05190aceda63fa75b2c001bfe.svg" alt="\theta"/>. The theoretical TRPO update is:</p>
 <div class="math">
-<p><img src="../_images/math/49fb48638180b9db4e6fa3008314fe6a1f2e04fe.svg" alt="\theta_{k+1} = \arg \max_{\theta} \; &amp; {\mathcal L}(\theta_k, \theta) \\
+<p><img src="../_images/math/aa66e49f15454e0a85cce9b598241eacc9c42a79.svg" alt="\theta_{k+1} = \arg \max_{\theta} \; &amp; {\mathcal L}(\theta_k, \theta) \\
 \text{s.t.} \; &amp; \bar{D}_{KL}(\theta || \theta_k) \leq \delta"/></p>
-</div><p>where <img class="math" src="../_images/math/12d9ee2e680e6e345d3cede2c0d7376073bae206.svg" alt="{\mathcal L}(\theta_k, \theta)"/> is the <em>surrogate advantage</em>, a measure of how policy <img class="math" src="../_images/math/80088cfe6126980142c5447a9cb12f69ee7fa333.svg" alt="\pi_{\theta}"/> performs relative to the old policy <img class="math" src="../_images/math/c0489440be42a601521652989352e32af063723c.svg" alt="\pi_{\theta_k}"/> using data from the old policy:</p>
+</div><p>where <img class="math" src="../_images/math/3e69a6361606ea1e60ba5237b7b659fc6df9bed5.svg" alt="{\mathcal L}(\theta_k, \theta)"/> is the <em>surrogate advantage</em>, a measure of how policy <img class="math" src="../_images/math/7dc51a55461de2c1a3d25bea3f53bfe034295878.svg" alt="\pi_{\theta}"/> performs relative to the old policy <img class="math" src="../_images/math/e62a292931ef3fb3fe8c005c1e3b0f5c20b78431.svg" alt="\pi_{\theta_k}"/> using data from the old policy:</p>
 <div class="math">
-<p><img src="../_images/math/7d5488f060af7629fc8ced8b21a37e5739f741ad.svg" alt="{\mathcal L}(\theta_k, \theta) = \underE{s,a \sim \pi_{\theta_k}}{
+<p><img src="../_images/math/095b80cbca4b3cd1d4afeb6e69cade2a74777af2.svg" alt="{\mathcal L}(\theta_k, \theta) = \underE{s,a \sim \pi_{\theta_k}}{
     \frac{\pi_{\theta}(a|s)}{\pi_{\theta_k}(a|s)} A^{\pi_{\theta_k}}(s,a)
     },"/></p>
-</div><p>and <img class="math" src="../_images/math/8b59be8adda60a88a54f45e1499aede82067971f.svg" alt="\bar{D}_{KL}(\theta || \theta_k)"/> is an average KL-divergence between policies across states visited by the old policy:</p>
+</div><p>and <img class="math" src="../_images/math/73e724b62c98461d86c9ff7a93f8cf38b7251c9a.svg" alt="\bar{D}_{KL}(\theta || \theta_k)"/> is an average KL-divergence between policies across states visited by the old policy:</p>
 <div class="math">
-<p><img src="../_images/math/8bb33077ffd11e60d3c6eb0a588e42b69acde4d3.svg" alt="\bar{D}_{KL}(\theta || \theta_k) = \underE{s \sim \pi_{\theta_k}}{
+<p><img src="../_images/math/215617da665cd1eb1d09e67cdd8bb0f3e5c53c04.svg" alt="\bar{D}_{KL}(\theta || \theta_k) = \underE{s \sim \pi_{\theta_k}}{
     D_{KL}\left(\pi_{\theta}(\cdot|s) || \pi_{\theta_k} (\cdot|s) \right)
 }."/></p>
 </div><div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
-<p class="last">The objective and constraint are both zero when <img class="math" src="../_images/math/256fb885ac1ae20b17a0c7b4ff2137d3fde2abf8.svg" alt="\theta = \theta_k"/>. Furthermore, the gradient of the constraint with respect to <img class="math" src="../_images/math/1a20bd03ccceae216a40cb69d3fb7a3970f6f275.svg" alt="\theta"/> is zero when <img class="math" src="../_images/math/256fb885ac1ae20b17a0c7b4ff2137d3fde2abf8.svg" alt="\theta = \theta_k"/>. Proving these facts requires some subtle command of the relevant math&#8212;it&#8217;s an exercise worth doing, whenever you feel ready!</p>
+<p class="last">The objective and constraint are both zero when <img class="math" src="../_images/math/390ebebc549df0955b359fd14e830832a9f2510b.svg" alt="\theta = \theta_k"/>. Furthermore, the gradient of the constraint with respect to <img class="math" src="../_images/math/a9bf14f8a79463d05190aceda63fa75b2c001bfe.svg" alt="\theta"/> is zero when <img class="math" src="../_images/math/390ebebc549df0955b359fd14e830832a9f2510b.svg" alt="\theta = \theta_k"/>. Proving these facts requires some subtle command of the relevant math&#8212;it&#8217;s an exercise worth doing, whenever you feel ready!</p>
 </div>
-<p>The theoretical TRPO update isn&#8217;t the easiest to work with, so TRPO makes some approximations to get an answer quickly. We Taylor expand the objective and constraint to leading order around <img class="math" src="../_images/math/f641937e50bf17c2fcf11e6c8fb60a3cc36d2793.svg" alt="\theta_k"/>:</p>
+<p>The theoretical TRPO update isn&#8217;t the easiest to work with, so TRPO makes some approximations to get an answer quickly. We Taylor expand the objective and constraint to leading order around <img class="math" src="../_images/math/40e42a57a796cf82042e9c386b76f52e8580f7b4.svg" alt="\theta_k"/>:</p>
 <div class="math">
-<p><img src="../_images/math/a12afc0aa92f0de8203fd714993eb3ec88dfe270.svg" alt="{\mathcal L}(\theta_k, \theta) &amp;\approx g^T (\theta - \theta_k) \\
+<p><img src="../_images/math/da3dc447ce26d2e41ca480634192588db85c5c40.svg" alt="{\mathcal L}(\theta_k, \theta) &amp;\approx g^T (\theta - \theta_k) \\
 \bar{D}_{KL}(\theta || \theta_k) &amp; \approx \frac{1}{2} (\theta - \theta_k)^T H (\theta - \theta_k)"/></p>
 </div><p>resulting in an approximate optimization problem,</p>
 <div class="math">
-<p><img src="../_images/math/37a2fc91d1e23c341896b067aa9a7c85b4cb0908.svg" alt="\theta_{k+1} = \arg \max_{\theta} \; &amp; g^T (\theta - \theta_k) \\
+<p><img src="../_images/math/deb468905c64f58cd9ec41000ce8cf5cffb99207.svg" alt="\theta_{k+1} = \arg \max_{\theta} \; &amp; g^T (\theta - \theta_k) \\
 \text{s.t.} \; &amp; \frac{1}{2} (\theta - \theta_k)^T H (\theta - \theta_k) \leq \delta."/></p>
 </div><div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
-<p class="last">By happy coincidence, the gradient <img class="math" src="../_images/math/c06262884339ba7a3058d27d76c58f8f0c8dc4bb.svg" alt="g"/> of the surrogate advantage function with respect to <img class="math" src="../_images/math/1a20bd03ccceae216a40cb69d3fb7a3970f6f275.svg" alt="\theta"/>, evaluated at <img class="math" src="../_images/math/256fb885ac1ae20b17a0c7b4ff2137d3fde2abf8.svg" alt="\theta = \theta_k"/>, is exactly equal to the policy gradient, <img class="math" src="../_images/math/f839e53d1ccacb63d4d86a8be348d9adc86d723a.svg" alt="\nabla_{\theta} J(\pi_{\theta})"/>! Try proving this, if you feel comfortable diving into the math.</p>
+<p class="last">By happy coincidence, the gradient <img class="math" src="../_images/math/fec72cf35e91da5a9f39a2c2d4f3926bf6f33466.svg" alt="g"/> of the surrogate advantage function with respect to <img class="math" src="../_images/math/a9bf14f8a79463d05190aceda63fa75b2c001bfe.svg" alt="\theta"/>, evaluated at <img class="math" src="../_images/math/390ebebc549df0955b359fd14e830832a9f2510b.svg" alt="\theta = \theta_k"/>, is exactly equal to the policy gradient, <img class="math" src="../_images/math/1bb7289c5dcb2f31df644039966ba2f4f7acd485.svg" alt="\nabla_{\theta} J(\pi_{\theta})"/>! Try proving this, if you feel comfortable diving into the math.</p>
 </div>
 <p>This approximate problem can be analytically solved by the methods of Lagrangian duality <a class="footnote-reference" href="#id2" id="id1">[1]</a>, yielding the solution:</p>
 <div class="math">
-<p><img src="../_images/math/46d48cc9eeb79d52d2f09900fd191f65108f7326.svg" alt="\theta_{k+1} = \theta_k + \sqrt{\frac{2 \delta}{g^T H^{-1} g}} H^{-1} g."/></p>
+<p><img src="../_images/math/aaa40f2b30bdd3bec40a9eb8df5e5e79492e10b5.svg" alt="\theta_{k+1} = \theta_k + \sqrt{\frac{2 \delta}{g^T H^{-1} g}} H^{-1} g."/></p>
 </div><p>If we were to stop here, and just use this final result, the algorithm would be exactly calculating the <a class="reference external" href="https://papers.nips.cc/paper/2073-a-natural-policy-gradient.pdf">Natural Policy Gradient</a>. A problem is that, due to the approximation errors introduced by the Taylor expansion, this may not satisfy the KL constraint, or actually improve the surrogate advantage. TRPO adds a modification to this update rule: a backtracking line search,</p>
 <div class="math">
-<p><img src="../_images/math/e14fae1f7f9dd024694a3a7598a772491a654c17.svg" alt="\theta_{k+1} = \theta_k + \alpha^j \sqrt{\frac{2 \delta}{g^T H^{-1} g}} H^{-1} g,"/></p>
-</div><p>where <img class="math" src="../_images/math/da24b56ee04420fc293f65deadefc862f651ac4c.svg" alt="\alpha \in (0,1)"/> is the backtracking coefficient, and <img class="math" src="../_images/math/78c461b0c8998c6936bbb50187bb91955b4785b6.svg" alt="j"/> is the smallest nonnegative integer such that <img class="math" src="../_images/math/70e714fda6cf3dbaa486eb712146e920d8c93e70.svg" alt="\pi_{\theta_{k+1}}"/> satisfies the KL constraint and produces a positive surrogate advantage.</p>
-<p>Lastly: computing and storing the matrix inverse, <img class="math" src="../_images/math/c19686d29c8808f32acb34a25b652118f928195a.svg" alt="H^{-1}"/>, is painfully expensive when dealing with neural network policies with thousands or millions of parameters. TRPO sidesteps the issue by using the <a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_gradient_method">conjugate gradient</a> algorithm to solve <img class="math" src="../_images/math/5b62d8ba7da612617b0d27c96721d9db4a80f20e.svg" alt="Hx = g"/> for <img class="math" src="../_images/math/2e031bbcf194184b9af9cba5a817d85007e83772.svg" alt="x = H^{-1} g"/>, requiring only a function which can compute the matrix-vector product <img class="math" src="../_images/math/c9673c4437ceb8dc9bedf413cae4773b4d9be489.svg" alt="Hx"/> instead of computing and storing the whole matrix <img class="math" src="../_images/math/b9d29b0250dbf71e8858eba83d7d2bf4f6c32e4a.svg" alt="H"/> directly. This is not too hard to do: we set up a symbolic operation to calculate</p>
+<p><img src="../_images/math/866706ac92607c0cd8e595bfc8ec298ca498f5fc.svg" alt="\theta_{k+1} = \theta_k + \alpha^j \sqrt{\frac{2 \delta}{g^T H^{-1} g}} H^{-1} g,"/></p>
+</div><p>where <img class="math" src="../_images/math/c348219a7bf15d8e58648c67ee22c1c5361b1783.svg" alt="\alpha \in (0,1)"/> is the backtracking coefficient, and <img class="math" src="../_images/math/d53ab2905e904c623af2f839cef3400b72408b60.svg" alt="j"/> is the smallest nonnegative integer such that <img class="math" src="../_images/math/c7f706411630a15f3d826c0ca5cbfab5b6013a55.svg" alt="\pi_{\theta_{k+1}}"/> satisfies the KL constraint and produces a positive surrogate advantage.</p>
+<p>Lastly: computing and storing the matrix inverse, <img class="math" src="../_images/math/eabe90bddc59856c310ce537a9670e158f573ffc.svg" alt="H^{-1}"/>, is painfully expensive when dealing with neural network policies with thousands or millions of parameters. TRPO sidesteps the issue by using the <a class="reference external" href="https://en.wikipedia.org/wiki/Conjugate_gradient_method">conjugate gradient</a> algorithm to solve <img class="math" src="../_images/math/1eac03eb0932e72f3c182397dd68a86a5d9b4f21.svg" alt="Hx = g"/> for <img class="math" src="../_images/math/cfe5365dd409ae992b30e7f71a120c390978105e.svg" alt="x = H^{-1} g"/>, requiring only a function which can compute the matrix-vector product <img class="math" src="../_images/math/e3bde12e4662c2e4f6b6d1c3cadcda83bf662ccd.svg" alt="Hx"/> instead of computing and storing the whole matrix <img class="math" src="../_images/math/afa196794cf9a6949778b572e28a82ab482ff9bd.svg" alt="H"/> directly. This is not too hard to do: we set up a symbolic operation to calculate</p>
 <div class="math">
-<p><img src="../_images/math/8d7cb2dcf48ef522fff82ce155d3a57748861642.svg" alt="Hx = \nabla_{\theta} \left( \left(\nabla_{\theta} \bar{D}_{KL}(\theta || \theta_k)\right)^T x \right),"/></p>
+<p><img src="../_images/math/03f50d7ad3dc62da7491075168e2954472e68ffd.svg" alt="Hx = \nabla_{\theta} \left( \left(\nabla_{\theta} \bar{D}_{KL}(\theta || \theta_k)\right)^T x \right),"/></p>
 </div><p>which gives us the correct output without computing the whole matrix.</p>
 <table class="docutils footnote" frame="void" id="id2" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
@@ -307,7 +307,7 @@
 <div class="section" id="pseudocode">
 <h3><a class="toc-backref" href="#id9">Pseudocode</a><a class="headerlink" href="#pseudocode" title="Permalink to this headline">¶</a></h3>
 <div class="math">
-<p><img src="../_images/math/fece98b123fdbe62167dade95a7c53d836ddc5a1.svg" alt="\begin{algorithm}[H]
+<p><img src="../_images/math/25e9a4a18580462a46762b3cb041fc940867fc23.svg" alt="\begin{algorithm}[H]
     \caption{Trust Region Policy Optimization}
     \label{alg1}
 \begin{algorithmic}[1]
@@ -455,13 +455,13 @@ value function per epoch.</li>
 <li><strong>damping_coeff</strong> (<em>float</em>) &#8211; <p>Artifact for numerical stability, should be
 smallish. Adjusts Hessian-vector product calculation:</p>
 <div class="math">
-<p><img src="../_images/math/a74f4337a79aded69e079da83c07930fc60ed57b.svg" alt="Hv \rightarrow (\alpha I + H)v"/></p>
-</div><p>where <img class="math" src="../_images/math/e37a3c8967bacd71f976963d8ff117f6dd0ad132.svg" alt="\alpha"/> is the damping coefficient.
+<p><img src="../_images/math/110f3bc810d9bbc0c7949feb439bde4677702db3.svg" alt="Hv \rightarrow (\alpha I + H)v"/></p>
+</div><p>where <img class="math" src="../_images/math/91481bcd133cc688f7f1f22eee632771de97ce99.svg" alt="\alpha"/> is the damping coefficient.
 Probably don&#8217;t play with this hyperparameter.</p>
 </li>
 <li><strong>cg_iters</strong> (<em>int</em>) &#8211; <p>Number of iterations of conjugate gradient to perform.
 Increasing this will lead to a more accurate approximation
-to <img class="math" src="../_images/math/f5d0f118aee5a364c9ef3d613ac60327f5287d5f.svg" alt="H^{-1} g"/>, and possibly slightly-improved performance,
+to <img class="math" src="../_images/math/b66fa073c27d5b13738c8b60438d4d5d39ff9e73.svg" alt="H^{-1} g"/>, and possibly slightly-improved performance,
 but at the cost of slowing things down.</p>
 <p>Also probably don&#8217;t play with this hyperparameter.</p>
 </li>
@@ -563,7 +563,7 @@ almost the same.</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, OpenAI.
+        &copy; Copyright 2018, OpenAI —— 曹真翻译.
 
     </p>
   </div>

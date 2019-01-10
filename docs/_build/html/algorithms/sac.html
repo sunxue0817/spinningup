@@ -263,74 +263,74 @@
 <div class="section" id="entropy-regularized-reinforcement-learning">
 <h4><a class="toc-backref" href="#id6">Entropy-Regularized Reinforcement Learning</a><a class="headerlink" href="#entropy-regularized-reinforcement-learning" title="Permalink to this headline">¶</a></h4>
 <p>Entropy is a quantity which, roughly speaking, says how random a random variable is. If a coin is weighted so that it almost always comes up heads, it has low entropy; if it&#8217;s evenly weighted and has a half chance of either outcome, it has high entropy.</p>
-<p>Let <img class="math" src="../_images/math/a679a9634cd3d168023caa7576bcbcbaeaa0d7d5.svg" alt="x"/> be a random variable with probability mass or density function <img class="math" src="../_images/math/fda9c3d12bc5face394db0eecc0a54d1bff5b46a.svg" alt="P"/>. The entropy <img class="math" src="../_images/math/b9d29b0250dbf71e8858eba83d7d2bf4f6c32e4a.svg" alt="H"/> of <img class="math" src="../_images/math/a679a9634cd3d168023caa7576bcbcbaeaa0d7d5.svg" alt="x"/> is computed from its distribution <img class="math" src="../_images/math/fda9c3d12bc5face394db0eecc0a54d1bff5b46a.svg" alt="P"/> according to</p>
+<p>Let <img class="math" src="../_images/math/2760e1d12dd3f76eea026a9fcb2e36938211df93.svg" alt="x"/> be a random variable with probability mass or density function <img class="math" src="../_images/math/0fb532924b75f4c5a66658e12b256177c78d092a.svg" alt="P"/>. The entropy <img class="math" src="../_images/math/afa196794cf9a6949778b572e28a82ab482ff9bd.svg" alt="H"/> of <img class="math" src="../_images/math/2760e1d12dd3f76eea026a9fcb2e36938211df93.svg" alt="x"/> is computed from its distribution <img class="math" src="../_images/math/0fb532924b75f4c5a66658e12b256177c78d092a.svg" alt="P"/> according to</p>
 <div class="math">
-<p><img src="../_images/math/b3d05fa94f0a18323c8c1dca703982855b1ba514.svg" alt="H(P) = \underE{x \sim P}{-\log P(x)}."/></p>
+<p><img src="../_images/math/21c71b6930c5bbb9318d1354b7a7e4d0ecb2e010.svg" alt="H(P) = \underE{x \sim P}{-\log P(x)}."/></p>
 </div><p>In entropy-regularized reinforcement learning, the agent gets a bonus reward at each time step proportional to the entropy of the policy at that timestep. This changes <a class="reference external" href="../spinningup/rl_intro.html#the-rl-problem">the RL problem</a> to:</p>
 <div class="math">
-<p><img src="../_images/math/96a8f8d1621fedfc2a633d1bb55fde203bd44ab9.svg" alt="\pi^* = \arg \max_{\pi} \underE{\tau \sim \pi}{ \sum_{t=0}^{\infty} \gamma^t \bigg( R(s_t, a_t, s_{t+1}) + \alpha H\left(\pi(\cdot|s_t)\right) \bigg)},"/></p>
-</div><p>where <img class="math" src="../_images/math/dee787f38c91d2cbcd96b8b8b9694eac695ef98c.svg" alt="\alpha &gt; 0"/> is the trade-off coefficient. (Note: we&#8217;re assuming an infinite-horizon discounted setting here, and we&#8217;ll do the same for the rest of this page.) We can now define the slightly-different value functions in this setting. <img class="math" src="../_images/math/f857ab97cf4591adcaac91f1d072868338bc5bfe.svg" alt="V^{\pi}"/> is changed to include the entropy bonuses from every timestep:</p>
+<p><img src="../_images/math/9ff76680227967c6ad167167782a81d21421b582.svg" alt="\pi^* = \arg \max_{\pi} \underE{\tau \sim \pi}{ \sum_{t=0}^{\infty} \gamma^t \bigg( R(s_t, a_t, s_{t+1}) + \alpha H\left(\pi(\cdot|s_t)\right) \bigg)},"/></p>
+</div><p>where <img class="math" src="../_images/math/289632776546d37fc6b0519a3978f57d0b1d2089.svg" alt="\alpha &gt; 0"/> is the trade-off coefficient. (Note: we&#8217;re assuming an infinite-horizon discounted setting here, and we&#8217;ll do the same for the rest of this page.) We can now define the slightly-different value functions in this setting. <img class="math" src="../_images/math/cfb3d7a155255d9382c1fcb00d94449c88d31e12.svg" alt="V^{\pi}"/> is changed to include the entropy bonuses from every timestep:</p>
 <div class="math">
-<p><img src="../_images/math/0968b9e16194afccc4d8bfc2a4a081d266087433.svg" alt="V^{\pi}(s) = \underE{\tau \sim \pi}{ \left. \sum_{t=0}^{\infty} \gamma^t \bigg( R(s_t, a_t, s_{t+1}) + \alpha H\left(\pi(\cdot|s_t)\right) \bigg) \right| s_0 = s}"/></p>
-</div><p><img class="math" src="../_images/math/d450c2b5a28043ac0eb590b277d53ba7d5866799.svg" alt="Q^{\pi}"/> is changed to include the entropy bonuses from every timestep <em>except the first</em>:</p>
+<p><img src="../_images/math/fb93579c007141bc528c703c19083265bb7a8103.svg" alt="V^{\pi}(s) = \underE{\tau \sim \pi}{ \left. \sum_{t=0}^{\infty} \gamma^t \bigg( R(s_t, a_t, s_{t+1}) + \alpha H\left(\pi(\cdot|s_t)\right) \bigg) \right| s_0 = s}"/></p>
+</div><p><img class="math" src="../_images/math/b92748aacf2eb5635a8a094db80fe39b93211eb7.svg" alt="Q^{\pi}"/> is changed to include the entropy bonuses from every timestep <em>except the first</em>:</p>
 <div class="math">
-<p><img src="../_images/math/920644da88017126ee516b08aee186696bda7152.svg" alt="Q^{\pi}(s,a) = \underE{\tau \sim \pi}{ \left. \sum_{t=0}^{\infty} \gamma^t  R(s_t, a_t, s_{t+1}) + \alpha \sum_{t=1}^{\infty} \gamma^t H\left(\pi(\cdot|s_t)\right)\right| s_0 = s, a_0 = a}"/></p>
-</div><p>With these definitions, <img class="math" src="../_images/math/f857ab97cf4591adcaac91f1d072868338bc5bfe.svg" alt="V^{\pi}"/> and <img class="math" src="../_images/math/d450c2b5a28043ac0eb590b277d53ba7d5866799.svg" alt="Q^{\pi}"/> are connected by:</p>
+<p><img src="../_images/math/7ba6acc8992b5ae83d86dbb329771b83580468de.svg" alt="Q^{\pi}(s,a) = \underE{\tau \sim \pi}{ \left. \sum_{t=0}^{\infty} \gamma^t  R(s_t, a_t, s_{t+1}) + \alpha \sum_{t=1}^{\infty} \gamma^t H\left(\pi(\cdot|s_t)\right)\right| s_0 = s, a_0 = a}"/></p>
+</div><p>With these definitions, <img class="math" src="../_images/math/cfb3d7a155255d9382c1fcb00d94449c88d31e12.svg" alt="V^{\pi}"/> and <img class="math" src="../_images/math/b92748aacf2eb5635a8a094db80fe39b93211eb7.svg" alt="Q^{\pi}"/> are connected by:</p>
 <div class="math">
-<p><img src="../_images/math/b726a1d37859b4b8eb8ed169d215b074933d1df6.svg" alt="V^{\pi}(s) = \underE{a \sim \pi}{Q^{\pi}(s,a)} + \alpha H\left(\pi(\cdot|s)\right)"/></p>
-</div><p>and the Bellman equation for <img class="math" src="../_images/math/d450c2b5a28043ac0eb590b277d53ba7d5866799.svg" alt="Q^{\pi}"/> is</p>
+<p><img src="../_images/math/94ee0540ca22031a91e5c17b8f4b32897788b7f8.svg" alt="V^{\pi}(s) = \underE{a \sim \pi}{Q^{\pi}(s,a)} + \alpha H\left(\pi(\cdot|s)\right)"/></p>
+</div><p>and the Bellman equation for <img class="math" src="../_images/math/b92748aacf2eb5635a8a094db80fe39b93211eb7.svg" alt="Q^{\pi}"/> is</p>
 <div class="math">
-<p><img src="../_images/math/33f7821425215be70a10b71279ef0dc8a7c9079a.svg" alt="Q^{\pi}(s,a) &amp;= \underE{s' \sim P \\ a' \sim \pi}{R(s,a,s') + \gamma\left(Q^{\pi}(s',a') + \alpha H\left(\pi(\cdot|s')\right) \right)} \\
+<p><img src="../_images/math/a860ff428b76f641a4d0ee8fe5be19974857017f.svg" alt="Q^{\pi}(s,a) &amp;= \underE{s' \sim P \\ a' \sim \pi}{R(s,a,s') + \gamma\left(Q^{\pi}(s',a') + \alpha H\left(\pi(\cdot|s')\right) \right)} \\
 &amp;= \underE{s' \sim P}{R(s,a,s') + \gamma V^{\pi}(s')}."/></p>
 </div><div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
-<p class="last">The way we&#8217;ve set up the value functions in the entropy-regularized setting is a little bit arbitrary, and actually we could have done it differently (eg make <img class="math" src="../_images/math/d450c2b5a28043ac0eb590b277d53ba7d5866799.svg" alt="Q^{\pi}"/> include the entropy bonus at the first timestep). The choice of definition may vary slightly across papers on the subject.</p>
+<p class="last">The way we&#8217;ve set up the value functions in the entropy-regularized setting is a little bit arbitrary, and actually we could have done it differently (eg make <img class="math" src="../_images/math/b92748aacf2eb5635a8a094db80fe39b93211eb7.svg" alt="Q^{\pi}"/> include the entropy bonus at the first timestep). The choice of definition may vary slightly across papers on the subject.</p>
 </div>
 </div>
 <div class="section" id="id1">
 <h4><a class="toc-backref" href="#id7">Soft Actor-Critic</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
-<p>SAC concurrently learns a policy <img class="math" src="../_images/math/80088cfe6126980142c5447a9cb12f69ee7fa333.svg" alt="\pi_{\theta}"/>, two Q-functions <img class="math" src="../_images/math/213a47cc1d5ab93ba1e7101e3869903f40e52df8.svg" alt="Q_{\phi_1}, Q_{\phi_2}"/>, and a value function <img class="math" src="../_images/math/9ebf8cd5585270a258da5a299e7db7229c9fddaf.svg" alt="V_{\psi}"/>.</p>
+<p>SAC concurrently learns a policy <img class="math" src="../_images/math/7dc51a55461de2c1a3d25bea3f53bfe034295878.svg" alt="\pi_{\theta}"/>, two Q-functions <img class="math" src="../_images/math/4069e3a0b343f61bbb6d573e33975903a5ed4dc3.svg" alt="Q_{\phi_1}, Q_{\phi_2}"/>, and a value function <img class="math" src="../_images/math/ece245ee7decbac88d636e152b034493cc523a86.svg" alt="V_{\psi}"/>.</p>
 <p><strong>Learning Q.</strong> The Q-functions are learned by MSBE minimization, using a <strong>target value network</strong> to form the Bellman backups. They both use the same target, like in TD3, and have loss functions:</p>
 <div class="math">
-<p><img src="../_images/math/0a1fc500475d85a71984c03f94462b075da698c3.svg" alt="L(\phi_i, {\mathcal D}) = \underset{(s,a,r,s',d) \sim {\mathcal D}}{{\mathrm E}}\left[
+<p><img src="../_images/math/a3931841bc2f0c0120c395c777c6ecdc6ad9253e.svg" alt="L(\phi_i, {\mathcal D}) = \underset{(s,a,r,s',d) \sim {\mathcal D}}{{\mathrm E}}\left[
     \Bigg( Q_{\phi_i}(s,a) - \left(r + \gamma (1 - d) V_{\psi_{\text{targ}}}(s') \right) \Bigg)^2
     \right]."/></p>
 </div><p>The target value network, like the target networks in DDPG and TD3, is obtained by polyak averaging the value network parameters over the course of training.</p>
-<p><strong>Learning V.</strong> The value function is learned by exploiting (a sample-based approximation of) the connection between <img class="math" src="../_images/math/d450c2b5a28043ac0eb590b277d53ba7d5866799.svg" alt="Q^{\pi}"/> and <img class="math" src="../_images/math/f857ab97cf4591adcaac91f1d072868338bc5bfe.svg" alt="V^{\pi}"/>. Before we go into the learning rule, let&#8217;s first rewrite the connection equation by using the definition of entropy to obtain:</p>
+<p><strong>Learning V.</strong> The value function is learned by exploiting (a sample-based approximation of) the connection between <img class="math" src="../_images/math/b92748aacf2eb5635a8a094db80fe39b93211eb7.svg" alt="Q^{\pi}"/> and <img class="math" src="../_images/math/cfb3d7a155255d9382c1fcb00d94449c88d31e12.svg" alt="V^{\pi}"/>. Before we go into the learning rule, let&#8217;s first rewrite the connection equation by using the definition of entropy to obtain:</p>
 <div class="math">
-<p><img src="../_images/math/51bf906bb7631d4354e52f5069ef0242bd2a2d96.svg" alt="V^{\pi}(s) &amp;= \underE{a \sim \pi}{Q^{\pi}(s,a)} + \alpha H\left(\pi(\cdot|s)\right) \\
+<p><img src="../_images/math/bec6b937e279700c455245b58673eeb1aaf43563.svg" alt="V^{\pi}(s) &amp;= \underE{a \sim \pi}{Q^{\pi}(s,a)} + \alpha H\left(\pi(\cdot|s)\right) \\
 &amp;= \underE{a \sim \pi}{Q^{\pi}(s,a) - \alpha \log \pi(a|s)}."/></p>
 </div><p>The RHS is an expectation over actions, so we can approximate it by sampling from the policy:</p>
 <div class="math">
-<p><img src="../_images/math/4843a432be98c7c7b50100e5227bc43ab4acd691.svg" alt="V^{\pi}(s) \approx Q^{\pi}(s,\tilde{a}) - \alpha \log \pi(\tilde{a}|s), \;\;\;\;\; \tilde{a} \sim \pi(\cdot|s)."/></p>
-</div><p>SAC sets up a mean-squared-error loss for <img class="math" src="../_images/math/9ebf8cd5585270a258da5a299e7db7229c9fddaf.svg" alt="V_{\psi}"/> based on this approximation. But what Q-value do we use? SAC uses <strong>clipped double-Q</strong> like TD3 for learning the value function, and takes the minimum Q-value between the two approximators. So the SAC loss for value function parameters is:</p>
+<p><img src="../_images/math/4f8632919e435dda58865cc69b501e6df04f611d.svg" alt="V^{\pi}(s) \approx Q^{\pi}(s,\tilde{a}) - \alpha \log \pi(\tilde{a}|s), \;\;\;\;\; \tilde{a} \sim \pi(\cdot|s)."/></p>
+</div><p>SAC sets up a mean-squared-error loss for <img class="math" src="../_images/math/ece245ee7decbac88d636e152b034493cc523a86.svg" alt="V_{\psi}"/> based on this approximation. But what Q-value do we use? SAC uses <strong>clipped double-Q</strong> like TD3 for learning the value function, and takes the minimum Q-value between the two approximators. So the SAC loss for value function parameters is:</p>
 <div class="math">
-<p><img src="../_images/math/d44a3cfb903ec8530a5880aa718aa5cf0dad28f8.svg" alt="L(\psi, {\mathcal D}) = \underE{s \sim \mathcal{D} \\ \tilde{a} \sim \pi_{\theta}}{\Bigg(V_{\psi}(s) - \left(\min_{i=1,2} Q_{\phi_i}(s,\tilde{a}) - \alpha \log \pi_{\theta}(\tilde{a}|s) \right)\Bigg)^2}."/></p>
+<p><img src="../_images/math/8ba3a2bc129f538c979dd459411d3d42610eb1a7.svg" alt="L(\psi, {\mathcal D}) = \underE{s \sim \mathcal{D} \\ \tilde{a} \sim \pi_{\theta}}{\Bigg(V_{\psi}(s) - \left(\min_{i=1,2} Q_{\phi_i}(s,\tilde{a}) - \alpha \log \pi_{\theta}(\tilde{a}|s) \right)\Bigg)^2}."/></p>
 </div><p>Importantly, we do <strong>not</strong> use actions from the replay buffer here: these actions are sampled fresh from the current version of the policy.</p>
-<p><strong>Learning the Policy.</strong> The policy should, in each state, act to maximize the expected future return plus expected future entropy. That is, it should maximize <img class="math" src="../_images/math/3c343749cc2f7804a670b618d03d056d7e35b5eb.svg" alt="V^{\pi}(s)"/>, which we expand out (as before) into</p>
+<p><strong>Learning the Policy.</strong> The policy should, in each state, act to maximize the expected future return plus expected future entropy. That is, it should maximize <img class="math" src="../_images/math/e8cac649e08a2b01c72c546971fe8a2bd817075a.svg" alt="V^{\pi}(s)"/>, which we expand out (as before) into</p>
 <div class="math">
-<p><img src="../_images/math/d3deca00a02e211a85278358f902e3ab0683c8a5.svg" alt="\underE{a \sim \pi}{Q^{\pi}(s,a) - \alpha \log \pi(a|s)}."/></p>
-</div><p>The way we optimize the policy makes use of the <strong>reparameterization trick</strong>, in which a sample from <img class="math" src="../_images/math/f85b799256ad373b882e9d0760b03ffcc297627e.svg" alt="\pi_{\theta}(\cdot|s)"/> is drawn by computing a deterministic function of state, policy parameters, and independent noise. To illustrate: following the authors of the SAC paper, we use a squashed Gaussian policy, which means that samples are obtained according to</p>
+<p><img src="../_images/math/f659980cf28676d16282404a2ef5523d2949200e.svg" alt="\underE{a \sim \pi}{Q^{\pi}(s,a) - \alpha \log \pi(a|s)}."/></p>
+</div><p>The way we optimize the policy makes use of the <strong>reparameterization trick</strong>, in which a sample from <img class="math" src="../_images/math/63153c589af38f72f423488969e431da0e8158c0.svg" alt="\pi_{\theta}(\cdot|s)"/> is drawn by computing a deterministic function of state, policy parameters, and independent noise. To illustrate: following the authors of the SAC paper, we use a squashed Gaussian policy, which means that samples are obtained according to</p>
 <div class="math">
-<p><img src="../_images/math/905cd42f4795d08f38be91a4affaed472941799a.svg" alt="\tilde{a}_{\theta}(s, \xi) = \tanh\left( \mu_{\theta}(s) + \sigma_{\theta}(s) \odot \xi \right), \;\;\;\;\; \xi \sim \mathcal{N}(0, I)."/></p>
+<p><img src="../_images/math/bd2562a86a5b25d226d5089d7c2c8cc3ce4eab7e.svg" alt="\tilde{a}_{\theta}(s, \xi) = \tanh\left( \mu_{\theta}(s) + \sigma_{\theta}(s) \odot \xi \right), \;\;\;\;\; \xi \sim \mathcal{N}(0, I)."/></p>
 </div><div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
 <p>This policy has two key differences from the policies we use in the other policy optimization algorithms:</p>
-<p><strong>1. The squashing function.</strong> The <img class="math" src="../_images/math/21166b68ac043adf354c550774eed2b507231426.svg" alt="\tanh"/> in the SAC policy ensures that actions are bounded to a finite range. This is absent in the VPG, TRPO, and PPO policies. It also changes the distribution: before the <img class="math" src="../_images/math/21166b68ac043adf354c550774eed2b507231426.svg" alt="\tanh"/> the SAC policy is a factored Gaussian like the other algorithms&#8217; policies, but after the <img class="math" src="../_images/math/21166b68ac043adf354c550774eed2b507231426.svg" alt="\tanh"/> it is not. (You can still compute the log-probabilities of actions in closed form, though: see the paper appendix for details.)</p>
+<p><strong>1. The squashing function.</strong> The <img class="math" src="../_images/math/c289fdd1e3510fd1d8b2a7b498437c7245e58f8d.svg" alt="\tanh"/> in the SAC policy ensures that actions are bounded to a finite range. This is absent in the VPG, TRPO, and PPO policies. It also changes the distribution: before the <img class="math" src="../_images/math/c289fdd1e3510fd1d8b2a7b498437c7245e58f8d.svg" alt="\tanh"/> the SAC policy is a factored Gaussian like the other algorithms&#8217; policies, but after the <img class="math" src="../_images/math/c289fdd1e3510fd1d8b2a7b498437c7245e58f8d.svg" alt="\tanh"/> it is not. (You can still compute the log-probabilities of actions in closed form, though: see the paper appendix for details.)</p>
 <p class="last"><strong>2. The way standard deviations are parameterized.</strong> In VPG, TRPO, and PPO, we represent the log std devs with state-independent parameter vectors. In SAC, we represent the log std devs as outputs from the neural network, meaning that they depend on state in a complex way. SAC with state-independent log std devs, in our experience, did not work. (Can you think of why? Or better yet: run an experiment to verify?)</p>
 </div>
 <p>The reparameterization trick allows us to rewrite the expectation over actions (which contains a pain point: the distribution depends on the policy parameters) into an expectation over noise (which removes the pain point: the distribution now has no dependence on parameters):</p>
 <div class="math">
-<p><img src="../_images/math/5bb18b5df7cf3c929debb1cf1e38e14af6ed96ca.svg" alt="\underE{a \sim \pi_{\theta}}{Q^{\pi_{\theta}}(s,a) - \alpha \log \pi_{\theta}(a|s)} = \underE{\xi \sim \mathcal{N}}{Q^{\pi_{\theta}}(s,\tilde{a}_{\theta}(s,\xi)) - \alpha \log \pi_{\theta}(\tilde{a}_{\theta}(s,\xi)|s)}"/></p>
-</div><p>To get the policy loss, the final step is that we need to substitute <img class="math" src="../_images/math/0d33c407d2046710a84c9e7f5c35ddf432d08da9.svg" alt="Q^{\pi_{\theta}}"/> with one of our function approximators. The same as in TD3, we use <img class="math" src="../_images/math/d0ce34d2d12b36de9ee3689921ea102f5ef641ce.svg" alt="Q_{\phi_1}"/>. The policy is thus optimized according to</p>
+<p><img src="../_images/math/96d09c1aa993614306f8bfe9e28b77f45bfdf638.svg" alt="\underE{a \sim \pi_{\theta}}{Q^{\pi_{\theta}}(s,a) - \alpha \log \pi_{\theta}(a|s)} = \underE{\xi \sim \mathcal{N}}{Q^{\pi_{\theta}}(s,\tilde{a}_{\theta}(s,\xi)) - \alpha \log \pi_{\theta}(\tilde{a}_{\theta}(s,\xi)|s)}"/></p>
+</div><p>To get the policy loss, the final step is that we need to substitute <img class="math" src="../_images/math/2d4b50475f4aa0005d97c0dd4daa446194290bf5.svg" alt="Q^{\pi_{\theta}}"/> with one of our function approximators. The same as in TD3, we use <img class="math" src="../_images/math/7ef3597bdc6a1cc20c592a7c4e2653c2692fcbd5.svg" alt="Q_{\phi_1}"/>. The policy is thus optimized according to</p>
 <div class="math">
-<p><img src="../_images/math/4d5b512d3799ef605088739a2503b7b248a54ac7.svg" alt="\max_{\theta} \underE{s \sim \mathcal{D} \\ \xi \sim \mathcal{N}}{Q_{\phi_1}(s,\tilde{a}_{\theta}(s,\xi)) - \alpha \log \pi_{\theta}(\tilde{a}_{\theta}(s,\xi)|s)},"/></p>
+<p><img src="../_images/math/88b59fd2fad4cd61226e70cf0d2c30289da3ed57.svg" alt="\max_{\theta} \underE{s \sim \mathcal{D} \\ \xi \sim \mathcal{N}}{Q_{\phi_1}(s,\tilde{a}_{\theta}(s,\xi)) - \alpha \log \pi_{\theta}(\tilde{a}_{\theta}(s,\xi)|s)},"/></p>
 </div><p>which is almost the same as the DDPG and TD3 policy optimization, except for the stochasticity and entropy term.</p>
 </div>
 </div>
 <div class="section" id="exploration-vs-exploitation">
 <h3><a class="toc-backref" href="#id8">Exploration vs. Exploitation</a><a class="headerlink" href="#exploration-vs-exploitation" title="Permalink to this headline">¶</a></h3>
-<p>SAC trains a stochastic policy with entropy regularization, and explores in an on-policy way. The entropy regularization coefficient <img class="math" src="../_images/math/e37a3c8967bacd71f976963d8ff117f6dd0ad132.svg" alt="\alpha"/> explicitly controls the explore-exploit tradeoff, with higher <img class="math" src="../_images/math/e37a3c8967bacd71f976963d8ff117f6dd0ad132.svg" alt="\alpha"/> corresponding to more exploration, and lower <img class="math" src="../_images/math/e37a3c8967bacd71f976963d8ff117f6dd0ad132.svg" alt="\alpha"/> corresponding to more exploitation. The right coefficient (the one which leads to the stablest / highest-reward learning) may vary from environment to environment, and could require careful tuning.</p>
+<p>SAC trains a stochastic policy with entropy regularization, and explores in an on-policy way. The entropy regularization coefficient <img class="math" src="../_images/math/91481bcd133cc688f7f1f22eee632771de97ce99.svg" alt="\alpha"/> explicitly controls the explore-exploit tradeoff, with higher <img class="math" src="../_images/math/91481bcd133cc688f7f1f22eee632771de97ce99.svg" alt="\alpha"/> corresponding to more exploration, and lower <img class="math" src="../_images/math/91481bcd133cc688f7f1f22eee632771de97ce99.svg" alt="\alpha"/> corresponding to more exploitation. The right coefficient (the one which leads to the stablest / highest-reward learning) may vary from environment to environment, and could require careful tuning.</p>
 <p>At test time, to see how well the policy exploits what it has learned, we remove stochasticity and use the mean action instead of a sample from the distribution. This tends to improve performance over the original stochastic policy.</p>
 <div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
@@ -340,7 +340,7 @@
 <div class="section" id="pseudocode">
 <h3><a class="toc-backref" href="#id9">Pseudocode</a><a class="headerlink" href="#pseudocode" title="Permalink to this headline">¶</a></h3>
 <div class="math">
-<p><img src="../_images/math/7ff0536d2e479ae833174c13ccff07b043d7cb55.svg" alt="\begin{algorithm}[H]
+<p><img src="../_images/math/ef8fefc20f28ba44d3b4d56b4323bbafcb04fddd.svg" alt="\begin{algorithm}[H]
     \caption{Soft Actor-Critic}
     \label{alg1}
 \begin{algorithmic}[1]
@@ -498,9 +498,9 @@ for the agent and the environment in each epoch.</li>
 networks. Target networks are updated towards main networks
 according to:</p>
 <div class="math">
-<p><img src="../_images/math/3714bdd41380a369cd9fb38e2c4a8c5712ff0048.svg" alt="\theta_{\text{targ}} \leftarrow
+<p><img src="../_images/math/cf198270bc54bd6bb89801db8a84684dc458b16b.svg" alt="\theta_{\text{targ}} \leftarrow
 \rho \theta_{\text{targ}} + (1-\rho) \theta"/></p>
-</div><p>where <img class="math" src="../_images/math/aa9d23401f3dfa97ca4762171bd13086d58d89bb.svg" alt="\rho"/> is polyak. (Always between 0 and 1, usually
+</div><p>where <img class="math" src="../_images/math/505b94c9e77f5e2fbb428e477ee489b69d236b10.svg" alt="\rho"/> is polyak. (Always between 0 and 1, usually
 close to 1.)</p>
 </li>
 <li><strong>lr</strong> (<em>float</em>) &#8211; Learning rate (used for both policy and value learning).</li>
@@ -602,7 +602,7 @@ the current policy and value function.</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, OpenAI.
+        &copy; Copyright 2018, OpenAI —— 曹真翻译.
 
     </p>
   </div>

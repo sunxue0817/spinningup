@@ -79,7 +79,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Spinning Up'
-copyright = '2018, OpenAI'
+copyright = '2018, OpenAI —— 曹真翻译'
 author = 'Joshua Achiam'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -176,6 +176,9 @@ imgmath_latex_preamble = r'''
     footskip=30pt
     }
 
+\usepackage{autofe}
+
+
 \newcommand{\E}{{\mathrm E}}
 
 \newcommand{\underE}[2]{\underset{\begin{subarray}{c}#1 \end{subarray}}{\E}\left[ #2 \right]}
@@ -200,6 +203,7 @@ man_pages = [
     (master_doc, 'spinningup', 'Spinning Up Documentation',
      [author], 1)
 ]
+
 
 
 # -- Options for Texinfo output -------------------------------------------

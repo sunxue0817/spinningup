@@ -228,33 +228,33 @@
 <p>In the end, we&#8217;ll tie those results together and describe the advantage-based expression for the policy gradient&#8212;the version we use in our <a class="reference external" href="../algorithms/vpg.html">Vanilla Policy Gradient</a> implementation.</p>
 <div class="section" id="deriving-the-simplest-policy-gradient">
 <h2><a class="toc-backref" href="#id7">Deriving the Simplest Policy Gradient</a><a class="headerlink" href="#deriving-the-simplest-policy-gradient" title="Permalink to this headline">¶</a></h2>
-<p>Here, we consider the case of a stochastic, parameterized policy, <img class="math" src="../_images/math/80088cfe6126980142c5447a9cb12f69ee7fa333.svg" alt="\pi_{\theta}"/>. We aim to maximize the expected return <img class="math" src="../_images/math/48ffbf0dd0274a46574e145ea23e4c174f6dfaa3.svg" alt="J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{R(\tau)}"/>. For the purposes of this derivation, we&#8217;ll take <img class="math" src="../_images/math/27905cd8b349a89eec129f7e3ac3d3ac4c82e501.svg" alt="R(\tau)"/> to give the <a class="reference external" href="../spinningup/rl_intro.html#reward-and-return">finite-horizon undiscounted return</a>, but the derivation for the infinite-horizon discounted return setting is almost identical.</p>
+<p>Here, we consider the case of a stochastic, parameterized policy, <img class="math" src="../_images/math/7dc51a55461de2c1a3d25bea3f53bfe034295878.svg" alt="\pi_{\theta}"/>. We aim to maximize the expected return <img class="math" src="../_images/math/de1ff9842b32229d28d41fc769d6b25e86c73c02.svg" alt="J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{R(\tau)}"/>. For the purposes of this derivation, we&#8217;ll take <img class="math" src="../_images/math/a4cfe11c3e8bb64a3fbcadd1e90e64d7488ab724.svg" alt="R(\tau)"/> to give the <a class="reference external" href="../spinningup/rl_intro.html#reward-and-return">finite-horizon undiscounted return</a>, but the derivation for the infinite-horizon discounted return setting is almost identical.</p>
 <p>We would like to optimize the policy by gradient ascent, eg</p>
 <div class="math">
-<p><img src="../_images/math/237c86938ce2e9de91040e4090f79c6a1125fc00.svg" alt="\theta_{k+1} = \theta_k + \alpha \left. \nabla_{\theta} J(\pi_{\theta}) \right|_{\theta_k}."/></p>
-</div><p>The gradient of policy performance, <img class="math" src="../_images/math/f839e53d1ccacb63d4d86a8be348d9adc86d723a.svg" alt="\nabla_{\theta} J(\pi_{\theta})"/>, is called the <strong>policy gradient</strong>, and algorithms that optimize the policy this way are called <strong>policy gradient algorithms.</strong> (Examples include Vanilla Policy Gradient and TRPO. PPO is often referred to as a policy gradient algorithm, though this is slightly inaccurate.)</p>
+<p><img src="../_images/math/20059fdc499f7f26d6fdb11f6916a30b82002293.svg" alt="\theta_{k+1} = \theta_k + \alpha \left. \nabla_{\theta} J(\pi_{\theta}) \right|_{\theta_k}."/></p>
+</div><p>The gradient of policy performance, <img class="math" src="../_images/math/1bb7289c5dcb2f31df644039966ba2f4f7acd485.svg" alt="\nabla_{\theta} J(\pi_{\theta})"/>, is called the <strong>policy gradient</strong>, and algorithms that optimize the policy this way are called <strong>policy gradient algorithms.</strong> (Examples include Vanilla Policy Gradient and TRPO. PPO is often referred to as a policy gradient algorithm, though this is slightly inaccurate.)</p>
 <p>To actually use this algorithm, we need an expression for the policy gradient which we can numerically compute. This involves two steps: 1) deriving the analytical gradient of policy performance, which turns out to have the form of an expected value, and then 2) forming a sample estimate of that expected value, which can be computed with data from a finite number of agent-environment interaction steps.</p>
 <p>In this subsection, we&#8217;ll find the simplest form of that expression. In later subsections, we&#8217;ll show how to improve on the simplest form to get the version we actually use in standard policy gradient implementations.</p>
 <p>We&#8217;ll begin by laying out a few facts which are useful for deriving the analytical gradient.</p>
-<p><strong>1. Probability of a Trajectory.</strong> The probability of a trajectory <img class="math" src="../_images/math/8b650845f5290c4327f29ff073a5b1a8dabb7298.svg" alt="\tau = (s_0, a_0, ..., s_{T+1})"/> given that actions come from <img class="math" src="../_images/math/80088cfe6126980142c5447a9cb12f69ee7fa333.svg" alt="\pi_{\theta}"/> is</p>
+<p><strong>1. Probability of a Trajectory.</strong> The probability of a trajectory <img class="math" src="../_images/math/c50e171831af8e1c7c4804e4e265fdc9f30fe66a.svg" alt="\tau = (s_0, a_0, ..., s_{T+1})"/> given that actions come from <img class="math" src="../_images/math/7dc51a55461de2c1a3d25bea3f53bfe034295878.svg" alt="\pi_{\theta}"/> is</p>
 <div class="math">
-<p><img src="../_images/math/2cb381fc364780ad05245f41cf88a9467bf4cb2f.svg" alt="P(\tau|\theta) = \rho_0 (s_0) \prod_{t=0}^{T} P(s_{t+1}|s_t, a_t) \pi_{\theta}(a_t |s_t)."/></p>
-</div><p><strong>2. The Log-Derivative Trick.</strong> The log-derivative trick is based on a simple rule from calculus: the derivative of <img class="math" src="../_images/math/ef040455c459db2f570c11ecb75b25853645d90a.svg" alt="\log x"/> with respect to <img class="math" src="../_images/math/a679a9634cd3d168023caa7576bcbcbaeaa0d7d5.svg" alt="x"/> is <img class="math" src="../_images/math/4a5449dd5e4be3a804c40210a24c5154bcd6760e.svg" alt="1/x"/>. When rearranged and combined with chain rule, we get:</p>
+<p><img src="../_images/math/86352c757b84a393cf84f05bce5c6374f9743eb3.svg" alt="P(\tau|\theta) = \rho_0 (s_0) \prod_{t=0}^{T} P(s_{t+1}|s_t, a_t) \pi_{\theta}(a_t |s_t)."/></p>
+</div><p><strong>2. The Log-Derivative Trick.</strong> The log-derivative trick is based on a simple rule from calculus: the derivative of <img class="math" src="../_images/math/2e51f7d34b0f3baf16aa26e83044ecb30b7270df.svg" alt="\log x"/> with respect to <img class="math" src="../_images/math/2760e1d12dd3f76eea026a9fcb2e36938211df93.svg" alt="x"/> is <img class="math" src="../_images/math/09ca6762a1faceea6a01694d7fb8c3e045ea3e4e.svg" alt="1/x"/>. When rearranged and combined with chain rule, we get:</p>
 <div class="math">
-<p><img src="../_images/math/2f10287db9a459af5467140025c35bb92e960ee3.svg" alt="\nabla_{\theta} P(\tau | \theta) = P(\tau | \theta) \nabla_{\theta} \log P(\tau | \theta)."/></p>
+<p><img src="../_images/math/e1604e4b22c1079e28069fd039092600719a79c0.svg" alt="\nabla_{\theta} P(\tau | \theta) = P(\tau | \theta) \nabla_{\theta} \log P(\tau | \theta)."/></p>
 </div><p><strong>3. Log-Probability of a Trajectory.</strong> The log-prob of a trajectory is just</p>
 <div class="math">
-<p><img src="../_images/math/1737476897d122c10cec3053f4d360f8b57d0a01.svg" alt="\log P(\tau|\theta) = \log \rho_0 (s_0) + \sum_{t=0}^{T} \bigg( \log P(s_{t+1}|s_t, a_t)  + \log \pi_{\theta}(a_t |s_t)\bigg)."/></p>
-</div><p><strong>4. Gradients of Environment Functions.</strong> The environment has no dependence on <img class="math" src="../_images/math/1a20bd03ccceae216a40cb69d3fb7a3970f6f275.svg" alt="\theta"/>, so gradients of <img class="math" src="../_images/math/b6ef65214189bd57d5130c050c9848928f697389.svg" alt="\rho_0(s_0)"/>, <img class="math" src="../_images/math/acce6f3cb29fba6f467260234cf1ad858c53822d.svg" alt="P(s_{t+1}|s_t, a_t)"/>, and <img class="math" src="../_images/math/27905cd8b349a89eec129f7e3ac3d3ac4c82e501.svg" alt="R(\tau)"/> are zero.</p>
+<p><img src="../_images/math/61db954dc76bee5b906ed05f34502448885c0cd4.svg" alt="\log P(\tau|\theta) = \log \rho_0 (s_0) + \sum_{t=0}^{T} \bigg( \log P(s_{t+1}|s_t, a_t)  + \log \pi_{\theta}(a_t |s_t)\bigg)."/></p>
+</div><p><strong>4. Gradients of Environment Functions.</strong> The environment has no dependence on <img class="math" src="../_images/math/a9bf14f8a79463d05190aceda63fa75b2c001bfe.svg" alt="\theta"/>, so gradients of <img class="math" src="../_images/math/7846ae8c6f1d1e57017ecffeaf9543f244cd28ca.svg" alt="\rho_0(s_0)"/>, <img class="math" src="../_images/math/87d1765d2719265b4ed6d4d2b9007c17d3bc0705.svg" alt="P(s_{t+1}|s_t, a_t)"/>, and <img class="math" src="../_images/math/a4cfe11c3e8bb64a3fbcadd1e90e64d7488ab724.svg" alt="R(\tau)"/> are zero.</p>
 <p><strong>5. Grad-Log-Prob of a Trajectory.</strong> The gradient of the log-prob of a trajectory is thus</p>
 <div class="math">
-<p><img src="../_images/math/5661deae547ee000037bc5ecc5e3077de6ee57db.svg" alt="\nabla_{\theta} \log P(\tau | \theta) &amp;= \cancel{\nabla_{\theta} \log \rho_0 (s_0)} + \sum_{t=0}^{T} \bigg( \cancel{\nabla_{\theta} \log P(s_{t+1}|s_t, a_t)}  + \nabla_{\theta} \log \pi_{\theta}(a_t |s_t)\bigg) \\
+<p><img src="../_images/math/cffe669e05d6316f56d675bf0a503965cbbd90d5.svg" alt="\nabla_{\theta} \log P(\tau | \theta) &amp;= \cancel{\nabla_{\theta} \log \rho_0 (s_0)} + \sum_{t=0}^{T} \bigg( \cancel{\nabla_{\theta} \log P(s_{t+1}|s_t, a_t)}  + \nabla_{\theta} \log \pi_{\theta}(a_t |s_t)\bigg) \\
 &amp;= \sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t)."/></p>
 </div><p>Putting it all together, we derive the following:</p>
 <div class="admonition-derivation-for-basic-policy-gradient admonition">
 <p class="first admonition-title">Derivation for Basic Policy Gradient</p>
 <div class="last math">
-<p><img src="../_images/math/6fcf142138ce8289bb4f5d4656f3f3bf1609214d.svg" alt="\begin{align*}
+<p><img src="../_images/math/02b363e46b1de5ae33e64178c0cd44d0d82f117e.svg" alt="\begin{align*}
 \nabla_{\theta} J(\pi_{\theta}) &amp;= \nabla_{\theta} \underE{\tau \sim \pi_{\theta}}{R(\tau)} &amp; \\
 &amp;= \nabla_{\theta} \int_{\tau} P(\tau|\theta) R(\tau) &amp; \text{Expand expectation} \\
 &amp;= \int_{\tau} \nabla_{\theta} P(\tau|\theta) R(\tau) &amp; \text{Bring gradient under integral} \\
@@ -263,11 +263,11 @@
 \therefore \nabla_{\theta} J(\pi_{\theta}) &amp;= \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) R(\tau)} &amp; \text{Expression for grad-log-prob}
 \end{align*}"/></p>
 </div></div>
-<p>This is an expectation, which means that we can estimate it with a sample mean. If we collect a set of trajectories <img class="math" src="../_images/math/2618cb22cf47efc780221f34206472f7bf678097.svg" alt="\mathcal{D} = \{\tau_i\}_{i=1,...,N}"/> where each trajectory is obtained by letting the agent act in the environment using the policy <img class="math" src="../_images/math/80088cfe6126980142c5447a9cb12f69ee7fa333.svg" alt="\pi_{\theta}"/>, the policy gradient can be estimated with</p>
+<p>This is an expectation, which means that we can estimate it with a sample mean. If we collect a set of trajectories <img class="math" src="../_images/math/86ebf90d1a4aa89d8ebc11fdfd0e3365bacf8581.svg" alt="\mathcal{D} = \{\tau_i\}_{i=1,...,N}"/> where each trajectory is obtained by letting the agent act in the environment using the policy <img class="math" src="../_images/math/7dc51a55461de2c1a3d25bea3f53bfe034295878.svg" alt="\pi_{\theta}"/>, the policy gradient can be estimated with</p>
 <div class="math">
-<p><img src="../_images/math/a8ec906d99c7cb540ef0df80d86fa1bca0f33a79.svg" alt="\hat{g} = \frac{1}{|\mathcal{D}|} \sum_{\tau \in \mathcal{D}} \sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) R(\tau),"/></p>
-</div><p>where <img class="math" src="../_images/math/1889e2b0692b42dc0ec4ea24fbbfa98745ac198f.svg" alt="|\mathcal{D}|"/> is the number of trajectories in <img class="math" src="../_images/math/b8fda719f4eca2e94bdde65ed40504645326e5fd.svg" alt="\mathcal{D}"/> (here, <img class="math" src="../_images/math/bc31bc706968058d05385235d40e5be6449ce21a.svg" alt="N"/>).</p>
-<p>This last expression is the simplest version of the computable expression we desired. Assuming that we have represented our policy in a way which allows us to calculate <img class="math" src="../_images/math/dcddd87f44c485d068a897bcdcd421893db63db3.svg" alt="\nabla_{\theta} \log \pi_{\theta}(a|s)"/>, and if we are able to run the policy in the environment to collect the trajectory dataset, we can compute the policy gradient and take an update step.</p>
+<p><img src="../_images/math/2ee65aa65048dfd18cc8e991ef75515b5d4a30dd.svg" alt="\hat{g} = \frac{1}{|\mathcal{D}|} \sum_{\tau \in \mathcal{D}} \sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) R(\tau),"/></p>
+</div><p>where <img class="math" src="../_images/math/c612e6b98bcaea6f0f0d621e575bb61dbc8e5194.svg" alt="|\mathcal{D}|"/> is the number of trajectories in <img class="math" src="../_images/math/0052cf5fc8987c95544742de23014066575ab4f7.svg" alt="\mathcal{D}"/> (here, <img class="math" src="../_images/math/8c774ef224ffafc5ff193252939fa7711ce1e119.svg" alt="N"/>).</p>
+<p>This last expression is the simplest version of the computable expression we desired. Assuming that we have represented our policy in a way which allows us to calculate <img class="math" src="../_images/math/d9271fc4543f4f39c9301bcaf074201210050923.svg" alt="\nabla_{\theta} \log \pi_{\theta}(a|s)"/>, and if we are able to run the policy in the environment to collect the trajectory dataset, we can compute the policy gradient and take an update step.</p>
 </div>
 <div class="section" id="implementing-the-simplest-policy-gradient">
 <h2><a class="toc-backref" href="#id8">Implementing the Simplest Policy Gradient</a><a class="headerlink" href="#implementing-the-simplest-policy-gradient" title="Permalink to this headline">¶</a></h2>
@@ -306,8 +306,8 @@
 <p class="first admonition-title">You Should Know</p>
 <p>Even though we describe this as a loss function, it is <strong>not</strong> a loss function in the typical sense from supervised learning. There are two main differences from standard loss functions.</p>
 <p><strong>1. The data distribution depends on the parameters.</strong> A loss function is usually defined on a fixed data distribution which is independent of the parameters we aim to optimize. Not so here, where the data must be sampled on the most recent policy.</p>
-<p><strong>2. It doesn&#8217;t measure performance.</strong> A loss function usually evaluates the performance metric that we care about. Here, we care about expected return, <img class="math" src="../_images/math/bac2be784363161f5e76c206e3319aa035c066fc.svg" alt="J(\pi_{\theta})"/>, but our &#8220;loss&#8221; function does not approximate this at all, even in expectation. This &#8220;loss&#8221; function is only useful to us because, when evaluated at the current parameters, with data generated by the current parameters, it has the negative gradient of performance.</p>
-<p>But after that first step of gradient descent, there is no more connection to performance. This means that minimizing this &#8220;loss&#8221; function, for a given batch of data, has <em>no</em> guarantee whatsoever of improving expected return. You can send this loss to <img class="math" src="../_images/math/5b06f1fe8ec90d14f7597c7bf106758a9fed48f8.svg" alt="-\infty"/> and policy performance could crater; in fact, it usually will. Sometimes a deep RL researcher might describe this outcome as the policy &#8220;overfitting&#8221; to a batch of data. This is descriptive, but should not be taken literally because it does not refer to generalization error.</p>
+<p><strong>2. It doesn&#8217;t measure performance.</strong> A loss function usually evaluates the performance metric that we care about. Here, we care about expected return, <img class="math" src="../_images/math/0cf62abcaf58a3622b9cf898ec1689f7b4a462d8.svg" alt="J(\pi_{\theta})"/>, but our &#8220;loss&#8221; function does not approximate this at all, even in expectation. This &#8220;loss&#8221; function is only useful to us because, when evaluated at the current parameters, with data generated by the current parameters, it has the negative gradient of performance.</p>
+<p>But after that first step of gradient descent, there is no more connection to performance. This means that minimizing this &#8220;loss&#8221; function, for a given batch of data, has <em>no</em> guarantee whatsoever of improving expected return. You can send this loss to <img class="math" src="../_images/math/efcc193714bcb1cee2238620dbfaaabda583cc85.svg" alt="-\infty"/> and policy performance could crater; in fact, it usually will. Sometimes a deep RL researcher might describe this outcome as the policy &#8220;overfitting&#8221; to a batch of data. This is descriptive, but should not be taken literally because it does not refer to generalization error.</p>
 <p class="last">We raise this point because it is common for ML practitioners to interpret a loss function as a useful signal during training&#8212;&#8221;if the loss goes down, all is well.&#8221; In policy gradients, this intuition is wrong, and you should only care about average return. The loss function means nothing.</p>
 </div>
 <div class="admonition-you-should-know admonition">
@@ -450,20 +450,20 @@
 <div class="section" id="expected-grad-log-prob-lemma">
 <h2><a class="toc-backref" href="#id9">Expected Grad-Log-Prob Lemma</a><a class="headerlink" href="#expected-grad-log-prob-lemma" title="Permalink to this headline">¶</a></h2>
 <p>In this subsection, we will derive an intermediate result which is extensively used throughout the theory of policy gradients. We will call it the Expected Grad-Log-Prob (EGLP) lemma. <a class="footnote-reference" href="#id3" id="id2">[1]</a></p>
-<p><strong>EGLP Lemma.</strong> Suppose that <img class="math" src="../_images/math/16b92ba11837118ba08f3bf14c65e6151a9def9a.svg" alt="P_{\theta}"/> is a parameterized probability distribution over a random variable, <img class="math" src="../_images/math/a679a9634cd3d168023caa7576bcbcbaeaa0d7d5.svg" alt="x"/>. Then:</p>
+<p><strong>EGLP Lemma.</strong> Suppose that <img class="math" src="../_images/math/4a6163e6240a14f74fba2bdea72aac2f8909a28e.svg" alt="P_{\theta}"/> is a parameterized probability distribution over a random variable, <img class="math" src="../_images/math/2760e1d12dd3f76eea026a9fcb2e36938211df93.svg" alt="x"/>. Then:</p>
 <div class="math">
-<p><img src="../_images/math/458b0eb0829ecd27ff745f9329fdc0fbd56295bf.svg" alt="\underE{x \sim P_{\theta}}{\nabla_{\theta} \log P_{\theta}(x)} = 0."/></p>
+<p><img src="../_images/math/25091b7fa6aed91cfe2481487b5432d02325fb05.svg" alt="\underE{x \sim P_{\theta}}{\nabla_{\theta} \log P_{\theta}(x)} = 0."/></p>
 </div><div class="admonition-proof admonition">
 <p class="first admonition-title">Proof</p>
 <p>Recall that all probability distributions are <em>normalized</em>:</p>
 <div class="math">
-<p><img src="../_images/math/1ccff802b56424217fbdb65469e70a2780a676e2.svg" alt="\int_x P_{\theta}(x) = 1."/></p>
+<p><img src="../_images/math/0c7fcec48dd848450b0b01f269ff564ba6cbd0e8.svg" alt="\int_x P_{\theta}(x) = 1."/></p>
 </div><p>Take the gradient of both sides of the normalization condition:</p>
 <div class="math">
-<p><img src="../_images/math/e9271f247e0b161843ba47329c92cd43e7395a7f.svg" alt="\nabla_{\theta} \int_x P_{\theta}(x) = \nabla_{\theta} 1 = 0."/></p>
+<p><img src="../_images/math/8b44a4977af7ae5904066a5140b52430cde43c4a.svg" alt="\nabla_{\theta} \int_x P_{\theta}(x) = \nabla_{\theta} 1 = 0."/></p>
 </div><p>Use the log derivative trick to get:</p>
 <div class="last math">
-<p><img src="../_images/math/2f52c5df9b4abb4b165f4e4a938d877d6441c2d3.svg" alt="0 &amp;= \nabla_{\theta} \int_x P_{\theta}(x) \\
+<p><img src="../_images/math/927813efe9dbea902440f6a1dda05a3bd8fd2344.svg" alt="0 &amp;= \nabla_{\theta} \int_x P_{\theta}(x) \\
 &amp;= \int_x \nabla_{\theta} P_{\theta}(x) \\
 &amp;= \int_x P_{\theta}(x) \nabla_{\theta} \log P_{\theta}(x) \\
 \therefore 0 &amp;= \underE{x \sim P_{\theta}}{\nabla_{\theta} \log P_{\theta}(x)}."/></p>
@@ -479,16 +479,16 @@
 <h2><a class="toc-backref" href="#id10">Don&#8217;t Let the Past Distract You</a><a class="headerlink" href="#don-t-let-the-past-distract-you" title="Permalink to this headline">¶</a></h2>
 <p>Examine our most recent expression for the policy gradient:</p>
 <div class="math">
-<p><img src="../_images/math/777ef86f94711dca46888226a5f5dd9ee40811db.svg" alt="\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) R(\tau)}."/></p>
-</div><p>Taking a step with this gradient pushes up the log-probabilities of each action in proportion to <img class="math" src="../_images/math/27905cd8b349a89eec129f7e3ac3d3ac4c82e501.svg" alt="R(\tau)"/>, the sum of <em>all rewards ever obtained</em>. But this doesn&#8217;t make much sense.</p>
+<p><img src="../_images/math/db4e93dd34fc43517d16f6485de11576b623568f.svg" alt="\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) R(\tau)}."/></p>
+</div><p>Taking a step with this gradient pushes up the log-probabilities of each action in proportion to <img class="math" src="../_images/math/a4cfe11c3e8bb64a3fbcadd1e90e64d7488ab724.svg" alt="R(\tau)"/>, the sum of <em>all rewards ever obtained</em>. But this doesn&#8217;t make much sense.</p>
 <p>Agents should really only reinforce actions on the basis of their <em>consequences</em>. Rewards obtained before taking an action have no bearing on how good that action was: only rewards that come <em>after</em>.</p>
 <p>It turns out that this intuition shows up in the math, and we can show that the policy gradient can also be expressed by</p>
 <div class="math">
-<p><img src="../_images/math/9926209f608ff0134af57f8b5fa4ecf0ea515480.svg" alt="\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) \sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1})}."/></p>
+<p><img src="../_images/math/bc00937d44c39b859c34dccac593a17d842030a5.svg" alt="\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) \sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1})}."/></p>
 </div><p>In this form, actions are only reinforced based on rewards obtained after they are taken.</p>
 <p>We&#8217;ll call this form the &#8220;reward-to-go policy gradient,&#8221; because the sum of rewards after a point in a trajectory,</p>
 <div class="math">
-<p><img src="../_images/math/1bccba32148775ea311d8c14933c6232e0828315.svg" alt="\hat{R}_t \doteq \sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1}),"/></p>
+<p><img src="../_images/math/b143c0effcec78fd96ac60efad452b4b9d208124.svg" alt="\hat{R}_t \doteq \sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1}),"/></p>
 </div><p>is called the <strong>reward-to-go</strong> from that point, and this policy gradient expression depends on the reward-to-go from state-action pairs.</p>
 <div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
@@ -528,57 +528,57 @@
 </div>
 <div class="section" id="baselines-in-policy-gradients">
 <h2><a class="toc-backref" href="#id12">Baselines in Policy Gradients</a><a class="headerlink" href="#baselines-in-policy-gradients" title="Permalink to this headline">¶</a></h2>
-<p>An immediate consequence of the EGLP lemma is that for any function <img class="math" src="../_images/math/39198dc626d803f8b1266d70dabb59b1ac38b6d2.svg" alt="b"/> which only depends on state,</p>
+<p>An immediate consequence of the EGLP lemma is that for any function <img class="math" src="../_images/math/1452003e378533853b68046023aab9c69631a5df.svg" alt="b"/> which only depends on state,</p>
 <div class="math">
-<p><img src="../_images/math/18738f8112fa4138e032a4be06e898543e587346.svg" alt="\underE{a_t \sim \pi_{\theta}}{\nabla_{\theta} \log \pi_{\theta}(a_t|s_t) b(s_t)} = 0."/></p>
+<p><img src="../_images/math/00b228c6d97e01293e936921a0568a35bb9ac627.svg" alt="\underE{a_t \sim \pi_{\theta}}{\nabla_{\theta} \log \pi_{\theta}(a_t|s_t) b(s_t)} = 0."/></p>
 </div><p>This allows us to add or subtract any number of terms like this from our expression for the policy gradient, without changing it in expectation:</p>
 <div class="math">
-<p><img src="../_images/math/a68f53bd1391212d17d426dafeb71a39c10c9189.svg" alt="\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) \left(\sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1}) - b(s_t)\right)}."/></p>
-</div><p>Any function <img class="math" src="../_images/math/39198dc626d803f8b1266d70dabb59b1ac38b6d2.svg" alt="b"/> used in this way is called a <strong>baseline</strong>.</p>
-<p>The most common choice of baseline is the <a class="reference external" href="../spinningup/rl_intro.html#value-functions">on-policy value function</a> <img class="math" src="../_images/math/d1a28691e5690a9f6b7bce161b03bd1fc8eadbd8.svg" alt="V^{\pi}(s_t)"/>. Recall that this is the average return an agent gets if it starts in state <img class="math" src="../_images/math/8b415ee5fdf45796473d9a05615664c67e20af3d.svg" alt="s_t"/> and then acts according to policy <img class="math" src="../_images/math/b8a498bfdeca84b973d6222e08a6d04321d65dc3.svg" alt="\pi"/> for the rest of its life.</p>
-<p>Empirically, the choice <img class="math" src="../_images/math/2221a29de2953ebb8930423425ed4d0feea27b25.svg" alt="b(s_t) = V^{\pi}(s_t)"/> has the desirable effect of reducing variance in the sample estimate for the policy gradient. This results in faster and more stable policy learning. It is also appealing from a conceptual angle: it encodes the intuition that if an agent gets what it expected, it should &#8220;feel&#8221; neutral about it.</p>
+<p><img src="../_images/math/a807b26c443ae16461c3ff67f3bd0d112b15b39f.svg" alt="\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) \left(\sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1}) - b(s_t)\right)}."/></p>
+</div><p>Any function <img class="math" src="../_images/math/1452003e378533853b68046023aab9c69631a5df.svg" alt="b"/> used in this way is called a <strong>baseline</strong>.</p>
+<p>The most common choice of baseline is the <a class="reference external" href="../spinningup/rl_intro.html#value-functions">on-policy value function</a> <img class="math" src="../_images/math/05786e13eeb0334b96ea03d93c89899d7ec20e31.svg" alt="V^{\pi}(s_t)"/>. Recall that this is the average return an agent gets if it starts in state <img class="math" src="../_images/math/c59b1a38d2b4e73e2cf513f8af52474024ec9950.svg" alt="s_t"/> and then acts according to policy <img class="math" src="../_images/math/6abd2b6bd2a10c499ace309d93cbfc9a48fbb708.svg" alt="\pi"/> for the rest of its life.</p>
+<p>Empirically, the choice <img class="math" src="../_images/math/4f7b9543e693d5e392d15ab8ceb5b36492749bf5.svg" alt="b(s_t) = V^{\pi}(s_t)"/> has the desirable effect of reducing variance in the sample estimate for the policy gradient. This results in faster and more stable policy learning. It is also appealing from a conceptual angle: it encodes the intuition that if an agent gets what it expected, it should &#8220;feel&#8221; neutral about it.</p>
 <div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
-<p>In practice, <img class="math" src="../_images/math/d1a28691e5690a9f6b7bce161b03bd1fc8eadbd8.svg" alt="V^{\pi}(s_t)"/> cannot be computed exactly, so it has to be approximated. This is usually done with a neural network, <img class="math" src="../_images/math/a133925364fc62de281e792d4a41fbc9c360967f.svg" alt="V_{\phi}(s_t)"/>, which is updated concurrently with the policy (so that the value network always approximates the value function of the most recent policy).</p>
-<p>The simplest method for learning <img class="math" src="../_images/math/662f11bc664c365835c552ff09b43fc4bc88f721.svg" alt="V_{\phi}"/>, used in most implementations of policy optimization algorithms (including VPG, TRPO, PPO, and A2C), is to minimize a mean-squared-error objective:</p>
+<p>In practice, <img class="math" src="../_images/math/05786e13eeb0334b96ea03d93c89899d7ec20e31.svg" alt="V^{\pi}(s_t)"/> cannot be computed exactly, so it has to be approximated. This is usually done with a neural network, <img class="math" src="../_images/math/1223cf0252ba3b06260621bf477ad335782a444b.svg" alt="V_{\phi}(s_t)"/>, which is updated concurrently with the policy (so that the value network always approximates the value function of the most recent policy).</p>
+<p>The simplest method for learning <img class="math" src="../_images/math/40daa061b2dea2b4a8afb1fb8f458a2ecc3ae047.svg" alt="V_{\phi}"/>, used in most implementations of policy optimization algorithms (including VPG, TRPO, PPO, and A2C), is to minimize a mean-squared-error objective:</p>
 <div class="math">
-<p><img src="../_images/math/e72767ea0e9d0fba2e5ab7af60aad01af4cdf0e0.svg" alt="\phi_k = \arg \min_{\phi} \underE{s_t, \hat{R}_t \sim \pi_k}{\left( V_{\phi}(s_t) - \hat{R}_t \right)^2},"/></p>
+<p><img src="../_images/math/c0efa008316fdb67b8a2ad3f05eba8aca2c00960.svg" alt="\phi_k = \arg \min_{\phi} \underE{s_t, \hat{R}_t \sim \pi_k}{\left( V_{\phi}(s_t) - \hat{R}_t \right)^2},"/></p>
 </div><div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p class="last">where <img class="math" src="../_images/math/9a2555f9b7533949f38b997c919bf86862ec0fae.svg" alt="\pi_k"/> is the policy at epoch <img class="math" src="../_images/math/ce641c655353b854e8d2ae836c6f97df9ace9984.svg" alt="k"/>. This is done with one or more steps of gradient descent, starting from the previous value parameters <img class="math" src="../_images/math/7681f537ec31c9bc1c811dd0f33f46aa9aaabebf.svg" alt="\phi_{k-1}"/>.</p>
+<p class="last">where <img class="math" src="../_images/math/3fe55f876a73c79ab71d1de36a863d3b40490b41.svg" alt="\pi_k"/> is the policy at epoch <img class="math" src="../_images/math/bfe6a51195498da9264816acf33086b130cbed8e.svg" alt="k"/>. This is done with one or more steps of gradient descent, starting from the previous value parameters <img class="math" src="../_images/math/9e91bffbd8f07af058ba604873ab5e069f10cd68.svg" alt="\phi_{k-1}"/>.</p>
 </div>
 </div>
 <div class="section" id="other-forms-of-the-policy-gradient">
 <h2><a class="toc-backref" href="#id13">Other Forms of the Policy Gradient</a><a class="headerlink" href="#other-forms-of-the-policy-gradient" title="Permalink to this headline">¶</a></h2>
 <p>What we have seen so far is that the policy gradient has the general form</p>
 <div class="math">
-<p><img src="../_images/math/1485ca5baaa09ed99fbcc54ba600e36852afd36c.svg" alt="\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) \Phi_t},"/></p>
-</div><p>where <img class="math" src="../_images/math/aaba82ffd0d44c6c1a14a125c83424b1a63ca7fb.svg" alt="\Phi_t"/> could be any of</p>
+<p><img src="../_images/math/6f190b2ff8fbb7f5dab01e019a9ef9289ac0ed6b.svg" alt="\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) \Phi_t},"/></p>
+</div><p>where <img class="math" src="../_images/math/2e5033de799caaef797a0231b2b9ad9d16d2b4c4.svg" alt="\Phi_t"/> could be any of</p>
 <div class="math">
-<p><img src="../_images/math/d728e9e6107056e4411a184d1a57f1510f79fa7d.svg" alt="\Phi_t &amp;= R(\tau),"/></p>
+<p><img src="../_images/math/ca5ab4da3d29eeeebfa804439d6bfbe2ba6f04f1.svg" alt="\Phi_t &amp;= R(\tau),"/></p>
 </div><p>or</p>
 <div class="math">
-<p><img src="../_images/math/c9dd451211b3afb0bc9dc0c19d477b23e931598a.svg" alt="\Phi_t &amp;= \sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1}),"/></p>
+<p><img src="../_images/math/68c14bf429b50c13c08d2e1f3607d6c8b4b4724d.svg" alt="\Phi_t &amp;= \sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1}),"/></p>
 </div><p>or</p>
 <div class="math">
-<p><img src="../_images/math/92ea8688d614735fd59cf9ecd9a36672ab5d7def.svg" alt="\Phi_t &amp;= \sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1}) - b(s_t)."/></p>
-</div><p>All of these choices lead to the same expected value for the policy gradient, despite having different variances. It turns out that there are two more valid choices of weights <img class="math" src="../_images/math/aaba82ffd0d44c6c1a14a125c83424b1a63ca7fb.svg" alt="\Phi_t"/> which are important to know.</p>
+<p><img src="../_images/math/7a40a2fd48557aca06446b0fbaccfd0923df7e18.svg" alt="\Phi_t &amp;= \sum_{t'=t}^T R(s_{t'}, a_{t'}, s_{t'+1}) - b(s_t)."/></p>
+</div><p>All of these choices lead to the same expected value for the policy gradient, despite having different variances. It turns out that there are two more valid choices of weights <img class="math" src="../_images/math/2e5033de799caaef797a0231b2b9ad9d16d2b4c4.svg" alt="\Phi_t"/> which are important to know.</p>
 <p><strong>1. On-Policy Action-Value Function.</strong> The choice</p>
 <div class="math">
-<p><img src="../_images/math/bf6f5680c7568790c744baf59bbc27831603f200.svg" alt="\Phi_t = Q^{\pi_{\theta}}(s_t, a_t)"/></p>
+<p><img src="../_images/math/101c43fe9d2916247d4161cc266f9efe1e4f3d4a.svg" alt="\Phi_t = Q^{\pi_{\theta}}(s_t, a_t)"/></p>
 </div><p>is also valid. See <a class="reference external" href="../spinningup/extra_pg_proof2.html">this page</a> for an (optional) proof of this claim.</p>
-<p><strong>2. The Advantage Function.</strong> Recall that the <a class="reference external" href="../spinningup/rl_intro.html#advantage-functions">advantage of an action</a>, defined by <img class="math" src="../_images/math/b01b7882de374f84fd2686fab209b641d8e7277b.svg" alt="A^{\pi}(s_t,a_t) = Q^{\pi}(s_t,a_t) - V^{\pi}(s_t)"/>,  describes how much better or worse it is than other actions on average (relative to the current policy). This choice,</p>
+<p><strong>2. The Advantage Function.</strong> Recall that the <a class="reference external" href="../spinningup/rl_intro.html#advantage-functions">advantage of an action</a>, defined by <img class="math" src="../_images/math/3d2945633ac9303f60c55444835cb9b10f318766.svg" alt="A^{\pi}(s_t,a_t) = Q^{\pi}(s_t,a_t) - V^{\pi}(s_t)"/>,  describes how much better or worse it is than other actions on average (relative to the current policy). This choice,</p>
 <div class="math">
-<p><img src="../_images/math/06e42f4a5a133c3a56d70aaa098c23c3f0a37df2.svg" alt="\Phi_t = A^{\pi_{\theta}}(s_t, a_t)"/></p>
-</div><p>is also valid. The proof is that it&#8217;s equivalent to using <img class="math" src="../_images/math/2e609266200dc3d0c82e592e1be4755f6e3c564c.svg" alt="\Phi_t = Q^{\pi_{\theta}}(s_t, a_t)"/> and then using a value function baseline, which we are always free to do.</p>
+<p><img src="../_images/math/e69622629adac3cd2c804231c72cdd5ab9d2ef36.svg" alt="\Phi_t = A^{\pi_{\theta}}(s_t, a_t)"/></p>
+</div><p>is also valid. The proof is that it&#8217;s equivalent to using <img class="math" src="../_images/math/99c23e97826a7cc756c851a863ccbddf19cea5fb.svg" alt="\Phi_t = Q^{\pi_{\theta}}(s_t, a_t)"/> and then using a value function baseline, which we are always free to do.</p>
 <div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
 <p class="last">The formulation of policy gradients with advantage functions is extremely common, and there are many different ways of estimating the advantage function used by different algorithms.</p>
 </div>
 <div class="admonition-you-should-know admonition">
 <p class="first admonition-title">You Should Know</p>
-<p>For a more detailed treatment of this topic, you should read the paper on <a class="reference external" href="https://arxiv.org/abs/1506.02438">Generalized Advantage Estimation</a> (GAE), which goes into depth about different choices of <img class="math" src="../_images/math/aaba82ffd0d44c6c1a14a125c83424b1a63ca7fb.svg" alt="\Phi_t"/> in the background sections.</p>
+<p>For a more detailed treatment of this topic, you should read the paper on <a class="reference external" href="https://arxiv.org/abs/1506.02438">Generalized Advantage Estimation</a> (GAE), which goes into depth about different choices of <img class="math" src="../_images/math/2e5033de799caaef797a0231b2b9ad9d16d2b4c4.svg" alt="\Phi_t"/> in the background sections.</p>
 <p class="last">That paper then goes on to describe GAE, a method for approximating the advantage function in policy optimization algorithms which enjoys widespread use. For instance, Spinning Up&#8217;s implementations of VPG, TRPO, and PPO make use of it. As a result, we strongly advise you to study it.</p>
 </div>
 </div>
@@ -608,7 +608,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, OpenAI.
+        &copy; Copyright 2018, OpenAI —— 曹真翻译.
 
     </p>
   </div>

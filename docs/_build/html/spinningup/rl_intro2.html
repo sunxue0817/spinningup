@@ -246,7 +246,7 @@
 <div class="section" id="id5">
 <h4>免模型学习中要学习什么<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
 <p>有两种用来表示和训练免模型学习强化学习算法的方式：</p>
-<p><strong>策略优化（Policy Optimization）</strong>：这个系列的方法可以表示为 <img class="math" src="../_images/math/8bc2ffb416e6b729009dac19bf9efe3c144cc2ac.svg" alt="\pi_{\theta}(a|s)"/> 。 它们直接对目标函数进行梯度下降进行优化，或者间接地，对目标函数的局部近似函数进行优化。优化基本都是基于 <strong>同策路</strong> 的，也就是说每一步更新只会用到最新的策略执行时采集到的数据。策略优化也包括学习出 <img class="math" src="../_images/math/9810155b30a8fc71eaed8c6f0f62a228c21f11ed.svg" alt="V_{\phi}(s)"/> ，作为 <img class="math" src="../_images/math/3c343749cc2f7804a670b618d03d056d7e35b5eb.svg" alt="V^{\pi}(s)"/> 的近似，从而知道如何更新策略。</p>
+<p><strong>策略优化（Policy Optimization）</strong>：这个系列的方法可以表示为 <img class="math" src="../_images/math/942a745636db4c6dc70f144df39fd02c4f2c98a6.svg" alt="\pi_{\theta}(a|s)"/> 。 它们直接对目标函数进行梯度下降进行优化，或者间接地，对目标函数的局部近似函数进行优化。优化基本都是基于 <strong>同策路</strong> 的，也就是说每一步更新只会用到最新的策略执行时采集到的数据。策略优化也包括学习出 <img class="math" src="../_images/math/04e3dd3212469f4c679250446641609d6115e420.svg" alt="V_{\phi}(s)"/> ，作为 <img class="math" src="../_images/math/e8cac649e08a2b01c72c546971fe8a2bd817075a.svg" alt="V^{\pi}(s)"/> 的近似，从而知道如何更新策略。</p>
 <p>基于策略优化的方法举例：</p>
 <ul class="simple">
 <li><a class="reference external" href="https://arxiv.org/abs/1602.01783">A2C / A3C</a>, 通过梯度下降直接最大化性能</li>
@@ -254,14 +254,14 @@
 </ul>
 <p><strong>Q-Learning</strong></p>
 <div class="math">
-<p><img src="../_images/math/c6b731255918704ea4b9dd46d1ac8a098b476a92.svg" alt="a(s) = \arg \max_a Q_{\theta}(s,a)."/></p>
+<p><img src="../_images/math/47c920dfc6d7e3e0a3ae69960a388880a0ee361b.svg" alt="a(s) = \arg \max_a Q_{\theta}(s,a)."/></p>
 </div><p>基于Q-Learning优化的方法</p>
 <ul class="simple">
 <li><a class="reference external" href="https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf">DQN</a>, 一个让深度强化学习得到发展的经典方法</li>
-<li>and <a class="reference external" href="https://arxiv.org/abs/1707.06887">C51</a>, a variant that learns a distribution over return whose expectation is <img class="math" src="../_images/math/27e0f032982b38571547cc19a81946ebdb69e1b9.svg" alt="Q^*"/>.</li>
-<li>以及 <a class="reference external" href="https://arxiv.org/abs/1707.06887">C51</a>, 学习一个关于回报的分布函数，其期望是 <img class="math" src="../_images/math/27e0f032982b38571547cc19a81946ebdb69e1b9.svg" alt="Q^*"/></li>
+<li>and <a class="reference external" href="https://arxiv.org/abs/1707.06887">C51</a>, a variant that learns a distribution over return whose expectation is <img class="math" src="../_images/math/d62537306703802cdc91716cba6a3728dc03c06e.svg" alt="Q^*"/>.</li>
+<li>以及 <a class="reference external" href="https://arxiv.org/abs/1707.06887">C51</a>, 学习一个关于回报的分布函数，其期望是 <img class="math" src="../_images/math/d62537306703802cdc91716cba6a3728dc03c06e.svg" alt="Q^*"/></li>
 </ul>
-<p><strong>策略优化和Q-Learning的比较</strong> 策略优化的主要优势是这类方法很稳定很可靠，从直觉上将，你是直接在优化你想要的东西。Q-learning方法通过训练 <img class="math" src="../_images/math/cd8d851b25e574efd2664f88ccddda3e165cb693.svg" alt="Q_{\theta}"/> 以满足自我一致，间接地优化智能体的表现。这种方法有很多失败的情况，所以相对来说没有那么稳定。<a class="footnote-reference" href="#id9" id="id8">[1]</a> 但是，Q-learning有效的时候能获得更好的采样效率，因为它们能够比策略优化更加有效地重用数据。</p>
+<p><strong>策略优化和Q-Learning的比较</strong> 策略优化的主要优势是这类方法很稳定很可靠，从直觉上将，你是直接在优化你想要的东西。Q-learning方法通过训练 <img class="math" src="../_images/math/80b5301e669df8b97c59b8575bc21a2980a17bf2.svg" alt="Q_{\theta}"/> 以满足自我一致，间接地优化智能体的表现。这种方法有很多失败的情况，所以相对来说没有那么稳定。<a class="footnote-reference" href="#id9" id="id8">[1]</a> 但是，Q-learning有效的时候能获得更好的采样效率，因为它们能够比策略优化更加有效地重用数据。</p>
 <p><strong>策略优化和Q-learning的融合方法</strong> 意外的是，策略优化和Q-learning并不是不能兼容的（在某些场景下，它们两者是 <a class="reference external" href="https://arxiv.org/abs/1704.06440">等价的</a> ），也有很多算法介于两种极端之间。这个范围之类的算法能够很好的平衡好两者之间的优点和缺点，比如说：</p>
 <ul class="simple">
 <li><a class="reference external" href="https://arxiv.org/abs/1509.02971">DDPG</a> ，同时学习确定性策略和Q-函数，并通过彼此互相提升</li>
@@ -283,8 +283,8 @@
 <ul class="simple">
 <li><a class="reference external" href="https://sites.google.com/view/mbmf">MBMF</a></li>
 </ul>
-<p><strong>Expert Iteration.</strong> A straightforward follow-on to pure planning involves using and learning an explicit representation of the policy, <img class="math" src="../_images/math/8bc2ffb416e6b729009dac19bf9efe3c144cc2ac.svg" alt="\pi_{\theta}(a|s)"/>. The agent uses a planning algorithm (like Monte Carlo Tree Search) in the model, generating candidate actions for the plan by sampling from its current policy. The planning algorithm produces an action which is better than what the policy alone would have produced, hence it is an &#8220;expert&#8221; relative to the policy. The policy is afterwards updated to produce an action more like the planning algorithm&#8217;s output.</p>
-<p><strong>专家迭代</strong> 一个基于纯计划直接前向 <img class="math" src="../_images/math/8bc2ffb416e6b729009dac19bf9efe3c144cc2ac.svg" alt="\pi_{\theta}(a|s)"/>
+<p><strong>Expert Iteration.</strong> A straightforward follow-on to pure planning involves using and learning an explicit representation of the policy, <img class="math" src="../_images/math/942a745636db4c6dc70f144df39fd02c4f2c98a6.svg" alt="\pi_{\theta}(a|s)"/>. The agent uses a planning algorithm (like Monte Carlo Tree Search) in the model, generating candidate actions for the plan by sampling from its current policy. The planning algorithm produces an action which is better than what the policy alone would have produced, hence it is an &#8220;expert&#8221; relative to the policy. The policy is afterwards updated to produce an action more like the planning algorithm&#8217;s output.</p>
+<p><strong>专家迭代</strong> 一个基于纯计划直接前向 <img class="math" src="../_images/math/942a745636db4c6dc70f144df39fd02c4f2c98a6.svg" alt="\pi_{\theta}(a|s)"/>
 * <a class="reference external" href="https://arxiv.org/abs/1705.08439">ExIt</a> 算法用这种算法训练深层神经网络来玩 Hex
 * <a class="reference external" href="https://arxiv.org/abs/1712.01815">AlphaZero</a> 是这种方法的另一个例子</p>
 <p><strong>Data Augmentation for Model-Free Methods.</strong> Use a model-free RL algorithm to train a policy or Q-function, but either 1) augment real experiences with fictitious ones in updating the agent, or 2) use <em>only</em> fictitous experience for updating the agent.
@@ -414,7 +414,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, OpenAI.
+        &copy; Copyright 2018, OpenAI —— 曹真翻译.
 
     </p>
   </div>

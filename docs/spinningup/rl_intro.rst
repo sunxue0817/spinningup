@@ -6,13 +6,13 @@
 .. contents:: 目录
     :depth: 2
 
-欢迎来到强化学习的介绍！我们希望你能了解以下内容：
+欢迎来到强化学习的介绍部分！我们希望你能了解以下内容：
 
 * 常见的符号表示
-* 高层次的讲解：关于强化学习算法究竟能做什么（我们会尽量避免 *如何做* 这个话题）
+* 高层次的理解：关于强化学习算法做什么（我们会尽量避免 *如何做* 这个话题）
 * 算法背后的核心数学知识
 
-总的来说，强化学习是关于智能体以及它们如何通过反复试错来学习的研究。它定义了通过奖励或者惩罚智能体的动作，从而使它未来更容易重复或者放弃某一动作的思想。
+总的来说，强化学习是关于智能体以及它们如何通过试错来学习的研究。它确定了通过奖励或惩罚智能体的动作从而使它未来更容易重复或者放弃某一动作的思想。
 
 强化学习能做什么
 ===============
@@ -24,7 +24,7 @@
     <video autoplay="" src="https://storage.googleapis.com/joschu-public/knocked-over-stand-up.mp4" loop="" controls="" style="display: block; margin-left: auto; margin-right: auto; margin-bottom:1.5em; width: 100%; max-width: 720px; max-height: 80vh;">
     </video>
 
-以及在现实世界中：
+以及在现实世界中的机器人：
 
 .. raw:: html
 
@@ -33,7 +33,7 @@
     </div>
     <br />
 
-强化学习因为在复杂策略游戏中有了突破而名声大噪，最著名的要数 `围棋`_ 、 `Dota`_ 、教电脑 `玩Atari游戏`_ 以及训练模拟机器人 `听从人类的指令`_ 。
+强化学习因为被用在复杂策略游戏创造出突破性的 AI 中而名声大噪，最著名的要数 `围棋`_ 、 `Dota`_ 、教电脑 `玩Atari游戏`_ 以及训练模拟机器人 `听从人类的指令`_ 。
 
 .. _`围棋`: https://deepmind.com/research/alphago/
 .. _`Dota`: https://blog.openai.com/openai-five/
@@ -49,11 +49,11 @@
     
     智能体和环境的循环作用
 
-强化学习的主要角色是 **智能体** 和 **环境** ,环境是智能体存在和互动的世界。智能体在每一步的交互中，都会获得对于所处环境状态的观察（有可能只是一部分），然后决定下一步要执行的动作。环境会因为智能体对它的动作而改变，也可能自己改变。
+强化学习的主要角色是 **智能体** 和 **环境**,环境是智能体存在和互动的世界。智能体在每一步的交互中，都会获得对于所处环境状态的观察（有可能只是一部分），然后决定下一步要执行的动作。环境会因为智能体对它的动作而改变，也可能自己改变。
 
-智能体也会从环境中感知到 **奖励** 信号，一个表明当前状态好坏的数字。智能体的目标是最大化累计奖励，也就是 **回报** 。强化学习就是智能体通过学习来完成目标的方法。
+智能体也会从环境中感知到 **奖励** 信号，一个表明当前状态好坏的数字。智能体的目标是最大化累计奖励，也就是 **回报**。强化学习就是智能体通过学习来完成目标的方法。
 
-为了便于后面的学习，我们介绍一些术语，以便了解强化学习能做什么：
+为了便于后面的学习，我们介绍一些术语：
 
 * 状态和观察(states and observations)
 * 动作空间(action spaces)
@@ -66,26 +66,26 @@
 状态和观察
 -----------------------
 
-一个 **状态** :math:`s` 是一个关于这个世界状态的完整描述。这个世界除了状态意外没有隐藏的信息。而 **观察** :math:`o` 是对于一个状态的部分描述，可能会漏掉一些信息。
+一个 **状态** :math:`s` 是一个关于这个世界状态的完整描述。这个世界除了状态以外没有别的信息。**观察** :math:`o` 是对于一个状态的部分描述，可能会漏掉一些信息。
 
-在深度强化学习中，我们一般用 `实数向量、矩阵或者更高阶的张量（tensor）`_ 表示状态和观察。比如说，视觉上的 *观察* 可以用RGB矩阵的方式表示其像素值；机器人的 *状态* 可以通过关节角度和速度来表示。
+在深度强化学习中，我们一般用 `实数向量、矩阵或者更高阶的张量（tensor）`_ 表示状态和观察。比如说，视觉上的 **观察** 可以用RGB矩阵的方式表示其像素值；机器人的 **状态** 可以通过关节角度和速度来表示。
 
-如果智能体能够对于环境的所有状态有全面的观察，我们通常说环境是被 **全面观察** 的。如果智能体只能观察到一部分，我们称之为 **部分观察**。
+如果智能体观察到环境的全部状态，我们通常说环境是被 **全面观察** 的。如果智能体只能观察到一部分，我们称之为 **部分观察**。
 
 .. admonition:: 你应该知道
 
-    强化学习有时候用这个符号 :math:`s` 代表状态 , 有些地方也会写作观察符号 :math:`o`.  尤其是：当智能体在决定采取什么动作的时候：我们会用符号表示动作是基于状态的，但实际上，动作是基于观察的，因为智能体并不知道状态（只能通过观察了解状态）。
+    强化学习有时候用这个符号 :math:`s` 代表状态 , 有些地方也会写作观察符号 :math:`o`.  尤其是，当智能体在决定采取什么动作的时候，符号上的表示按理动作是基于状态的，但实际上，动作是基于观察的，因为智能体并不能知道状态（只能通过观察了解状态）。
 
-    在我们的教程中，我们会按照标准使用符号，不过你一般能从上下文中看出来具体是什么意思。如果你对有些内容不清楚，请提出issue！我们的目的是教会大家，不是让大家混淆。
+    在我们的教程中，我们会按照标准的方式使用这些符号，不过你一般能从上下文中看出来具体表示什么。如果你觉得有些内容不够清楚，请提出issue！我们的目的是教会大家，不是让大家混淆。
 
 .. _`实数向量、矩阵或者更高阶的张量（tensor）`: https://en.wikipedia.org/wiki/Real_coordinate_space
 
 动作空间
 -------------
 
-不同的环境有不同的动作。所有有效动作的集合称之为 **动作空间**。有些环境，比如说 Atari 游戏和围棋，具有的是 **离散动作空间**，这种情况下智能体只能采取有限的动作。其他的一些环境，比如智能体在物理世界控制机器人，属于 **连续动作空间**。在连续动作空间中，动作是实数向量。
+不同的环境有不同的动作。所有有效动作的集合称之为 **动作空间**。有些环境，比如说 Atari 游戏和围棋，属于 **离散动作空间**，这种情况下智能体只能采取有限的动作。其他的一些环境，比如智能体在物理世界中控制机器人，属于 **连续动作空间**。在连续动作空间中，动作是实数向量。
 
-这种区别对于深度强化学习影响很大。有些种类的算法只能用在某一些案例上，如果用在别的地方可能需要重写大量代码。
+这种区别对于深度强化学习来说，影响深远。有些种类的算法只能直接用在某些案例上，如果需要用在别的地方，可能就需要大量重写代码。
 
 策略
 --------
@@ -102,7 +102,7 @@
 
     a_t \sim \pi(\cdot | s_t).
 
-因为策略就是智能体的大脑，所以很多时候“策略”和“智能体”这两个名词经常互换，例如：“策略的目的是最大化奖励”。
+因为策略本质上就是智能体的大脑，所以很多时候“策略”和“智能体”这两个名词经常互换，例如我们会说：“策略的目的是最大化奖励”。
 
 在深度强化学习中，我们处理的是参数化的策略，这些策略的输出，依赖于一系列计算函数，而这些函数又依赖于参数（例如神经网络的权重和误差），所以我们可以通过一些优化算法改变智能体的的行为。
 
@@ -125,15 +125,15 @@
     net = mlp(obs, hidden_dims=(64,64), activation=tf.tanh)
     actions = tf.layers.dense(net, units=act_dim, activation=None)
 
-其中， ``mlp`` 是一个给定大小和激活函数，把多个 ``密集层`` （dense layer）相互堆积在一起的函数
+其中，*mlp* 是把多个给定大小和激活函数的 *密集层* （dense layer）相互堆积在一起的函数。
 
 随机性策略
 ^^^^^^^^^^^^^^^^^^^
 
-深度强化学习中最常见的两种随机策略是 **categorical policies** 和 **diagonal Gaussian policies**. 
+深度强化学习中最常见的两种随机策略是 **绝对策略**(Categorical Policies) 和 **对角高斯策略** (Diagonal Gaussian Policies)。
 
-`Categorical`_ 策略适用于离散行动空间，而
-`Gaussian`_ 策略一般用在连续行动空间
+`确定`_ 策略适用于离散行动空间，而
+`高斯`_ 策略一般用在连续行动空间
 
 使用和训练随机策略的时候有两个重要的计算：
 
@@ -144,48 +144,49 @@
 下面我们介绍一下这两种策略
 
 
-.. admonition:: Categorical Policies
+.. admonition:: 绝对策略
 
-    A categorical policy is like a classifier over discrete actions. You build the neural network for a categorical policy the same way you would for a classifier: the input is the observation, followed by some number of layers (possibly convolutional or densely-connected, depending on the kind of input), and then you have one final linear layer that gives you logits for each action, followed by a `softmax`_ to convert the logits into probabilities. 
+    确定策略就像是一个离散空间的分类器(classifier)。对于分类器和确定策略来说，建立神经网络的方式一模一样：输入是观察，接着是一些卷积、全连接层之类的，至于具体是哪些取决于输入的类型，最后一个线性层给出每个行动的 log 数值(logits)，后面跟一个 `softmax`_ 层把 log 数值转换为可能性。   
 
-    **采样** 给定每个行动的可能性，TensorFlow之类的框架有内置采样工。具体可查阅
-`tf.distributions.Categorical`_  或 `tf.multinomial`_ 的文档。
+    **采样** 给定每个行动的可能性，TensorFlow之类的框架有内置采样工。具体可查阅 `tf.distributions.Categorical`_  或 `tf.multinomial`_ 的文档。
 
-    **Log-Likelihood.** Denote the last layer of probabilities as :math:`P_{\theta}(s)`. It is a vector with however many entries as there are actions, so we can treat the actions as indices for the vector. The log likelihood for an action :math:`a` can then be obtained by indexing into the vector:
+    **对数似然** ：表示最后一层的可能性 :math:`P_{\theta}(s)`。它是一个有很多值的向量，我们可以把行动当做向量的索引。所以向量的对数似然值 :math:`a` 可以通过这样得到：
+
 
     .. math::
 
         \log \pi_{\theta}(a|s) = \log \left[P_{\theta}(s)\right]_a.
 
 
-.. admonition:: Diagonal Gaussian Policies
+.. admonition:: 对角高斯策略
 
-    A multivariate Gaussian distribution (or multivariate normal distribution, if you prefer) is described by a mean vector, :math:`\mu`, and a covariance matrix, :math:`\Sigma`. A diagonal Gaussian distribution is a special case where the covariance matrix only has entries on the diagonal. As a result, we can represent it by a vector.
+    多元高斯分布（或者多元正态分布），可以用一个向量 :math:`\mu` 和协方差 :math:`\Sigma` 来描述。对角高斯分布就是协方差矩阵只有对角线上有值的特殊情况，所以我们可以用一个向量来表示它。
 
-    A diagonal Gaussian policy always has a neural network that maps from observations to mean actions, :math:`\mu_{\theta}(s)`. There are two different ways that the covariance matrix is typically represented.
+    对角高斯策略总会有一个神经网络，表示观察到行动的映射。其中有两种协方差矩阵的经典表示方式：
 
-    **The first way:** There is a single vector of log standard deviations, :math:`\log \sigma`, which is **not** a function of state: the :math:`\log \sigma` are standalone parameters. (你应该知道: our implementations of VPG, TRPO, and PPO do it this way.)
+    **第一种** ： 有一个单独的关于对数标准差的向量： :math:`\log \sigma`，它不是关于状态的函数，:math:`\log \sigma` 而是单独的参数（我们这个项目里，VPG, TRPO 和 PPO 都是用这种方式实现的）。
 
-    **The second way:** There is a neural network that maps from states to log standard deviations, :math:`\log \sigma_{\theta}(s)`. It may optionally share some layers with the mean network.
+    **第二种** ：有一个神经网络，从状态映射到对数标准差 :math:`\log \sigma_{\theta}(s)`。这种方式可能会均值网络共享某些层的参数。
 
-    Note that in both cases we output log standard deviations instead of standard deviations directly. This is because log stds are free to take on any values in :math:`(-\infty, \infty)`, while stds must be nonnegative. It's easier to train parameters if you don't have to enforce those kinds of constraints. The standard deviations can be obtained immediately from the log standard deviations by exponentiating them, so we do not lose anything by representing them this way.
+    要注意这两种情况下我们都没有直接计算标准差而是对数标准差。这是因为对数标准差能够接受 :math:`(-\infty, \infty)` 的任何值，而标准差必须要求参数非负。要知道，限制条件越少，训练就越简单。而标准差可以通过取幂快速从对数标准差中计算得到，所以这种表示方法也不会丢失信息。
 
-    **Sampling.** Given the mean action :math:`\mu_{\theta}(s)` and standard deviation :math:`\sigma_{\theta}(s)`, and a vector :math:`z` of noise from a spherical Gaussian (:math:`z \sim \mathcal{N}(0, I)`), an action sample can be computed with
+    **采样** ：给定平均行动  :math:`\mu_{\theta}(s)` 和 标准差 :math:`\sigma_{\theta}(s)`，以及一个服从球形高斯分布的噪声向量 :math:`z`，行为的样本可以这样计算：
 
     .. math::
 
         a = \mu_{\theta}(s) + \sigma_{\theta}(s) \odot z,
 
-    where :math:`\odot` denotes the elementwise product of two vectors. Standard frameworks have built-in ways to compute the noise vectors, such as `tf.random_normal`_. Alternatively, you can just provide the mean and standard deviation directly to a `tf.distributions.Normal`_ object and use that to sample.
+    这里 :math:`\odot` 表示两个向量按元素乘。标准框架都有内置噪声向量实现，例如  `tf.random_normal`_ 。你也可以直接用 `tf.distributions.Normal`_ 以均值和标准差的方式采样。
 
-    **Log-Likelihood.** The log-likelihood of a :math:`k` -dimensional action :math:`a`, for a diagonal Gaussian with mean :math:`\mu = \mu_{\theta}(s)` and standard deviation :math:`\sigma = \sigma_{\theta}(s)`, is given by
+    **对数似然** 一个 k 维行动 :math:`a` 基于均值为 :math:`\mu = \mu_{\theta}(s)`，标准差为 :math:`\sigma = \sigma_{\theta}(s)` 的对角高斯的对数似然：
+
 
     .. math::
 
         \log \pi_{\theta}(a|s) = -\frac{1}{2}\left(\sum_{i=1}^k \left(\frac{(a_i - \mu_i)^2}{\sigma_i^2} + 2 \log \sigma_i \right) + k \log 2\pi \right).
 
-.. _`Categorical`: https://en.wikipedia.org/wiki/Categorical_distribution
-.. _`Gaussian`: https://en.wikipedia.org/wiki/Multivariate_normal_distribution
+.. _`确定`: https://en.wikipedia.org/wiki/Categorical_distribution
+.. _`高斯`: https://en.wikipedia.org/wiki/Multivariate_normal_distribution
 .. _`softmax`: https://developers.google.com/machine-learning/crash-course/multi-class-neural-networks/softmax
 .. _`tf.distributions.Categorical`: https://www.tensorflow.org/api_docs/python/tf/distributions/Categorical
 .. _`tf.multinomial`: https://www.tensorflow.org/api_docs/python/tf/multinomial
@@ -201,12 +202,13 @@
 
     \tau = (s_0, a_0, s_1, a_1, ...).
 
-第一个状态 :math:`s_0`，是从 **开始状态分布** 中随机采样的，有时候表示为 :math:`\rho_0`:
+第一个状态 :math:`s_0`，是从 **开始状态分布** 中随机采样的，有时候表示为 :math:`\rho_0` :
+
 .. math::
 
     s_0 \sim \rho_0(\cdot).
 
-转态转换（从某一状态时间 :math:`t`, :math:`s_t`到另一状态时间 :math:`t+1`, :math:`s_{t+1}` 会发生什么），是由环境的自然法则确定的，并且只依赖于最近的行动 :math:`a_t`。它们可以是确定性的：
+转态转换（从某一状态时间 :math:`t` , :math:`s_t` 到另一状态时间 :math:`t+1` , :math:`s_{t+1}` 会发生什么），是由环境的自然法则确定的，并且只依赖于最近的行动 :math:`a_t`。它们可以是确定性的：
 
 .. math::
 
@@ -225,48 +227,47 @@
     行动轨迹常常也被称作 **episodes** 或者 **rollouts**。
 
 
-奖励和返回
+奖励和回报
 -----------------
 
-奖励函数在强化学习中非常重要。它依赖于这个世界的状态，已经做出的行动，以及世界下一步的行动。
+强化学习中，奖励函数 :math:`R` 非常重要。它由当前状态、已经执行的行动和下一步的状态共同决定。
 
 .. math::
 
     r_t = R(s_t, a_t, s_{t+1})
 
-有时候这个公式会被改成只依赖于当前的状态 :math:`r_t = R(s_t)`，或者状态和行动对 :math:`r_t = R(s_t,a_t)`。
+有时候这个公式会被改成只依赖当前的状态 :math:`r_t = R(s_t)`，或者状态行动对 :math:`r_t = R(s_t,a_t)`。
 
-智能体的目标是最大化行动轨迹的累计奖励，这意味着很多事情。我们会把所有的情况表示为 :math:`R(\tau)`，要么可以很清楚的从上下文看出来，要么就不重要。（因为相同的方程式适用于所有情况。）
+智能体的目标是最大化行动轨迹的累计奖励，这意味着很多事情。我们会把所有的情况表示为 :math:`R(\tau)`，至于具体表示什么，要么可以很清楚的从上下文看出来，要么并不重要。（因为相同的方程式适用于所有情况。）
 
-**有限无衰减收益**，指的是在一个固定窗口步数内获得的累计奖励：
+**无衰减收益**，指的是在一个固定窗口步数内获得的累计奖励：
 
 .. math::
 
     R(\tau) = \sum_{t=0}^T r_t.
 
-另一种叫做 **无限衰减收益**，指的是智能体获得的全部奖励之和，但是奖励会因为获得的时间不同而打折（乘上一个系数）。这个公式包含一个衰减率 :math:`\gamma \in (0,1)`:
+另一种叫做 **衰减收益**，指的是智能体获得的全部奖励之和，但是奖励会因为获得的时间不同而衰减。这个公式包含衰减率 :math:`\gamma \in (0,1)`:
 
 .. math::
 
     R(\tau) = \sum_{t=0}^{\infty} \gamma^t r_t.
 
-这里为什么要加上一个衰减率呢？为什么不直接把所有的奖励加在一起？可以从两个角度来解释： 直观上讲，现在的奖励比外来的奖励要好，所以未来的奖励会打折；数学角度上，无限多个奖励的和很可能 `不收敛`_ ，有了这个衰减率和适当的约束条件，数值就会收敛。
+这里为什么要加上一个衰减率呢？为什么不直接把所有的奖励加在一起？可以从两个角度来解释： 直观上讲，现在的奖励比外来的奖励要好，所以未来的奖励会衰减；数学角度上，无限多个奖励的和很可能 `不收敛`_ ，有了衰减率和适当的约束条件，数值才会收敛。
 
 .. admonition:: 你应该知道
 
-    尽管这两种收益的公式看起来差距很明显，但在深度强化学习中我们经常会混用。比如说，我们经常会用算法优化无折扣的收益，但是用衰减率估算 **值函数**。    
+    这两个公式看起来差距很大，事实上我们经常会混用。比如说，我们经常会用算法优化无衰减的回报，但是用衰减率估算 **值函数**。    
 
 .. _`不收敛`: https://en.wikipedia.org/wiki/Convergent_series
 
 强化学习问题
 --------------
 
-**expected return** when the agent acts according to it.
-无论选择哪种方式衡量收益（有限无折扣或无限折扣），无论选择哪种策略，强化学习的目标都是选择一种策略获得智能体的最大化 **预期收益**。
+无论选择哪种方式衡量收益（无衰减收益或衰减收益），无论选择哪种策略，强化学习的目标都是选择一种策略从而最大化 **预期收益**。
 
-讨论预期收益之前，我们先探探行动轨迹的可能性分布。
+讨论预期收益之前，我们先讨论下行动轨迹的可能性分布。
 
-我们假设环境转换和策略都是随机的。这种情况下， :math:`T` -步 行动轨迹是：
+我们假设环境转换和策略都是随机的。这种情况下， :math:`T` 步 行动轨迹是：
 
 .. math::
 
@@ -284,34 +285,35 @@
 
     \pi^* = \arg \max_{\pi} J(\pi),
 
- :math:`\pi^*` 是 **最优策略**
+
+:math:`\pi^*` 是 **最优策略**
 
 值函数
 ---------------
 
-知道一个状态的值或者状态行动对(state-action pair)很有用。这里的值指的是，如果你从某一个状态或者状态行动对开始，一直按照某个策略运行下去最终获得的期望回报。 **值函数** 几乎被用在每一个强化学习的方法中。
+知道一个状态的 **值** 或者状态行动对(state-action pair)很有用。这里的值指的是，如果你从某一个状态或者状态行动对开始，一直按照某个策略运行下去最终获得的期望回报。几乎是所有的强化学习方法，都在用不同的形式使用着值函数。
 
-这里介绍四种函数：
+这里介绍四种主要函数：
 
-1.同策略值函数： :math:`V^{\pi}(s)`，从某一个状态 :math:`s` 开始，之后每一步都按照策略 :math:`\pi` 执行
+1. **同策略值函数** ： :math:`V^{\pi}(s)`，从某一个状态 :math:`s` 开始，之后每一步行动都按照策略 :math:`\pi` 执行
     .. math::
         
         V^{\pi}(s) = \underE{\tau \sim \pi}{R(\tau)\left| s_0 = s\right.}
 
-2.同策略行动-值函数： :math:`Q^{\pi}(s,a)`,从某一个状态 :math:`s` 开始，先随便执行一个行动 :math:`a` （有可能不是按照策略走的），之后每一步都按照固定的策略执行 :math:`\pi`
+2. **同策略行动-值函数** ： :math:`Q^{\pi}(s,a)`,从某一个状态 :math:`s` 开始，先随便执行一个行动 :math:`a` （有可能不是按照策略走的），之后每一步都按照固定的策略执行 :math:`\pi`
 
     .. math::
         
         Q^{\pi}(s,a) = \underE{\tau \sim \pi}{R(\tau)\left| s_0 = s, a_0 = a\right.}
 
 
-3. 最优值函数： :math:`V^*(s)`，从某一个状态 :math:`s` 开始，之后每一步走执行 *最优策略* 策略 :math:`\pi`
+3. **最优值函数**： :math:`V^*(s)`，从某一个状态 :math:`s` 开始，之后每一步都按照 *最优策略*  :math:`\pi` 执行
 
     .. math::
 
         V^*(s) = \max_{\pi} \underE{\tau \sim \pi}{R(\tau)\left| s_0 = s\right.}
 
-4.  最优行动-值函数： :math:`Q^*(s,a)` ，从某一个状态 :math:`s` 开始，先随便执行一个行动 :math:`a` （有可能不是按照策略走的），之后每一步都按照 *最优策略* 执行 :math:`\pi`
+4.  **最优行动-值函数** ： :math:`Q^*(s,a)` ，从某一个状态 :math:`s` 开始，先随便执行一个行动 :math:`a` （有可能不是按照策略走的），之后每一步都按照 *最优策略* 执行 :math:`\pi`   
 
     .. math::
 
@@ -319,7 +321,7 @@
 
 .. admonition:: 你应该知道
 
-    当我们讨论值函数的时候，如果我们没有特指依赖时间，那就意味着 **无限折扣收益**。 有限无折扣收益需要传入时间作为参数，你知道为什么吗？ 提示：时间到了会发生什么？
+    当我们讨论值函数的时候，如果我们没有提到时间依赖问题，那就意味着 **折扣收益**。 无衰减收益需要传入时间作为参数，你知道为什么吗？ 提示：时间到了会发生什么？
 
 .. admonition:: 你应该知道
 
@@ -340,9 +342,9 @@
 最优Q函数和最优行动
 ---------------------------------------------
 
-最优行动-值函数 :math:`Q^*(s,a)` 和被最优策略选中的行动有重要的联系。从定义上讲， :math:`Q^*(s,a)` 指的是从一个状态 :math:`s`开始，任意执行一个行动 :math:`a`，然后一直按照最优策略执行下去所获得的回报。 
+最优行动-值函数 :math:`Q^*(s,a)` 和被最优策略选中的行动有重要的联系。从定义上讲， :math:`Q^*(s,a)` 指的是从一个状态 :math:`s` 开始，任意执行一个行动 :math:`a` ，然后一直按照最优策略执行下去所获得的回报。 
 
-最优策略 :math:`s`会选择从状态 :math:`s`开始选择能够最大化期望回报的行动。所以如果我们有了 :math:`Q^*`，就可以通过下面的公式直接获得最优行动： :math:`a^*(s)`：
+最优策略 :math:`s` 会选择从状态 :math:`s` 开始选择能够最大化期望回报的行动。所以如果我们有了 :math:`Q^*` ，就可以通过下面的公式直接获得最优行动： :math:`a^*(s)` ：
 
 .. math::
 
@@ -357,7 +359,7 @@
 
     起始点的值等于当前点预期值和下一个点的值之和。
     
-通策略值函数的贝尔曼方程：
+同策略值函数的贝尔曼方程：
 
 .. math::
     :nowrap:
@@ -367,7 +369,7 @@
     Q^{\pi}(s,a) &= \underE{s'\sim P}{r(s,a) + \gamma \underE{a'\sim \pi}{Q^{\pi}(s',a')}},
     \end{align*}
 
-:math:`s' \sim P` 是 :math:`s' \sim P(\cdot |s,a)` 的简写, 表明下一个状态 :math:`s'` 是按照转换规则从环境中抽样得到的; :math:`a \sim \pi` 是 :math:`a \sim \pi(\cdot|s)` 的简写; and :math:`a' \sim \pi`是 :math:`a' \sim \pi(\cdot|s')` 的简写. 
+:math:`s' \sim P` 是 :math:`s' \sim P(\cdot |s,a)` 的简写, 表明下一个状态 :math:`s'` 是按照转换规则从环境中抽样得到的; :math:`a \sim \pi` 是 :math:`a \sim \pi(\cdot|s)` 的简写; and :math:`a' \sim \pi` 是 :math:`a' \sim \pi(\cdot|s')` 的简写. 
 
 最优值函数的贝尔曼方程是：
 
@@ -379,7 +381,7 @@
     Q^*(s,a) &= \underE{s'\sim P}{r(s,a) + \gamma \max_{a'} Q^*(s',a')}.
     \end{align*}
 
-同策略值函数和最优值函数的贝尔曼方程最大的区别是有无 :math:`\max` 。这表明智能体在选择下一步行动时，为了做出最优行动，他必须选择能获得最大值的行动。
+同策略值函数和最优值函数的贝尔曼方程最大的区别是是否在行动中去 :math:`\max` 。这表明智能体在选择下一步行动时，为了做出最优行动，他必须选择能获得最大值的行动。
 
 .. admonition:: 你应该知道
 
@@ -388,9 +390,9 @@
 优势函数（Advantage Functions）
 -------------------
 
-强化学习中，有些时候我们不需要描述一个行动的绝对好坏，而只需要知道它相对于平均水平的优势。也就是说，我们只想知道一个行动的相对 **优势** 。这个概念就被称为优势函数。
+强化学习中，有些时候我们不需要描述一个行动的绝对好坏，而只需要知道它相对于平均水平的优势。也就是说，我们只想知道一个行动的相对 **优势** 。这就是优势函数的概念。
 
-一个服从策略 :math:`\pi`的优势函数，描述的是它在状态 :math:`s`下采取行为 :math:`a`比随机选择一个行为好多少（假设之后一直服从策略 :math:`\pi` ）。数学角度上，优势函数的定义为：
+一个服从策略 :math:`\pi` 的优势函数，描述的是它在状态 :math:`s` 下采取行为 :math:`a` 比随机选择一个行为好多少（假设之后一直服从策略 :math:`\pi`  ）。数学角度上，优势函数的定义为：
 
 .. math::
 
@@ -398,18 +400,20 @@
 
 .. admonition:: 你应该知道
 
-    我们之后会继续谈论这部分，优势函数对于策略梯度方法来说非常重要。
+    我们之后会继续谈论优势函数，它对于策略梯度方法非常重要。
 
 数学模型（可选）
 ====================
 
-我们已经非正式地讨论了智能体的环境，但是如果你深入研究，可能会发现这样的标准数学形式：**马尔科夫决策过程** (Markov Decision Processes, MDPs).MDP是一个5元组 :math:`\langle S, A, R, P, \rho_0 \rangle`, 其中
+我们已经非正式地讨论了智能体的环境，但是如果你深入研究，可能会发现这样的标准数学形式：**马尔科夫决策过程** (Markov Decision Processes, MDPs)。MDP是一个5元组 :math:`\langle S, A, R, P, \rho_0 \rangle`，其中
 
 * :math:`S` 是所有有效状态的集合,
 * :math:`A` 是所有有效动作的集合,
 * :math:`R : S \times A \times S \to \mathbb{R}` 是奖励函数，其中 :math:`r_t = R(s_t, a_t, s_{t+1})`,
 * :math:`P : S \times A \to \mathcal{P}(S)` 是转态转移的规则，其中 :math:`P(s'|s,a)` 是在状态  :math:`s` 下 采取动作 :math:`a` 转移到状态 :math:`s'` 的概率。 
-* and :math:`\rho_0` is the starting state distribution.
+* :math:`\rho_0` 是开始状态的分布。
 
-.. _`Markov property`: https://en.wikipedia.org/wiki/Markov_property
+马尔科夫决策过程指的是服从 `马尔科夫性`_ 的系统： 状态转移只依赖与最近的状态和行动，而不依赖之前的历史数据。
+
+.. _`马尔科夫性`: https://en.wikipedia.org/wiki/Markov_property
 
