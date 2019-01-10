@@ -1,5 +1,5 @@
 ===================================
-Spinning Up as a Deep RL Researcher
+深度强化学习研究者的资料
 ===================================
 By Joshua Achiam, October 13th, 2018
 
@@ -10,7 +10,7 @@ By Joshua Achiam, October 13th, 2018
 If you’re an aspiring deep RL researcher, you’ve probably heard all kinds of things about deep RL by this point. You know that `it’s hard and it doesn’t always work`_. That even when you’re following a recipe, `reproducibility`_ `is a challenge`_. And that if you’re starting from scratch, `the learning curve is incredibly steep`_. It’s also the case that there are a lot of `great`_ `resources`_ `out`_ `there`_, but the material is new enough that there’s not a clear, well-charted path to mastery. The goal of this column is to help you get past the initial hurdle, and give you a clear sense of how to spin up as a deep RL researcher. In particular, this will outline a useful curriculum for increasing raw knowledge, while interleaving it with the odds and ends that lead to better research.
 
 
-The Right Background
+正确的背景
 ====================
 
 **Build up a solid mathematical background.** From probability and statistics, feel comfortable with random variables, Bayes’ theorem, chain rule of probability, expected values, standard deviations, and importance sampling. From multivariate calculus, understand gradients and (optionally, but it’ll help) Taylor series expansions.
@@ -21,7 +21,7 @@ The Right Background
 
 **Get comfortable with the main concepts and terminology in RL.** Know what states, actions, trajectories, policies, rewards, value functions, and action-value functions are. If you're unfamiliar, Spinning Up ships with `an introduction`_ to this material; it's also worth checking out the `RL-Intro`_ from the OpenAI Hackathon, or the exceptional and thorough `overview by Lilian Weng`_. Optionally, if you’re the sort of person who enjoys mathematical theory, study up on the math of `monotonic improvement theory`_ (which forms the basis for advanced policy gradient algorithms), or `classical RL algorithms`_ (which despite being superseded by deep RL algorithms, contain valuable insights that sometimes drive new research).  
 
-Learn by Doing
+动手中学习
 ==============
 
 **Write your own implementations.** You should implement as many of the core deep RL algorithms from scratch as you can, with the aim of writing the shortest correct implementation of each. This is by far the best way to develop an understanding of how they work, as well as intuitions for their specific performance characteristics. 
@@ -48,7 +48,7 @@ Learn by Doing
 
 **Keep these habits!** These habits are worth keeping beyond the stage where you’re just learning about deep RL---they will accelerate your research!
 
-Developing a Research Project
+开展一个研究项目
 =============================
 
 Once you feel reasonably comfortable with the basics in deep RL, you should start pushing on the boundaries and doing research. To get there, you'll need an idea for a project.
@@ -73,7 +73,7 @@ Problems in this frame come up when they come up---it's hard to go looking for t
 **Avoid reinventing the wheel.** When you come up with a good idea that you want to start testing, that’s great! But while you’re still in the early stages with it, do the most thorough check you can to make sure it hasn’t already been done. It can be pretty disheartening to get halfway through a project, and only then discover that there's already a paper about your idea. It's especially frustrating when the work is concurrent, which happens from time to time! But don’t let that deter you---and definitely don’t let it motivate you to plant flags with not-quite-finished research and over-claim the merits of the partial work. Do good research and finish out your projects with complete and thorough investigations, because that’s what counts, and by far what matters most in the long run.
 
 
-Doing Rigorous Research in RL
+做严谨的强化学习研究
 =============================
 
 Now you’ve come up with an idea, and you’re fairly certain it hasn’t been done. You use the skills you’ve developed to implement it and you start testing it out on standard domains. It looks like it works! But what does that mean, and how well does it have to work to be important? This is one of the hardest parts of research in deep RL. In order to validate that your proposal is a meaningful contribution, you have to rigorously prove that it actually gets a performance benefit over the strongest possible baseline algorithm---whatever currently achieves SOTA (state of the art) on your test domains. If you’ve invented a new test domain, so there’s no previous SOTA, you still need to try out whatever the most reliable algorithm in the literature is that could plausibly do well in the new test domain, and then you have to beat that. 
@@ -86,7 +86,7 @@ Now you’ve come up with an idea, and you’re fairly certain it hasn’t been 
 
 **Check each claim separately.** Another critical aspect of doing research is to run an ablation analysis. Any method you propose is likely to have several key design decisions---like architecture choices or regularization techniques, for instance---each of which could separately impact performance. The claim you'll make in your work is that those design decisions collectively help, but this is really a bundle of several claims in disguise: one for each such design element. By systematically evaluating what would happen if you were to swap them out with alternate design choices, or remove them entirely, you can figure out how to correctly attribute credit for the benefits your method confers. This lets you make each separate claim with a measure of confidence, and increases the overall strength of your work. 
 
-Closing Thoughts
+别想太多
 ================
 
 Deep RL is an exciting, fast-moving field, and we need as many people as possible to go through the open problems and make progress on them. Hopefully, you feel a bit more prepared to be a part of it after reading this! And whenever you’re ready, `let us know`_.
@@ -94,7 +94,7 @@ Deep RL is an exciting, fast-moving field, and we need as many people as possibl
 .. _`let us know`: https://jobs.lever.co/openai
 
 
-PS: Other Resources
+后记：其他资源
 ===================
 
 Consider reading through these other informative articles about growing as a researcher or engineer in this field:
@@ -103,7 +103,7 @@ Consider reading through these other informative articles about growing as a res
 
 `ML Engineering for AI Safety & Robustness: a Google Brain Engineer’s Guide to Entering the Field <https://80000hours.org/articles/ml-engineering-career-transition-guide/>`_, by Catherine Olsson and 80,000 Hours. 
 
-References
+参考
 ==========
 
 .. _`it’s hard and it doesn’t always work`: https://www.alexirpan.com/2018/02/14/rl-hard.html
