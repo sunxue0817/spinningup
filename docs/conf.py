@@ -79,7 +79,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Spinning Up'
-copyright = 'OpenAI提供教程，由曹真翻译。'
+copyright = '2018, OpenAI'
 author = 'Joshua Achiam'
 
 # The version info for the project you're documenting, acts as replacement for

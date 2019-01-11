@@ -17,14 +17,14 @@
 强化学习能做什么
 ===============
 
-基于强化学习的方法已经在很多地方取得了成功。例如，它被用来教电脑在仿真环境下控制机器人：
+基于强化学习的方法已经在很多地方取得了成功。例如，它被用来教电脑在仿真环境下控制机器人（YouTube视频）：
 
 .. raw:: html
 
     <video autoplay="" src="https://storage.googleapis.com/joschu-public/knocked-over-stand-up.mp4" loop="" controls="" style="display: block; margin-left: auto; margin-right: auto; margin-bottom:1.5em; width: 100%; max-width: 720px; max-height: 80vh;">
     </video>
 
-以及在现实世界中的机器人：
+以及在现实世界中的机器人（YouTube视频）：
 
 .. raw:: html
 
@@ -224,7 +224,7 @@
 
 .. admonition:: 你应该知道
 
-    行动轨迹常常也被称作 **episodes** 或者 **rollouts**。
+    行动轨迹常常也被称作 **回合(episodes)** 或者 **rollouts**。
 
 
 奖励和回报
