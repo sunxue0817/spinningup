@@ -7,12 +7,17 @@
 
 
 In this section, we'll discuss the mathematical foundations of policy optimization algorithms, and connect the material to sample code. We will cover three key results in the theory of **policy gradients**: 
+在这个部分，我们会讨论策略优化算法的数学基础，同时提供样例代码。我们会包括策略优化的以下三个部分
 
 * `the simplest equation`_ describing the gradient of policy performance with respect to policy parameters,
 * a rule which allows us to `drop useless terms`_ from that expression,
 * and a rule which allows us to `add useful terms`_ to that expression.
+* 最简单的等式 描述了策略表现对于策略参数的梯度
+* 一个让我们可以 舍弃无用项 的公式
+* 一个让我们可以 添加有用参数 的公式
 
 In the end, we'll tie those results together and describe the advantage-based expression for the policy gradient---the version we use in our `Vanilla Policy Gradient`_ implementation.
+最后，我们会把结果放在一起，然后描述策略梯度更有优势的版本： 我们在 `Vanilla Policy Gradient`_ 中使用的版本。
 
 .. _`the simplest equation`: ../spinningup/rl_intro3.html#deriving-the-simplest-policy-gradient
 .. _`drop useless terms`: ../spinningup/rl_intro3.html#don-t-let-the-past-distract-you
@@ -20,21 +25,27 @@ In the end, we'll tie those results together and describe the advantage-based ex
 .. _`Vanilla Policy Gradient`: ../algorithms/vpg.html
 
 Deriving the Simplest Policy Gradient
+最简单的策略梯度求导
 =====================================
 
 Here, we consider the case of a stochastic, parameterized policy, :math:`\pi_{\theta}`. We aim to maximize the expected return :math:`J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{R(\tau)}`. For the purposes of this derivation, we'll take :math:`R(\tau)` to give the `finite-horizon undiscounted return`_, but the derivation for the infinite-horizon discounted return setting is almost identical.
+我们考虑一种基于随机参数的策略： :math:`\pi_{\theta}` 。我们的目的是最小化期望回报 :math:`J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{R(\tau)}` 。为了计算导数，我们假定 :math:`R(\tau)` 属于 `无衰减回报`，但是对于衰减回报来说基本上是一样的。
 
-.. _`finite-horizon undiscounted return`: ../spinningup/rl_intro.html#reward-and-return
+
+.. _`无衰减回报`: ../spinningup/rl_intro.html#reward-and-return
 
 We would like to optimize the policy by gradient ascent, eg
+我们想要通过梯度下降来优化策略，例如
 
 .. math::
 
     \theta_{k+1} = \theta_k + \alpha \left. \nabla_{\theta} J(\pi_{\theta}) \right|_{\theta_k}.
 
 The gradient of policy performance, :math:`\nabla_{\theta} J(\pi_{\theta})`, is called the **policy gradient**, and algorithms that optimize the policy this way are called **policy gradient algorithms.** (Examples include Vanilla Policy Gradient and TRPO. PPO is often referred to as a policy gradient algorithm, though this is slightly inaccurate.)
+策略性能的梯度 :math:`\nabla_{\theta} J(\pi_{\theta})` ，通常被称为 **策略梯度** ，优化策略的算法通常被称为 **策略算法** 。（比如说 Vanilla Policy Gradient 和 TRPO。PPO 也被称为策略梯度算法，尽管这样不是很准确。）
 
 To actually use this algorithm, we need an expression for the policy gradient which we can numerically compute. This involves two steps: 1) deriving the analytical gradient of policy performance, which turns out to have the form of an expected value, and then 2) forming a sample estimate of that expected value, which can be computed with data from a finite number of agent-environment interaction steps. 
+
 
 In this subsection, we'll find the simplest form of that expression. In later subsections, we'll show how to improve on the simplest form to get the version we actually use in standard policy gradient implementations.
 

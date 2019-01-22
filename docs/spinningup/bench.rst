@@ -1,5 +1,5 @@
 ==========================================
-Benchmarks for Spinning Up Implementations
+Spinning Up 算法实现的基准
 ==========================================
 
 .. contents:: Table of Contents
