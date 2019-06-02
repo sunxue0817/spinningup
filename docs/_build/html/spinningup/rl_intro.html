@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="../_static/css/modify.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="第二部分：各种各种的强化学习算法" href="rl_intro2.html" />
+    <link rel="next" title="第二部分：强化学习算法概述" href="rl_intro2.html" />
     <link rel="prev" title="绘制结果" href="../user/plotting.html" /> 
  <script type="text/javascript">
  
@@ -99,9 +99,9 @@ var _hmt = _hmt || [];
             
               <p class="caption"><span class="caption-text">用户文档</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../user/introduction.html">介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/introduction.html">项目介绍</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user/installation.html">安装</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/algorithms.html">算法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/algorithms.html">核心算法及其实现</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user/running.html">运行试验</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user/saving_and_loading.html">试验输出</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user/plotting.html">绘制结果</a></li>
@@ -130,7 +130,7 @@ var _hmt = _hmt || [];
 <li class="toctree-l2"><a class="reference internal" href="#id20">数学模型（可选）</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="rl_intro2.html">第二部分：各种各种的强化学习算法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rl_intro2.html">第二部分：强化学习算法概述</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rl_intro3.html">第三部分：策略优化介绍</a></li>
 </ul>
 <p class="caption"><span class="caption-text">资源</span></p>
@@ -376,21 +376,21 @@ a_t &amp;\sim \pi_{\theta}(\cdot | s_t)."/></p>
 <p><img src="../_images/math/2393b6354c85e8bb305133fd08b62084ed3a64ff.svg" alt="r_t = R(s_t, a_t, s_{t+1})"/></p>
 </div><p>有时候这个公式会被改成只依赖当前的状态 <img class="math" src="../_images/math/d4fe03dd0163385f0844c31b77488f435b59fac8.svg" alt="r_t = R(s_t)"/>，或者状态行动对 <img class="math" src="../_images/math/db2f78cfcd28e97aac7e951b96e6b23759284728.svg" alt="r_t = R(s_t,a_t)"/>。</p>
 <p>智能体的目标是最大化行动轨迹的累计奖励，这意味着很多事情。我们会把所有的情况表示为 <img class="math" src="../_images/math/a4cfe11c3e8bb64a3fbcadd1e90e64d7488ab724.svg" alt="R(\tau)"/>，至于具体表示什么，要么可以很清楚的从上下文看出来，要么并不重要。（因为相同的方程式适用于所有情况。）</p>
-<p><strong>无衰减收益</strong>，指的是在一个固定窗口步数内获得的累计奖励：</p>
+<p><img class="math" src="../_images/math/c3a09339f0c7f42a4ba2b3163f5f3184319b9f4c.svg" alt="T"/> <strong>步累计奖赏</strong>，指的是在一个固定窗口步数 <img class="math" src="../_images/math/c3a09339f0c7f42a4ba2b3163f5f3184319b9f4c.svg" alt="T"/> 内获得的累计奖励：</p>
 <div class="math">
 <p><img src="../_images/math/7930a61633ed77668804165f84dfb986e97c1c0a.svg" alt="R(\tau) = \sum_{t=0}^T r_t."/></p>
-</div><p>另一种叫做 <strong>衰减收益</strong>，指的是智能体获得的全部奖励之和，但是奖励会因为获得的时间不同而衰减。这个公式包含衰减率 <img class="math" src="../_images/math/47cd85a3b6e025ebade63d4c2e89c6a6e8328ea8.svg" alt="\gamma \in (0,1)"/>:</p>
+</div><p>另一种叫做 <img class="math" src="../_images/math/17e4394e734f4f3fda4b32e70c8e9f41787197fc.svg" alt="\gamma"/> <strong>折扣奖励</strong>，指的是智能体获得的全部奖励之和，但是奖励会因为获得的时间不同而衰减。这个公式包含衰减率 <img class="math" src="../_images/math/47cd85a3b6e025ebade63d4c2e89c6a6e8328ea8.svg" alt="\gamma \in (0,1)"/>:</p>
 <div class="math">
 <p><img src="../_images/math/a0f534d5571d04c1c0d00f036b9b803b0e95e5f3.svg" alt="R(\tau) = \sum_{t=0}^{\infty} \gamma^t r_t."/></p>
 </div><p>这里为什么要加上一个衰减率呢？为什么不直接把所有的奖励加在一起？可以从两个角度来解释： 直观上讲，现在的奖励比外来的奖励要好，所以未来的奖励会衰减；数学角度上，无限多个奖励的和很可能 <a class="reference external" href="https://en.wikipedia.org/wiki/Convergent_series">不收敛</a> ，有了衰减率和适当的约束条件，数值才会收敛。</p>
 <div class="admonition- admonition">
 <p class="first admonition-title">你应该知道</p>
-<p class="last">这两个公式看起来差距很大，事实上我们经常会混用。比如说，我们经常会用算法优化无衰减的回报，但是用衰减率估算 <strong>值函数</strong>。</p>
+<p class="last">这两个公式看起来差距很大，事实上我们经常会混用。比如说，我们经常使用 <img class="math" src="../_images/math/17e4394e734f4f3fda4b32e70c8e9f41787197fc.svg" alt="\gamma"/> 折扣奖励，但是用衰减率估算 <strong>值函数</strong>。</p>
 </div>
 </div>
 <div class="section" id="id17">
 <h3>强化学习问题<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
-<p>无论选择哪种方式衡量收益（无衰减收益或衰减收益），无论选择哪种策略，强化学习的目标都是选择一种策略从而最大化 <strong>预期收益</strong>。</p>
+<p>无论选择哪种方式衡量收益（<img class="math" src="../_images/math/c3a09339f0c7f42a4ba2b3163f5f3184319b9f4c.svg" alt="T"/> 步累计奖赏或者 <img class="math" src="../_images/math/17e4394e734f4f3fda4b32e70c8e9f41787197fc.svg" alt="\gamma"/> 折扣奖励），无论选择哪种策略，强化学习的目标都是选择一种策略从而最大化 <strong>预期收益</strong>。</p>
 <p>讨论预期收益之前，我们先讨论下行动轨迹的可能性分布。</p>
 <p>我们假设环境转换和策略都是随机的。这种情况下， <img class="math" src="../_images/math/c3a09339f0c7f42a4ba2b3163f5f3184319b9f4c.svg" alt="T"/> 步 行动轨迹是：</p>
 <div class="math">
@@ -434,7 +434,7 @@ a_t &amp;\sim \pi_{\theta}(\cdot | s_t)."/></p>
 </ol>
 <div class="admonition- admonition">
 <p class="first admonition-title">你应该知道</p>
-<p class="last">当我们讨论值函数的时候，如果我们没有提到时间依赖问题，那就意味着 <strong>折扣收益</strong>。 无衰减收益需要传入时间作为参数，你知道为什么吗？ 提示：时间到了会发生什么？</p>
+<p class="last">当我们讨论值函数的时候，如果我们没有提到时间依赖问题，那就意味着 <strong>折扣累计奖赏</strong>。 无衰减收益需要传入时间作为参数，你知道为什么吗？ 提示：时间到了会发生什么？</p>
 </div>
 <div class="admonition- admonition">
 <p class="first admonition-title">你应该知道</p>
@@ -513,7 +513,7 @@ Q^*(s,a) &amp;= \underE{s'\sim P}{r(s,a) + \gamma \max_{a'} Q^*(s',a')}.
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="rl_intro2.html" class="btn btn-neutral float-right" title="第二部分：各种各种的强化学习算法" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="rl_intro2.html" class="btn btn-neutral float-right" title="第二部分：强化学习算法概述" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../user/plotting.html" class="btn btn-neutral" title="绘制结果" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

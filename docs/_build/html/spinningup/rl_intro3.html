@@ -32,7 +32,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="深度强化学习研究者的资料" href="spinningup.html" />
-    <link rel="prev" title="第二部分：各种各种的强化学习算法" href="rl_intro2.html" /> 
+    <link rel="prev" title="第二部分：强化学习算法概述" href="rl_intro2.html" /> 
  <script type="text/javascript">
  
 var _hmt = _hmt || [];
@@ -99,9 +99,9 @@ var _hmt = _hmt || [];
             
               <p class="caption"><span class="caption-text">用户文档</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../user/introduction.html">介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/introduction.html">项目介绍</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user/installation.html">安装</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../user/algorithms.html">算法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/algorithms.html">核心算法及其实现</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user/running.html">运行试验</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user/saving_and_loading.html">试验输出</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user/plotting.html">绘制结果</a></li>
@@ -109,8 +109,9 @@ var _hmt = _hmt || [];
 <p class="caption"><span class="caption-text">强化学习介绍</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="rl_intro.html">第一部分：强化学习中的核心概念</a></li>
-<li class="toctree-l1"><a class="reference internal" href="rl_intro2.html">第二部分：各种各种的强化学习算法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rl_intro2.html">第二部分：强化学习算法概述</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">第三部分：策略优化介绍</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">最简单的策略梯度求导</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#implementing-the-simplest-policy-gradient">Implementing the Simplest Policy Gradient</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#expected-grad-log-prob-lemma">Expected Grad-Log-Prob Lemma</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#don-t-let-the-past-distract-you">Don&#8217;t Let the Past Distract You</a></li>
@@ -214,45 +215,38 @@ var _hmt = _hmt || [];
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1><a class="toc-backref" href="#id7">第三部分：策略优化介绍</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id8">第三部分：策略优化介绍</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="table-of-contents">
 <p class="topic-title first">Table of Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#id1" id="id7">第三部分：策略优化介绍</a><ul>
-<li><a class="reference internal" href="#implementing-the-simplest-policy-gradient" id="id8">Implementing the Simplest Policy Gradient</a></li>
-<li><a class="reference internal" href="#expected-grad-log-prob-lemma" id="id9">Expected Grad-Log-Prob Lemma</a></li>
-<li><a class="reference internal" href="#don-t-let-the-past-distract-you" id="id10">Don&#8217;t Let the Past Distract You</a></li>
-<li><a class="reference internal" href="#implementing-reward-to-go-policy-gradient" id="id11">Implementing Reward-to-Go Policy Gradient</a></li>
-<li><a class="reference internal" href="#baselines-in-policy-gradients" id="id12">Baselines in Policy Gradients</a></li>
-<li><a class="reference internal" href="#other-forms-of-the-policy-gradient" id="id13">Other Forms of the Policy Gradient</a></li>
-<li><a class="reference internal" href="#recap" id="id14">Recap</a></li>
+<li><a class="reference internal" href="#id1" id="id8">第三部分：策略优化介绍</a><ul>
+<li><a class="reference internal" href="#id2" id="id9">最简单的策略梯度求导</a></li>
+<li><a class="reference internal" href="#implementing-the-simplest-policy-gradient" id="id10">Implementing the Simplest Policy Gradient</a></li>
+<li><a class="reference internal" href="#expected-grad-log-prob-lemma" id="id11">Expected Grad-Log-Prob Lemma</a></li>
+<li><a class="reference internal" href="#don-t-let-the-past-distract-you" id="id12">Don&#8217;t Let the Past Distract You</a></li>
+<li><a class="reference internal" href="#implementing-reward-to-go-policy-gradient" id="id13">Implementing Reward-to-Go Policy Gradient</a></li>
+<li><a class="reference internal" href="#baselines-in-policy-gradients" id="id14">Baselines in Policy Gradients</a></li>
+<li><a class="reference internal" href="#other-forms-of-the-policy-gradient" id="id15">Other Forms of the Policy Gradient</a></li>
+<li><a class="reference internal" href="#recap" id="id16">Recap</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<p>In this section, we&#8217;ll discuss the mathematical foundations of policy optimization algorithms, and connect the material to sample code. We will cover three key results in the theory of <strong>policy gradients</strong>:
-在这个部分，我们会讨论策略优化算法的数学基础，同时提供样例代码。我们会包括策略优化的以下三个部分</p>
+<p>在这个部分，我们会讨论策略优化算法的数学基础，同时提供样例代码。我们会包括策略优化的以下三个部分</p>
 <ul class="simple">
-<li><a class="reference external" href="../spinningup/rl_intro3.html#deriving-the-simplest-policy-gradient">the simplest equation</a> describing the gradient of policy performance with respect to policy parameters,</li>
-<li>a rule which allows us to <a class="reference external" href="../spinningup/rl_intro3.html#don-t-let-the-past-distract-you">drop useless terms</a> from that expression,</li>
-<li>and a rule which allows us to <a class="reference external" href="../spinningup/rl_intro3.html#baselines-in-policy-gradients">add useful terms</a> to that expression.</li>
 <li>最简单的等式 描述了策略表现对于策略参数的梯度</li>
 <li>一个让我们可以 舍弃无用项 的公式</li>
 <li>一个让我们可以 添加有用参数 的公式</li>
 </ul>
-<p>In the end, we&#8217;ll tie those results together and describe the advantage-based expression for the policy gradient&#8212;the version we use in our <a class="reference external" href="../algorithms/vpg.html">Vanilla Policy Gradient</a> implementation.
-最后，我们会把结果放在一起，然后描述策略梯度更有优势的版本： 我们在 <a class="reference external" href="../algorithms/vpg.html">Vanilla Policy Gradient</a> 中使用的版本。</p>
-<p>Deriving the Simplest Policy Gradient
-最简单的策略梯度求导
-=====================================</p>
-<p>Here, we consider the case of a stochastic, parameterized policy, <img class="math" src="../_images/math/7dc51a55461de2c1a3d25bea3f53bfe034295878.svg" alt="\pi_{\theta}"/>. We aim to maximize the expected return <img class="math" src="../_images/math/de1ff9842b32229d28d41fc769d6b25e86c73c02.svg" alt="J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{R(\tau)}"/>. For the purposes of this derivation, we&#8217;ll take <img class="math" src="../_images/math/a4cfe11c3e8bb64a3fbcadd1e90e64d7488ab724.svg" alt="R(\tau)"/> to give the <a href="#id15"><span class="problematic" id="id16">`finite-horizon undiscounted return`_</span></a>, but the derivation for the infinite-horizon discounted return setting is almost identical.
-我们考虑一种基于随机参数的策略： <img class="math" src="../_images/math/7dc51a55461de2c1a3d25bea3f53bfe034295878.svg" alt="\pi_{\theta}"/> 。我们的目的是最小化期望回报 <img class="math" src="../_images/math/de1ff9842b32229d28d41fc769d6b25e86c73c02.svg" alt="J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{R(\tau)}"/> 。为了计算导数，我们假定 <img class="math" src="../_images/math/a4cfe11c3e8bb64a3fbcadd1e90e64d7488ab724.svg" alt="R(\tau)"/> 属于 <cite>无衰减回报</cite>，但是对于衰减回报来说基本上是一样的。</p>
+<p>最后，我们会把结果放在一起，然后描述策略梯度更有优势的版本： 我们在 <a class="reference external" href="../algorithms/vpg.html">Vanilla Policy Gradient</a> 中使用的版本。</p>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id9">最简单的策略梯度求导</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>我们考虑一种基于随机参数的策略： <img class="math" src="../_images/math/7dc51a55461de2c1a3d25bea3f53bfe034295878.svg" alt="\pi_{\theta}"/> 。我们的目的是最小化期望回报 <img class="math" src="../_images/math/de1ff9842b32229d28d41fc769d6b25e86c73c02.svg" alt="J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{R(\tau)}"/> 。为了计算导数，我们假定 <img class="math" src="../_images/math/a4cfe11c3e8bb64a3fbcadd1e90e64d7488ab724.svg" alt="R(\tau)"/> 属于 <cite>无衰减回报</cite>，但是对于衰减回报来说基本上是一样的。</p>
 <p>We would like to optimize the policy by gradient ascent, eg
 我们想要通过梯度下降来优化策略，例如</p>
 <div class="math">
 <p><img src="../_images/math/20059fdc499f7f26d6fdb11f6916a30b82002293.svg" alt="\theta_{k+1} = \theta_k + \alpha \left. \nabla_{\theta} J(\pi_{\theta}) \right|_{\theta_k}."/></p>
-</div><p>The gradient of policy performance, <img class="math" src="../_images/math/1bb7289c5dcb2f31df644039966ba2f4f7acd485.svg" alt="\nabla_{\theta} J(\pi_{\theta})"/>, is called the <strong>policy gradient</strong>, and algorithms that optimize the policy this way are called <strong>policy gradient algorithms.</strong> (Examples include Vanilla Policy Gradient and TRPO. PPO is often referred to as a policy gradient algorithm, though this is slightly inaccurate.)
-策略性能的梯度 <img class="math" src="../_images/math/1bb7289c5dcb2f31df644039966ba2f4f7acd485.svg" alt="\nabla_{\theta} J(\pi_{\theta})"/> ，通常被称为 <strong>策略梯度</strong> ，优化策略的算法通常被称为 <strong>策略算法</strong> 。（比如说 Vanilla Policy Gradient 和 TRPO。PPO 也被称为策略梯度算法，尽管这样不是很准确。）</p>
+</div><p>策略性能的梯度 <img class="math" src="../_images/math/1bb7289c5dcb2f31df644039966ba2f4f7acd485.svg" alt="\nabla_{\theta} J(\pi_{\theta})"/> ，通常被称为 <strong>策略梯度</strong> ，优化策略的算法通常被称为 <strong>策略算法</strong> 。（比如说 Vanilla Policy Gradient 和 TRPO。PPO 也被称为策略梯度算法，尽管这样不是很准确。）</p>
 <p>To actually use this algorithm, we need an expression for the policy gradient which we can numerically compute. This involves two steps: 1) deriving the analytical gradient of policy performance, which turns out to have the form of an expected value, and then 2) forming a sample estimate of that expected value, which can be computed with data from a finite number of agent-environment interaction steps.</p>
 <p>In this subsection, we&#8217;ll find the simplest form of that expression. In later subsections, we&#8217;ll show how to improve on the simplest form to get the version we actually use in standard policy gradient implementations.</p>
 <p>We&#8217;ll begin by laying out a few facts which are useful for deriving the analytical gradient.</p>
@@ -288,8 +282,9 @@ var _hmt = _hmt || [];
 <p><img src="../_images/math/2ee65aa65048dfd18cc8e991ef75515b5d4a30dd.svg" alt="\hat{g} = \frac{1}{|\mathcal{D}|} \sum_{\tau \in \mathcal{D}} \sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) R(\tau),"/></p>
 </div><p>where <img class="math" src="../_images/math/c612e6b98bcaea6f0f0d621e575bb61dbc8e5194.svg" alt="|\mathcal{D}|"/> is the number of trajectories in <img class="math" src="../_images/math/0052cf5fc8987c95544742de23014066575ab4f7.svg" alt="\mathcal{D}"/> (here, <img class="math" src="../_images/math/8c774ef224ffafc5ff193252939fa7711ce1e119.svg" alt="N"/>).</p>
 <p>This last expression is the simplest version of the computable expression we desired. Assuming that we have represented our policy in a way which allows us to calculate <img class="math" src="../_images/math/d9271fc4543f4f39c9301bcaf074201210050923.svg" alt="\nabla_{\theta} \log \pi_{\theta}(a|s)"/>, and if we are able to run the policy in the environment to collect the trajectory dataset, we can compute the policy gradient and take an update step.</p>
+</div>
 <div class="section" id="implementing-the-simplest-policy-gradient">
-<h2><a class="toc-backref" href="#id8">Implementing the Simplest Policy Gradient</a><a class="headerlink" href="#implementing-the-simplest-policy-gradient" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id10">Implementing the Simplest Policy Gradient</a><a class="headerlink" href="#implementing-the-simplest-policy-gradient" title="Permalink to this headline">¶</a></h2>
 <p>We give a short Tensorflow implementation of this simple version of the policy gradient algorithm in <code class="docutils literal"><span class="pre">spinup/examples/pg_math/1_simple_pg.py</span></code>. (It can also be viewed <a class="reference external" href="https://github.com/openai/spinningup/blob/master/spinup/examples/pg_math/1_simple_pg.py">on github</a>.) It is only 122 lines long, so we highly recommend reading through it in depth. While we won&#8217;t go through the entirety of the code here, we&#8217;ll highlight and explain a few important pieces.</p>
 <p><strong>1. Making the Policy Network.</strong></p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>25
@@ -467,8 +462,8 @@ var _hmt = _hmt || [];
 <p>The main loop of the algorithm just repeatedly calls <code class="docutils literal"><span class="pre">train_one_epoch()</span></code>.</p>
 </div>
 <div class="section" id="expected-grad-log-prob-lemma">
-<h2><a class="toc-backref" href="#id9">Expected Grad-Log-Prob Lemma</a><a class="headerlink" href="#expected-grad-log-prob-lemma" title="Permalink to this headline">¶</a></h2>
-<p>In this subsection, we will derive an intermediate result which is extensively used throughout the theory of policy gradients. We will call it the Expected Grad-Log-Prob (EGLP) lemma. <a class="footnote-reference" href="#id4" id="id3">[1]</a></p>
+<h2><a class="toc-backref" href="#id11">Expected Grad-Log-Prob Lemma</a><a class="headerlink" href="#expected-grad-log-prob-lemma" title="Permalink to this headline">¶</a></h2>
+<p>In this subsection, we will derive an intermediate result which is extensively used throughout the theory of policy gradients. We will call it the Expected Grad-Log-Prob (EGLP) lemma. <a class="footnote-reference" href="#id5" id="id4">[1]</a></p>
 <p><strong>EGLP Lemma.</strong> Suppose that <img class="math" src="../_images/math/4a6163e6240a14f74fba2bdea72aac2f8909a28e.svg" alt="P_{\theta}"/> is a parameterized probability distribution over a random variable, <img class="math" src="../_images/math/2760e1d12dd3f76eea026a9fcb2e36938211df93.svg" alt="x"/>. Then:</p>
 <div class="math">
 <p><img src="../_images/math/25091b7fa6aed91cfe2481487b5432d02325fb05.svg" alt="\underE{x \sim P_{\theta}}{\nabla_{\theta} \log P_{\theta}(x)} = 0."/></p>
@@ -487,15 +482,15 @@ var _hmt = _hmt || [];
 &amp;= \int_x P_{\theta}(x) \nabla_{\theta} \log P_{\theta}(x) \\
 \therefore 0 &amp;= \underE{x \sim P_{\theta}}{\nabla_{\theta} \log P_{\theta}(x)}."/></p>
 </div></div>
-<table class="docutils footnote" frame="void" id="id4" rules="none">
+<table class="docutils footnote" frame="void" id="id5" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td>The author of this article is not aware of this lemma being given a standard name anywhere in the literature. But given how often it comes up, it seems pretty worthwhile to give it some kind of name for ease of reference.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id4">[1]</a></td><td>The author of this article is not aware of this lemma being given a standard name anywhere in the literature. But given how often it comes up, it seems pretty worthwhile to give it some kind of name for ease of reference.</td></tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="don-t-let-the-past-distract-you">
-<h2><a class="toc-backref" href="#id10">Don&#8217;t Let the Past Distract You</a><a class="headerlink" href="#don-t-let-the-past-distract-you" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id12">Don&#8217;t Let the Past Distract You</a><a class="headerlink" href="#don-t-let-the-past-distract-you" title="Permalink to this headline">¶</a></h2>
 <p>Examine our most recent expression for the policy gradient:</p>
 <div class="math">
 <p><img src="../_images/math/db4e93dd34fc43517d16f6485de11576b623568f.svg" alt="\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) R(\tau)}."/></p>
@@ -516,7 +511,7 @@ var _hmt = _hmt || [];
 <p>An (optional) proof of this claim can be found <a class="reference external" href="../spinningup/extra_pg_proof1.html">here</a>, and it ultimately depends on the EGLP lemma.</p>
 </div>
 <div class="section" id="implementing-reward-to-go-policy-gradient">
-<h2><a class="toc-backref" href="#id11">Implementing Reward-to-Go Policy Gradient</a><a class="headerlink" href="#implementing-reward-to-go-policy-gradient" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id13">Implementing Reward-to-Go Policy Gradient</a><a class="headerlink" href="#implementing-reward-to-go-policy-gradient" title="Permalink to this headline">¶</a></h2>
 <p>We give a short Tensorflow implementation of the reward-to-go policy gradient in <code class="docutils literal"><span class="pre">spinup/examples/pg_math/2_rtg_pg.py</span></code>. (It can also be viewed <a class="reference external" href="https://github.com/openai/spinningup/blob/master/spinup/examples/pg_math/2_rtg_pg.py">on github</a>.)</p>
 <p>The only thing that has changed from <code class="docutils literal"><span class="pre">1_simple_pg.py</span></code> is that we now use different weights in the loss function. The code modification is very slight: we add a new function, and change two other lines. The new function is:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>12
@@ -546,7 +541,7 @@ var _hmt = _hmt || [];
 </td></tr></table></div>
 </div>
 <div class="section" id="baselines-in-policy-gradients">
-<h2><a class="toc-backref" href="#id12">Baselines in Policy Gradients</a><a class="headerlink" href="#baselines-in-policy-gradients" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id14">Baselines in Policy Gradients</a><a class="headerlink" href="#baselines-in-policy-gradients" title="Permalink to this headline">¶</a></h2>
 <p>An immediate consequence of the EGLP lemma is that for any function <img class="math" src="../_images/math/1452003e378533853b68046023aab9c69631a5df.svg" alt="b"/> which only depends on state,</p>
 <div class="math">
 <p><img src="../_images/math/00b228c6d97e01293e936921a0568a35bb9ac627.svg" alt="\underE{a_t \sim \pi_{\theta}}{\nabla_{\theta} \log \pi_{\theta}(a_t|s_t) b(s_t)} = 0."/></p>
@@ -569,7 +564,7 @@ var _hmt = _hmt || [];
 </div>
 </div>
 <div class="section" id="other-forms-of-the-policy-gradient">
-<h2><a class="toc-backref" href="#id13">Other Forms of the Policy Gradient</a><a class="headerlink" href="#other-forms-of-the-policy-gradient" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id15">Other Forms of the Policy Gradient</a><a class="headerlink" href="#other-forms-of-the-policy-gradient" title="Permalink to this headline">¶</a></h2>
 <p>What we have seen so far is that the policy gradient has the general form</p>
 <div class="math">
 <p><img src="../_images/math/6f190b2ff8fbb7f5dab01e019a9ef9289ac0ed6b.svg" alt="\nabla_{\theta} J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{\sum_{t=0}^{T} \nabla_{\theta} \log \pi_{\theta}(a_t |s_t) \Phi_t},"/></p>
@@ -602,7 +597,7 @@ var _hmt = _hmt || [];
 </div>
 </div>
 <div class="section" id="recap">
-<h2><a class="toc-backref" href="#id14">Recap</a><a class="headerlink" href="#recap" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id16">Recap</a><a class="headerlink" href="#recap" title="Permalink to this headline">¶</a></h2>
 <p>In this chapter, we described the basic theory of policy gradient methods and connected some of the early results to code examples. The interested student should continue from here by studying how the later results (value function baselines and the advantage formulation of policy gradients) translate into Spinning Up&#8217;s implementation of <a class="reference external" href="../algorithms/vpg.html">Vanilla Policy Gradient</a>.</p>
 </div>
 </div>
@@ -618,7 +613,7 @@ var _hmt = _hmt || [];
         <a href="spinningup.html" class="btn btn-neutral float-right" title="深度强化学习研究者的资料" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="rl_intro2.html" class="btn btn-neutral" title="第二部分：各种各种的强化学习算法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="rl_intro2.html" class="btn btn-neutral" title="第二部分：强化学习算法概述" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -1,5 +1,5 @@
 ============
-介绍
+项目介绍
 ============
 
 .. contents:: 目录
@@ -49,7 +49,7 @@
 这个项目如何服务我们的使命
 ===========================
 
-OpenAI 的 使命_ 是确保通用人工智能(Artificial general intelligence, AGI)的安全发展以及让人工智能带来的收益分布更加均匀。Spinning Up 这样的教育工具能够在这两个方面都作出贡献。
+OpenAI 的 `使命`_ 是确保通用人工智能(Artificial general intelligence, AGI)的安全发展以及让人工智能带来的收益分布更加均匀。Spinning Up 这样的教育工具能够在这两个方面都作出贡献。
 
 只要我们能帮助更多人了解人工智能究竟是什么以及它是怎么工作的，我们就能更接近广泛的利益分配。这会促使人们批判地思考很多问题，因为人工智能在我们的生活中变得越来越重要。
 
@@ -70,7 +70,6 @@ Spinning Up 项目的算法实现的时候有下面两个要求：
 我们尽量减少算法实现时候的技巧(trick)和相似算法之间的区别。这里可以展示一些移除的技巧，我们把原始 Soft-Actor Critic 算法中的 正则_ 和 `观察正则化(observation normalization)`_ 都移除了。我们在 DDPG, TD3, 和 SAC 的实现中，都遵循了 `原始TD3代码`_ 的约定，所有的梯度更新都是在每一个回合的最后执行的（而不是整个回合都在执行）。
 
 所有的算法都做到“足够好”是指性能大致达到最优，但不一定达到了最优效果。所以进行科研基准(benchmark)的对比时要小心。每种实现的性能表现可以在我们的 基准_ 找到。
- 
 
 支持计划
 ============
@@ -97,7 +96,7 @@ Spinning Up 项目的算法实现的时候有下面两个要求：
 .. _`rllab`: https://github.com/rll/rllab
 .. _`Baselines`: https://github.com/openai/baselines
 .. _`rllib`: https://github.com/ray-project/ray/tree/master/python/ray/rllib
-.. _`mission`: https://blog.openai.com/openai-charter/
+.. _`使命`: https://blog.openai.com/openai-charter/
 .. _`正则`: https://github.com/haarnoja/sac/blob/108a4229be6f040360fcca983113df9c4ac23a6a/sac/distributions/normal.py#L69
 .. _`观察正则化(observation normalization)`: https://github.com/openai/baselines/blob/28aca637d0f13f4415cc5ebb778144154cff3110/baselines/run.py#L131
 .. _`original TD3 code`: https://github.com/sfujim/TD3/blob/25dfc0a6562c54ae5575fad5b8f08bc9d5c4e26c/main.py#L89
