@@ -6,4 +6,4 @@ data/
 .python-version
 .idea/
 .vscode/
-docs/_build
+_build/*

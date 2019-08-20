@@ -6,7 +6,9 @@
 深度强化学习教程：Spinning Up项目中文版
 ==================================
 
-.. image:: images/spinning-up-in-rl.png
+.. image:: images/wechat.jpg
+
+顺便给自己的公主号：一时博客 打个广告，欢迎关注，以下为正文。
 
 .. toctree::
    :maxdepth: 2
