@@ -22,7 +22,7 @@
 最简单的策略梯度求导
 =====================================
 
-我们考虑一种基于随机参数的策略： :math:`\pi_{\theta}` 。我们的目的是最小化期望回报 :math:`J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{R(\tau)}` 。为了计算导数，我们假定 :math:`R(\tau)` 属于 `无衰减回报`，但是对于衰减回报来说基本上是一样的。
+我们考虑一种基于随机参数的策略： :math:`\pi_{\theta}` 。我们的目的是最大化期望回报 :math:`J(\pi_{\theta}) = \underE{\tau \sim \pi_{\theta}}{R(\tau)}` 。为了计算导数，我们假定 :math:`R(\tau)` 属于 `无衰减回报`，但是对于衰减回报来说基本上是一样的。
 
 
 .. _`无衰减回报`: ../spinningup/rl_intro.html#reward-and-return
