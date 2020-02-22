@@ -36,12 +36,12 @@ We would like to optimize the policy by gradient ascent, eg
 
 策略性能的梯度 :math:`\nabla_{\theta} J(\pi_{\theta})` ，通常被称为 **策略梯度** ，优化策略的算法通常被称为 **策略算法** 。（比如说 Vanilla Policy Gradient 和 TRPO。PPO 也被称为策略梯度算法，尽管这样不是很准确。）
 
-To actually use this algorithm, we need an expression for the policy gradient which we can numerically compute. This involves two steps: 1) deriving the analytical gradient of policy performance, which turns out to have the form of an expected value, and then 2) forming a sample estimate of that expected value, which can be computed with data from a finite number of agent-environment interaction steps. 
+为了真正使用这个算法，我们需要一个能进行数值计算的策略梯度表达。这包含两个部分：1）推导策略表现的解析梯度，其结果为期望值的形式；2)形成期望值的样本估计值，该估计值可以通过有限步数的agent-environment互动得到的数据来计算。 
 
 
-In this subsection, we'll find the simplest form of that expression. In later subsections, we'll show how to improve on the simplest form to get the version we actually use in standard policy gradient implementations.
+在这一子部分，我们将探索这种表达的最简单形式。在下一部分，我们将展示如何改进最简单的形式以得到我们在标准策略梯度中实际应用的版本。
 
-We'll begin by laying out a few facts which are useful for deriving the analytical gradient.
+为了得到解析梯度，我们将先说明一些事实。
 
 **1. Probability of a Trajectory.** The probability of a trajectory :math:`\tau = (s_0, a_0, ..., s_{T+1})` given that actions come from :math:`\pi_{\theta}` is
 
@@ -98,12 +98,12 @@ This is an expectation, which means that we can estimate it with a sample mean. 
 
 where :math:`|\mathcal{D}|` is the number of trajectories in :math:`\mathcal{D}` (here, :math:`N`).
 
-This last expression is the simplest version of the computable expression we desired. Assuming that we have represented our policy in a way which allows us to calculate :math:`\nabla_{\theta} \log \pi_{\theta}(a|s)`, and if we are able to run the policy in the environment to collect the trajectory dataset, we can compute the policy gradient and take an update step.
+最后这个表达式是我们期望的最简可计算表达式。假设我们用一种可以计算的方式来表示我们的策略 :math:`\nabla_{\theta} \log \pi_{\theta}(a|s)`, and if we are able to run the policy in the environment to collect the trajectory dataset, we can compute the policy gradient and take an update step.
 
 Implementing the Simplest Policy Gradient
 =========================================
 
-We give a short Tensorflow implementation of this simple version of the policy gradient algorithm in ``spinup/examples/pg_math/1_simple_pg.py``. (It can also be viewed `on github <https://github.com/openai/spinningup/blob/master/spinup/examples/pg_math/1_simple_pg.py>`_.) It is only 122 lines long, so we highly recommend reading through it in depth. While we won't go through the entirety of the code here, we'll highlight and explain a few important pieces.
+我们给出了一个上述策略梯度简化算法的Tensorflow版本 ``spinup/examples/pg_math/1_simple_pg.py``. (It can also be viewed `on github <https://github.com/openai/spinningup/blob/master/spinup/examples/pg_math/1_simple_pg.py>`_.) 只有122行代码，所以强烈推荐大家认真研读。虽然我们不能一一解释每一行代码，但是我们会标注和解释一些重要的部分。
 
 **1. Making the Policy Network.** 
 
@@ -118,7 +118,7 @@ We give a short Tensorflow implementation of this simple version of the policy g
     # make action selection op (outputs int actions, sampled from policy)
     actions = tf.squeeze(tf.multinomial(logits=logits,num_samples=1), axis=1)
 
-This block builds a feedforward neural network categorical policy. (See the `Stochastic Policies`_ section in Part 1 for a refresher.) The ``logits`` tensor can be used to construct log-probabilities and probabilities for actions, and the ``actions`` tensor samples actions based on the probabilities implied by ``logits``.
+这部分建立了一个分类策略的前馈神经网络。(See the `Stochastic Policies`_ section in Part 1 for a refresher.) 张量``logits`` 可以用来构建log-probabilities and 行动的概率, and 张量``actions`` 基于 ``logits`` 得到的概率行动进行采样。
 
 .. _`Stochastic Policies`: ../spinningup/rl_intro.html#stochastic-policies
 
@@ -136,8 +136,7 @@ This block builds a feedforward neural network categorical policy. (See the `Sto
     loss = -tf.reduce_mean(weights_ph * log_probs)
 
 
-In this block, we build a "loss" function for the policy gradient algorithm. When the right data is plugged in, the gradient of this loss is equal to the policy gradient. The right data means a set of (state, action, weight) tuples collected while acting according to the current policy, where the weight for a state-action pair is the return from the episode to which it belongs. (Although as we will show in later subsections, there are other values you can plug in for the weight which also work correctly.)
-
+这一部分，我们构建了一个 "loss" 函数. 当输入正确的数据时，损失梯度等于策略梯度。正确的数据指的是当智能体根据当前的策略行动时，得到的一系列（状态，行动，奖励）的元组，其中奖励是指一个状态——行动对在当前回合得到的回报。尽管接下来我们会讲到另一个可以正确计算的奖励。
 
 .. admonition:: You Should Know
     
